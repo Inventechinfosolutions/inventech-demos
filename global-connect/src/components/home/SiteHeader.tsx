@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
 import { List, MagnifyingGlass, X } from "@phosphor-icons/react";
 import emblem from "@/assets/karnataka-emblem.png";
-import { HELP_DESK, NAV } from "@/lib/nav";
+import { NAV } from "@/lib/nav";
 import { cn } from "@/lib/utils";
 import { HeritageHeader } from "@/components/heritage/HeritageHeader";
 import { HorizonHeader } from "@/components/horizon/HorizonHeader";
@@ -38,17 +38,15 @@ function GlobalHeader({ solid }: { solid: boolean }) {
         filled ? "bg-(color:--gc-navy)/92 shadow-[0_8px_30px_rgba(3,10,30,0.35)] backdrop-blur-md" : "bg-transparent",
       )}
     >
-      <div className="mx-auto flex h-[72px] max-w-[1320px] items-center gap-6 px-5 lg:px-8">
-        <Link to="/global-connect" className="flex shrink-0 items-center gap-3" onClick={() => setOpen(false)}>
-          <span className="grid size-12 place-items-center overflow-hidden rounded-full bg-white shadow-md ring-2 ring-(color:--gc-gold-3)/70">
-            <img src={emblem} alt="Government of Karnataka emblem" className="h-auto w-[38px]" />
+      <div className="mx-auto flex h-[72px] max-w-[1320px] items-center gap-3 px-4 sm:gap-6 sm:px-5 lg:px-8">
+        <Link to="/global-connect" className="flex min-w-0 shrink-0 items-center gap-2 sm:gap-3" onClick={() => setOpen(false)}>
+          <span className="grid size-10 shrink-0 place-items-center overflow-hidden rounded-full bg-white shadow-md ring-2 ring-(color:--gc-gold-3)/70 sm:size-12">
+            <img src={emblem} alt="Government of Karnataka emblem" className="h-auto w-[32px] sm:w-[38px]" />
           </span>
           <span className="leading-none text-white">
-            <span className="block font-display text-[15px] font-semibold tracking-wide">{t("KARNATAKA")}</span>
-            <span className="block font-display text-[15px] font-semibold tracking-wide">{t("GLOBAL CONNECT")}</span>
-            <span className="mt-1 hidden text-[8.5px] font-medium tracking-[0.18em] text-white/65 sm:block">
-              {t("PEOPLE • PARTNERSHIPS • OPPORTUNITIES")}
-            </span>
+            <span className="block text-[7.5px] font-semibold tracking-[0.16em] text-white/65 sm:text-[8.5px]">GOVERNMENT OF KARNATAKA</span>
+            <span className="mt-1 block font-display text-[13px] font-semibold tracking-wide sm:text-[15px]">{t("GLOBAL INVESTMENT")}</span>
+            <span className="block font-display text-[13px] font-semibold tracking-wide sm:text-[15px]">{t("AND NRI AFFAIRS")}</span>
           </span>
         </Link>
 
@@ -90,12 +88,6 @@ function GlobalHeader({ solid }: { solid: boolean }) {
             <MagnifyingGlass size={20} />
           </button>
           <ThemeSwitcher />
-          <Link
-            to={HELP_DESK}
-            className="hidden rounded-full border border-white/45 px-5 py-2 text-[13.5px] font-medium whitespace-nowrap text-white transition hover:border-white hover:bg-white/10 sm:inline-block"
-          >
-            NRI Help Desk
-          </Link>
           <button
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -132,13 +124,6 @@ function GlobalHeader({ solid }: { solid: boolean }) {
                   {t(n.label)}
                 </NavLink>
               ))}
-              <Link
-                to={HELP_DESK}
-                onClick={() => setOpen(false)}
-                className="mt-2 rounded-full border border-white/45 px-5 py-2.5 text-center text-[14px] font-medium text-white"
-              >
-                NRI Help Desk
-              </Link>
             </div>
           </motion.nav>
         ) : null}

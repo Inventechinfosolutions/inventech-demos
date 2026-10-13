@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { InstagramLogo, LinkedinLogo, XLogo, YoutubeLogo } from "@phosphor-icons/react";
+import mark from "@/assets/gina-mark.png";
 import emblem from "@/assets/karnataka-emblem.png";
 import { ABOUT, SERVICE_LINKS } from "@/lib/nav";
 import { PATHWAYS, pathwayHref } from "@/lib/pathways";
@@ -64,9 +65,10 @@ export function HeritageFooter() {
 
         <div className="flex items-center gap-3">
           <img src={emblem} alt="" className="h-10 w-auto" />
+          <img src={mark} alt="" className="h-10 w-auto" />
           <span className="text-[12px] leading-snug">
-            <span className="block font-semibold text-(color:--gc-ink)">Government of Karnataka</span>
-            All rights reserved.
+            <span className="block font-semibold text-(color:--gc-ink)">Global Investment and NRI Affairs</span>
+            Government of Karnataka. All rights reserved.
           </span>
         </div>
       </div>

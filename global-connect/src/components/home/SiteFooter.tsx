@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { LinkedinLogo, XLogo, YoutubeLogo } from "@phosphor-icons/react";
+import mark from "@/assets/gina-mark.png";
 import emblem from "@/assets/karnataka-emblem.png";
 import { ABOUT, SERVICE_LINKS } from "@/lib/nav";
 import { PATHWAYS, pathwayHref } from "@/lib/pathways";
@@ -44,9 +45,11 @@ function GlobalFooter() {
             <span className="grid size-12 place-items-center overflow-hidden rounded-full bg-white ring-2 ring-(color:--gc-gold-3)/70">
               <img src={emblem} alt="" className="h-auto w-[38px]" />
             </span>
+            <img src={mark} alt="" className="h-12 w-auto" />
             <span className="leading-tight">
-              <span className="block font-display text-[15px] font-semibold text-white">{t("Karnataka Global Connect")}</span>
-              <span className="block text-[12px]">{t("People • Partnerships • Opportunities")}</span>
+              <span className="block text-[10px] font-semibold tracking-[0.14em] text-white/60">GOVERNMENT OF KARNATAKA</span>
+              <span className="block font-display text-[15px] font-semibold text-white">{t("Global Investment and NRI Affairs")}</span>
+              <span className="block text-[11.5px]">{t("Karnataka to the World • The World to Karnataka")}</span>
             </span>
           </div>
           <p className="mt-4 max-w-xs text-[13px] leading-relaxed text-white/55">
@@ -96,7 +99,7 @@ function GlobalFooter() {
       </div>
 
       <div className="mx-auto mt-12 flex max-w-[1320px] flex-col gap-3 border-t border-white/10 pt-6 text-[12px] text-white/50 sm:flex-row sm:items-center sm:justify-between">
-        <span>{t("© 2026 Karnataka Global Connect · Concept prototype")}</span>
+        <span>{t("© 2026 Global Investment and NRI Affairs, Government of Karnataka · Concept prototype")}</span>
         <div className="flex gap-5">
           {["Privacy", "Terms", "Accessibility", "Contact"].map((l) => (
             <a key={l} href="#contact" className="transition hover:text-white">

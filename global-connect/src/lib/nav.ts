@@ -1,11 +1,14 @@
-import { PATHWAYS, pathwayHref } from "./pathways";
+import { PATHWAYS, pathwayHref, type PathwayId } from "./pathways";
 
 export type NavItem = { label: string; to: string; end: boolean };
 
+/** Pathways left out of the header menu. Their pages still exist. */
+const OFF_MENU: PathwayId[] = ["talent", "partner"];
+
 export const NAV: NavItem[] = [
   { label: "Home", to: "/global-connect", end: true },
+  ...PATHWAYS.filter((p) => !OFF_MENU.includes(p.id)).map((p) => ({ label: p.nav, to: pathwayHref(p.id), end: false })),
   { label: "About", to: "/global-connect/about", end: false },
-  ...PATHWAYS.map((p) => ({ label: p.nav, to: pathwayHref(p.id), end: false })),
 ];
 
 export const HELP_DESK = "/global-connect/help";

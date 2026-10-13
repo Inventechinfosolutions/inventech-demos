@@ -161,7 +161,7 @@ function CardSkyline() {
   );
 }
 
-const SLANT = "[clip-path:polygon(0_16px,100%_0,100%_calc(100%-16px),0_100%)]";
+const SLANT = "absolute inset-0 -z-10 -skew-y-3 overflow-hidden rounded-[22px] bg-gradient-to-b transition-colors duration-300 group-hover:from-brand group-hover:to-brand";
 
 function ExploreBda() {
   const { t } = useLang();
@@ -204,8 +204,10 @@ function ExploreBda() {
               whileHover={{ y: -8, rotate: -0.6 }}
               className="group block [filter:drop-shadow(0_14px_20px_rgba(11,44,107,0.13))]"
             >
-              <div className={cn("relative flex min-h-[236px] flex-col bg-gradient-to-b px-4 pb-6 pt-7 transition-colors duration-300 group-hover:from-brand group-hover:to-brand", e.card, SLANT)}>
-                <CardSkyline />
+              <div className="relative isolate flex min-h-[236px] flex-col px-4 pb-6 pt-7">
+                <span aria-hidden className={cn(SLANT, e.card)}>
+                  <CardSkyline />
+                </span>
                 <span className={cn("grid size-12 place-items-center rounded-full text-white shadow-md ring-4 ring-white/70 transition-all duration-500 group-hover:rotate-[-10deg] group-hover:bg-white/20", e.dot)}>
                   <e.icon weight="duotone" className="size-6" />
                 </span>

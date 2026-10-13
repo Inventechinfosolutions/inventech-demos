@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
 import { CaretDown, GlobeSimple, List, MagnifyingGlass, X } from "@phosphor-icons/react";
+import mark from "@/assets/gina-mark.png";
 import emblem from "@/assets/karnataka-emblem.png";
 import { ThemeSwitcher } from "@/components/home/ThemeSwitcher";
-import { HELP_DESK, NAV } from "@/lib/nav";
+import { NAV } from "@/lib/nav";
 import { cn } from "@/lib/utils";
 import { useT } from "@/theme/context";
 
@@ -30,13 +31,14 @@ export function HeritageHeader() {
       <div className="mx-auto flex h-[76px] max-w-[1320px] items-center gap-3 px-4 sm:gap-5 sm:px-5 lg:px-8">
         <Link to="/global-connect" className="flex min-w-0 shrink items-center xl:shrink-0 gap-2.5 sm:gap-3" onClick={() => setOpen(false)}>
           <img src={emblem} alt="Government of Karnataka emblem" className="h-10 w-auto drop-shadow-sm sm:h-12" />
+          <img src={mark} alt="Global Investment and NRI Affairs logo" className="h-9 w-auto sm:h-11" />
           <span className="leading-none">
             <span className="block text-[7.5px] font-bold tracking-[0.14em] sm:text-[8.5px] sm:tracking-[0.16em] text-(color:--gc-ink-2)">GOVERNMENT OF KARNATAKA</span>
             <span className="mt-1 block font-display text-[13px] font-bold whitespace-nowrap sm:text-[15px] sm:tracking-wide text-(color:--gc-ink)">
-              {t("KARNATAKA")} {t("GLOBAL CONNECT")}
+              {t("GLOBAL INVESTMENT")}
             </span>
-            <span className="mt-1 hidden text-[8px] font-semibold tracking-[0.16em] text-(color:--gc-gold-4) sm:block">
-              {t("PEOPLE • PARTNERSHIPS • OPPORTUNITIES")}
+            <span className="block font-display text-[13px] font-bold whitespace-nowrap sm:text-[15px] sm:tracking-wide text-(color:--gc-ink)">
+              {t("AND NRI AFFAIRS")}
             </span>
           </span>
         </Link>
@@ -88,12 +90,6 @@ export function HeritageHeader() {
             <CaretDown size={11} weight="bold" />
           </button>
           <ThemeSwitcher light />
-          <Link
-            to={HELP_DESK}
-            className="ml-1 hidden rounded-full bg-(color:--gc-navy) px-5 py-2.5 text-[13px] font-semibold whitespace-nowrap text-white shadow-[0_6px_18px_rgba(12,58,42,0.25)] transition hover:bg-(color:--gc-navy-2) sm:inline-block"
-          >
-            NRI Help Desk
-          </Link>
           <button
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -133,13 +129,6 @@ export function HeritageHeader() {
                   {t(n.label)}
                 </NavLink>
               ))}
-              <Link
-                to={HELP_DESK}
-                onClick={() => setOpen(false)}
-                className="mt-2 rounded-full bg-(color:--gc-navy) px-5 py-2.5 text-center text-[14px] font-semibold text-white"
-              >
-                NRI Help Desk
-              </Link>
             </div>
           </motion.nav>
         ) : null}

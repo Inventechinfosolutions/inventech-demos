@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { InstagramLogo, LinkedinLogo, XLogo, YoutubeLogo } from "@phosphor-icons/react";
+import mark from "@/assets/gina-mark.png";
 import emblem from "@/assets/karnataka-emblem.png";
 import skyline from "@/assets/horizon/footer-skyline.jpg";
 import { ABOUT, SERVICE_LINKS } from "@/lib/nav";
@@ -36,15 +37,19 @@ export function HorizonFooter() {
       />
 
       <div className="mx-auto grid max-w-[1320px] gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr_1fr]">
-        <div className="flex items-start gap-3">
-          <span className="grid size-14 shrink-0 place-items-center rounded-full bg-white">
-            <img src={emblem} alt="" className="h-10 w-auto" />
+        <div className="flex flex-col items-start gap-3">
+          <span className="flex items-center gap-3">
+            <span className="grid size-14 shrink-0 place-items-center rounded-full bg-white">
+              <img src={emblem} alt="" className="h-10 w-auto" />
+            </span>
+            <img src={mark} alt="" className="h-14 w-auto shrink-0" />
           </span>
           <span className="leading-tight">
             <span className="block text-[9px] font-bold tracking-[0.16em] text-white/60">GOVERNMENT OF KARNATAKA</span>
-            <span className="mt-1 block font-display text-[15px] font-extrabold text-white">{t("KARNATAKA")} {t("GLOBAL CONNECT")}</span>
+            <span className="mt-1 block font-display text-[15px] font-extrabold text-white">{t("GLOBAL INVESTMENT")}</span>
+            <span className="block font-display text-[15px] font-extrabold text-white">{t("AND NRI AFFAIRS")}</span>
             <span className="mt-1 block text-[9px] font-semibold tracking-[0.16em] text-(color:--gc-gold)">
-              {t("PEOPLE • PARTNERSHIPS • OPPORTUNITIES")}
+              {t("KARNATAKA TO THE WORLD • THE WORLD TO KARNATAKA")}
             </span>
           </span>
         </div>

@@ -5,10 +5,9 @@
  */
 export const HERITAGE_COPY: Record<string, string> = {
   // Header, footer and navigation
-  "Karnataka Global Connect": "Karnataka Global Connect",
   "One gateway for global investment, talent, partnerships and opportunities in Karnataka.":
     "A global gateway for investment, talent, partnerships, Kannadigas and opportunities.",
-  "© 2026 Karnataka Global Connect · Concept prototype": "© 2026 Government of Karnataka. All rights reserved.",
+  "© 2026 Global Investment and NRI Affairs, Government of Karnataka · Concept prototype": "© 2026 Government of Karnataka. All rights reserved.",
   Contact: "Login / Register",
 
   // Pathways
@@ -29,7 +28,7 @@ export const HERITAGE_COPY: Record<string, string> = {
   "Investor Support": "Dedicated Investor Support",
   "Future-Ready State": "A Future-Ready State",
   "Concept preview. The proposed platform can provide global investors with one clear entry point, from first interest to implementation.":
-    "Concept preview. Karnataka Global Connect offers investors one clear entry point, from first interest to implementation.",
+    "Concept preview. Global Investment and NRI Affairs offers investors one clear entry point, from first interest to implementation.",
   "Beyond investment": "Lasting partnership",
   "Our Relationship Does Not End With Investment": "Our Support Continues After You Invest",
   "We continue to support your growth journey in Karnataka.": "Karnataka stays with you as your enterprise grows.",
@@ -40,7 +39,7 @@ export const HERITAGE_COPY: Record<string, string> = {
   "Transparent progress": "Clear progress",
   "Track Your Journey": "Follow Your Journey",
   "Getting started": "Begin here",
-  "Start with the Global Karnataka Portal": "Begin With Karnataka Global Connect",
+  "Start with the Global Karnataka Portal": "Begin With Global Investment and NRI Affairs",
   "One gateway to begin your investment journey.": "One gateway for every investor.",
   "How Does It Work?": "How the Journey Works",
   "A simple, guided journey to invest in Karnataka.": "A guided journey to invest in Karnataka.",
