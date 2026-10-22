@@ -46,6 +46,8 @@ export const DEMOS = [
       { id: "portal", path: "/design-7", name: "Design 7", style: "Citizen Portal" },
       { id: "civic", path: "/design-8", name: "Design 8", style: "Citizen Services" },
       { id: "garden", path: "/design-9", name: "Design 9", style: "Watercolour" },
+      { id: "dashboard", path: "/design-10", name: "Design 10", style: "Dashboard" },
+      { id: "bright", path: "/design-11", name: "Design 11", style: "Bright City" },
     ],
   },
   { id: "fms", name: "RGUHS FMS · Finance Management System", pinVersion: 1 },

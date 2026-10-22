@@ -30,7 +30,7 @@ const LOGINS = [
   SERVICES.find((s) => s.icon === "cdrms")!,
 ];
 
-function LoginMenu({ light = false }: { light?: boolean }) {
+export function LoginMenu({ light = false }: { light?: boolean }) {
   const { t } = useLang();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);

@@ -1,6 +1,8 @@
 import { motion } from "motion/react";
 import { useEffect } from "react";
 import { Navigate, Outlet, Route, Routes, useLocation } from "react-router";
+import { BrightShell } from "@/components/bright/BrightShell";
+import { DashboardShell } from "@/components/dashboard/DashShell";
 import { BrandHeader } from "@/components/layout/BrandHeader";
 import { DesignSwitcher } from "@/components/layout/DesignSwitcher";
 import { MainNav } from "@/components/layout/MainNav";
@@ -12,6 +14,8 @@ import { PortalNav } from "@/components/portal/PortalNav";
 import { DESIGNS, DesignProvider } from "@/lib/design";
 import { useVisibility } from "@/lib/visibility";
 import { CivicPage } from "@/pages/CivicPage";
+import { BrightPage } from "@/pages/BrightPage";
+import { DashboardPage } from "@/pages/DashboardPage";
 import { GardenPage } from "@/pages/GardenPage";
 import { GalleryPage } from "@/pages/GalleryPage";
 import { GeometricPage } from "@/pages/GeometricPage";
@@ -37,6 +41,34 @@ function Site() {
   const match = DESIGNS.find((d) => d.path === pathname)?.id;
   const design = match ?? (pathname === "/sitemap" ? "portal" : "photo");
   if (ready && !admin && match && isHidden(match)) return <Navigate to="/" replace />;
+  if (design === "dashboard")
+    return (
+      <DesignProvider value={design}>
+        <DashboardShell>
+          <motion.main key={pathname} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="flex-1">
+            <Outlet />
+          </motion.main>
+          <SiteFooter />
+          <DesignSwitcher />
+          <ScrollProgress />
+          <BackToTop />
+        </DashboardShell>
+      </DesignProvider>
+    );
+  if (design === "bright")
+    return (
+      <DesignProvider value={design}>
+        <BrightShell>
+          <motion.main key={pathname} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="flex-1">
+            <Outlet />
+          </motion.main>
+          <SiteFooter />
+          <DesignSwitcher />
+          <ScrollProgress />
+          <BackToTop />
+        </BrightShell>
+      </DesignProvider>
+    );
   return (
     <DesignProvider value={design}>
       <div className="flex min-h-svh flex-col">
@@ -78,6 +110,8 @@ export default function App() {
           <Route path="/design-7" element={<PortalPage />} />
           <Route path="/design-8" element={<CivicPage />} />
           <Route path="/design-9" element={<GardenPage />} />
+          <Route path="/design-10" element={<DashboardPage />} />
+          <Route path="/design-11" element={<BrightPage />} />
           <Route path="/sitemap" element={<SitemapPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>

@@ -227,7 +227,7 @@ function ExploreBda() {
   );
 }
 
-const QUICK: { icon: Icon; label: Text; href: string }[] = [
+export const QUICK: { icon: Icon; label: Text; href: string }[] = [
   { icon: Desktop, label: svc("online").label, href: svc("online").href },
   { icon: Calculator, label: svc("calculator").label, href: svc("calculator").href },
   { icon: CreditCard, label: svc("tax").label, href: svc("tax").href },
@@ -290,14 +290,14 @@ function QuickServices() {
   );
 }
 
-const INITIATIVE_STYLE: { icon: Icon; sub: Text; card: string; iconTone: string }[] = [
+export const INITIATIVE_STYLE: { icon: Icon; sub: Text; card: string; iconTone: string }[] = [
   { icon: Leaf, sub: t2("15 Lakh Planting Initiative for a Greener Bengaluru", "ಹಸಿರು ಬೆಂಗಳೂರಿಗಾಗಿ 15 ಲಕ್ಷ ಗಿಡ ನೆಡುವ ಉಪಕ್ರಮ"), card: "bg-emerald-50/80 border-emerald-100", iconTone: "bg-emerald-100 text-emerald-600" },
   { icon: HouseLine, sub: t2("Site Allotment and Project Information", "ನಿವೇಶನ ಹಂಚಿಕೆ ಮತ್ತು ಯೋಜನಾ ಮಾಹಿತಿ"), card: "bg-violet-50/80 border-violet-100", iconTone: "bg-violet-100 text-violet-600" },
   { icon: ChartLineUp, sub: t2("Driving the Next Phase of Growth", "ಮುಂದಿನ ಹಂತದ ಬೆಳವಣಿಗೆಗೆ ಚಾಲನೆ"), card: "bg-orange-50/80 border-orange-100", iconTone: "bg-orange-100 text-orange-600" },
   { icon: UsersThree, sub: t2("Public Interaction and Citizen Engagement", "ಸಾರ್ವಜನಿಕ ಸಂವಾದ ಮತ್ತು ನಾಗರಿಕ ಭಾಗವಹಿಸುವಿಕೆ"), card: "bg-sky-50/80 border-sky-100", iconTone: "bg-sky-100 text-sky-600" },
 ];
 
-const INITIATIVE_ORDER = [0, 2, 1, 3];
+export const INITIATIVE_ORDER = [0, 2, 1, 3];
 
 function Initiatives() {
   const { t } = useLang();
@@ -524,7 +524,7 @@ export function Assets() {
   );
 }
 
-const LINKS: { icon: Icon; label: Text; href: string }[] = [
+export const LINKS: { icon: Icon; label: Text; href: string }[] = [
   { icon: Briefcase, label: svc("business").label, href: svc("business").href },
   { icon: Buildings, label: svc("formed").label, href: svc("formed").href },
   { icon: Info, label: svc("jcc").label, href: svc("jcc").href },

@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 import type { Text } from "@/lib/i18n";
 
-export type Design = "photo" | "illustrated" | "showcase" | "modern" | "geometric" | "orbit" | "portal" | "civic" | "garden";
+export type Design = "photo" | "illustrated" | "showcase" | "modern" | "geometric" | "orbit" | "portal" | "civic" | "garden" | "dashboard" | "bright";
 
 export const DESIGNS: { id: Design; path: string; label: Text; style: Text; summary: Text; image: string }[] = [
   {
@@ -102,6 +102,28 @@ export const DESIGNS: { id: Design; path: string; label: Text; style: Text; summ
       kn: "ಮೃದು ಜಲವರ್ಣ ಪೋರ್ಟಲ್: ಎಲೆಯಾಕಾರದ ಮೂಲೆಗಳ ಅಗಲವಾದ ಛಾಯಾಚಿತ್ರ ಸ್ಲೈಡ್‌ಶೋ, ದುಂಡನೆಯ ತ್ವರಿತ ಸೇವಾ ಬಟನ್‌ಗಳು, ಓರೆಯಾದ ಬಿಡಿಎ ಅನ್ವೇಷಣಾ ಕಾರ್ಡ್‌ಗಳು, ಉಪಕ್ರಮಗಳು ಮತ್ತು ಭೂದೃಶ್ಯದ ಅಡಿಭಾಗ.",
     },
     image: "images/previews/design-9.jpg",
+  },
+  {
+    id: "dashboard",
+    path: "/design-10",
+    label: { en: "Design 10", kn: "ವಿನ್ಯಾಸ 10" },
+    style: { en: "Dashboard", kn: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್" },
+    summary: {
+      en: "App-style dashboard with a side menu, a Bengaluru skyline hero with a petal services hub, quick service tiles, a layouts map, initiatives, an updates strip and four colour themes to choose from.",
+      kn: "ಪಕ್ಕದ ಮೆನುವಿನ ಆ್ಯಪ್ ಶೈಲಿಯ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್: ಬೆಂಗಳೂರು ನಗರದೃಶ್ಯದೊಂದಿಗೆ ದಳಾಕಾರದ ಸೇವಾ ಕೇಂದ್ರ, ತ್ವರಿತ ಸೇವಾ ಟೈಲ್‌ಗಳು, ಬಡಾವಣೆ ನಕ್ಷೆ, ಉಪಕ್ರಮಗಳು, ಅಪ್‌ಡೇಟ್‌ಗಳ ಸಾಲು ಮತ್ತು ನಾಲ್ಕು ಬಣ್ಣದ ಥೀಮ್‌ಗಳು.",
+    },
+    image: "images/previews/design-10.jpg",
+  },
+  {
+    id: "bright",
+    path: "/design-11",
+    label: { en: "Design 11", kn: "ವಿನ್ಯಾಸ 11" },
+    style: { en: "Bright City", kn: "ಉಜ್ವಲ ನಗರ" },
+    summary: {
+      en: "Light dashboard with an icon rail, a serif hero and a circular skyline ringed by service bubbles, a big search with quick actions, a green Bengaluru layouts map, initiatives, updates and colour themes.",
+      kn: "ಐಕಾನ್ ರೈಲ್‌ನ ತಿಳಿ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್: ಸೇವಾ ಗುಳ್ಳೆಗಳಿಂದ ಸುತ್ತುವರಿದ ವೃತ್ತಾಕಾರದ ನಗರದೃಶ್ಯ, ದೊಡ್ಡ ಹುಡುಕಾಟ ಮತ್ತು ತ್ವರಿತ ಕ್ರಿಯೆಗಳು, ಹಸಿರು ಬೆಂಗಳೂರು ಬಡಾವಣೆ ನಕ್ಷೆ, ಉಪಕ್ರಮಗಳು, ಅಪ್‌ಡೇಟ್‌ಗಳು ಮತ್ತು ಬಣ್ಣದ ಥೀಮ್‌ಗಳು.",
+    },
+    image: "images/previews/design-11.jpg",
   },
 ];
 

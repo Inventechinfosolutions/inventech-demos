@@ -5,4 +5,5 @@ export const PHOTOS = {
   villa: "images/bda-villa.jpg",
   layoutSigns: "images/layout-signs.jpg",
   layoutBoard: "images/layout-board.jpg",
+  skyline: "images/bengaluru-skyline.jpg",
 } as const;
