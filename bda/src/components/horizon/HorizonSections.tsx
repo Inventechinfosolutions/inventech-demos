@@ -22,6 +22,7 @@ import {
   type Icon,
 } from "@phosphor-icons/react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { HeroSlides } from "@/components/home/HeroSlides";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router";
 import { GreenMap } from "@/components/bright/BrightSections";
@@ -101,7 +102,7 @@ const HERO = {
   commitment: t2("Our Commitment", "ನಮ್ಮ ಬದ್ಧತೆ"),
   explore: t2("Explore BDA", "ಬಿಡಿಎ ಅನ್ವೇಷಿಸಿ"),
   exploreSub: t2("Find information and access services across BDA's key areas", "ಬಿಡಿಎಯ ಪ್ರಮುಖ ವಿಭಾಗಗಳಲ್ಲಿ ಮಾಹಿತಿ ಮತ್ತು ಸೇವೆಗಳನ್ನು ಪಡೆಯಿರಿ"),
-  credit: t2("Photo: Varthur skyline by SlowPhoton, CC BY-SA 4.0", "ಛಾಯಾಚಿತ್ರ: ವರ್ತೂರು, SlowPhoton, CC BY-SA 4.0"),
+  credit: t2("Photos: BDA; Varthur skyline by SlowPhoton, CC BY-SA 4.0", "ಚಿತ್ರಗಳು: ಬಿಡಿಎ; ವರ್ತೂರು, SlowPhoton, CC BY-SA 4.0"),
 };
 
 const FAN: { key: AreaKey; icon: Icon; card: string; bubble: string }[] = [
@@ -311,7 +312,7 @@ export function HorizonHero() {
               transition={{ duration: 1.2, ease: EASE }}
               className="absolute inset-0 overflow-hidden [clip-path:url(#horizon-blob)]"
             >
-              <img src={asset(PHOTOS.skyline)} alt="" className="size-full object-cover object-[55%_55%] contrast-110 saturate-[1.35] motion-safe:animate-[kenburns_24s_ease-in-out_infinite_alternate]" />
+              <HeroSlides className="contrast-110 saturate-[1.35]" imgClassName="object-[55%_55%]" />
               <span className="absolute inset-0 bg-gradient-to-t from-sky-100/70 via-transparent to-amber-50/20" aria-hidden />
             </motion.div>
             <Commitment />

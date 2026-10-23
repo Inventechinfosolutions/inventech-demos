@@ -129,7 +129,7 @@ const HERO = {
   ),
   cta: t2("Explore BDA Services", "ಬಿಡಿಎ ಸೇವೆಗಳನ್ನು ಅನ್ವೇಷಿಸಿ"),
   core: [t2("Explore", "ಅನ್ವೇಷಿಸಿ"), t2("BDA", "ಬಿಡಿಎ"), t2("Services", "ಸೇವೆಗಳು")],
-  credit: t2("Photo: Varthur skyline by SlowPhoton, CC BY-SA 4.0", "ಛಾಯಾಚಿತ್ರ: ವರ್ತೂರು, SlowPhoton, CC BY-SA 4.0"),
+  credit: t2("Photos: BDA; Varthur skyline by SlowPhoton, CC BY-SA 4.0", "ಚಿತ್ರಗಳು: ಬಿಡಿಎ; ವರ್ತೂರು, SlowPhoton, CC BY-SA 4.0"),
 };
 
 const PETALS: { key: AreaKey; icon: Icon; color: string; angle: number }[] = [

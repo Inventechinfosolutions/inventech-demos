@@ -18,6 +18,7 @@ import {
   type Icon,
 } from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "motion/react";
+import { HeroSlides } from "@/components/home/HeroSlides";
 import { useState, type ReactNode } from "react";
 import { Link } from "react-router";
 import { QUICK as CIVIC_QUICK } from "@/components/civic/CivicSections";
@@ -90,6 +91,7 @@ const HERO = {
 };
 
 const CREDITS: { label: Text; href: string }[] = [
+  { label: t2("Aerial photos: BDA", "ವೈಮಾನಿಕ ಚಿತ್ರಗಳು: ಬಿಡಿಎ"), href: "https://bdakarnataka.in/" },
   {
     label: t2("Metro photo: Augustus Binu, CC BY-SA 3.0", "ಮೆಟ್ರೋ ಚಿತ್ರ: Augustus Binu, CC BY-SA 3.0"),
     href: "https://commons.wikimedia.org/wiki/File:Bangalore_Metro_One_Evening_View.JPG",
@@ -222,10 +224,9 @@ export function BrightHero() {
   return (
     <section className="relative grid items-center gap-8 overflow-x-clip px-4 pb-4 pt-2 md:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-4">
       <div aria-hidden className="pointer-events-none absolute inset-0 hidden overflow-hidden sm:block">
-        <img
-          src={asset(PHOTOS.skyline)}
-          alt=""
-          className="absolute -right-[4%] top-[30%] h-[62%] w-[74%] object-cover object-[50%_88%] opacity-80 contrast-125 saturate-150 [mask-image:radial-gradient(ellipse_60%_55%_at_55%_55%,#000_40%,transparent_80%)] motion-safe:animate-[kenburns_26s_ease-in-out_infinite_alternate]"
+        <HeroSlides
+          className="-right-[4%] left-auto top-[30%] h-[62%] w-[74%] opacity-80 contrast-125 saturate-150 [mask-image:radial-gradient(ellipse_60%_55%_at_55%_55%,#000_40%,transparent_80%)]"
+          imgClassName="object-[50%_70%]"
         />
         <svg viewBox="0 0 800 520" preserveAspectRatio="none" className="absolute right-0 top-0 h-full w-[75%]">
           <path d="M40 470 C 220 300 360 520 560 360 S 790 250 820 120" fill="none" stroke="white" strokeWidth="26" strokeOpacity="0.55" strokeLinecap="round" />

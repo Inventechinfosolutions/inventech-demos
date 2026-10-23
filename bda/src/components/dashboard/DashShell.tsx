@@ -1,5 +1,6 @@
 import { Bell, CaretRight, Check, Headset, House, List, MagnifyingGlass, Palette, TreeStructure, X, type Icon } from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "motion/react";
+import { HeroSlides } from "@/components/home/HeroSlides";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router";
 import { RailFlyoutProvider, useFlyoutTrigger } from "@/components/layout/RailFlyout";
@@ -9,7 +10,6 @@ import { ORG, SERVICES } from "@/lib/content";
 import { DASH_THEMES, DashThemeProvider, themeStyle, useDashTheme } from "@/lib/dashTheme";
 import { AREAS, type AreaKey } from "@/lib/ia";
 import { useLang, type Text } from "@/lib/i18n";
-import { PHOTOS } from "@/lib/photos";
 import { usePrefs } from "@/lib/prefs";
 import { asset, cn, external } from "@/lib/utils";
 import { ITEM_X, stagger } from "./motion";
@@ -264,16 +264,9 @@ function DashTopBar({ onMenu }: { onMenu: () => void }) {
 function Backdrop() {
   return (
     <div className="pointer-events-none absolute inset-x-0 top-0 h-[560px] overflow-hidden sm:h-[640px]" aria-hidden>
-      <span className="absolute inset-0 motion-safe:animate-[kenburns_24s_ease-in-out_infinite_alternate]">
-        <motion.img
-          src={asset(PHOTOS.skyline)}
-          alt=""
-          initial={{ scale: 1.1, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 2.4, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute inset-0 size-full object-cover object-[60%_60%]"
-        />
-      </span>
+      <motion.span className="absolute inset-0" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2.4, ease: [0.22, 1, 0.36, 1] }}>
+        <HeroSlides imgClassName="object-[60%_60%]" />
+      </motion.span>
       <span className="absolute inset-0 bg-brand opacity-15 mix-blend-color transition-colors duration-500" />
       <span className="absolute inset-0 bg-gradient-to-r from-page from-10% via-page/75 via-35% to-page/0 to-60% transition-colors duration-500 max-lg:via-page/85 max-lg:to-page/40" />
       <span className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-page/80 to-transparent transition-colors duration-500" />
