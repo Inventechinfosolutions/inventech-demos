@@ -92,8 +92,7 @@ function Landscape() {
 
 export function SiteFooter() {
   const { t, lang } = useLang();
-  const { design } = useDesign();
-  const garden = design === "garden";
+  const { design, light: garden } = useDesign();
   const civic = design === "civic" || garden;
   return (
     <>

@@ -10,6 +10,7 @@ import { QuickStrip } from "@/components/layout/QuickStrip";
 import { BackToTop, ScrollProgress } from "@/components/layout/ScrollExtras";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { TopBar } from "@/components/layout/TopBar";
+import { PlannerShell } from "@/components/planner/PlannerShell";
 import { PortalNav } from "@/components/portal/PortalNav";
 import { DESIGNS, DesignProvider } from "@/lib/design";
 import { useVisibility } from "@/lib/visibility";
@@ -20,9 +21,12 @@ import { GardenPage } from "@/pages/GardenPage";
 import { GalleryPage } from "@/pages/GalleryPage";
 import { GeometricPage } from "@/pages/GeometricPage";
 import { HomePage } from "@/pages/HomePage";
+import { HorizonPage } from "@/pages/HorizonPage";
 import { ModernPage } from "@/pages/ModernPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { OrbitPage } from "@/pages/OrbitPage";
+import { PlannerPage } from "@/pages/PlannerPage";
+import { SkylinePage } from "@/pages/SkylinePage";
 import { PortalPage } from "@/pages/PortalPage";
 import { SitemapPage } from "@/pages/SitemapPage";
 import { ShowcasePage } from "@/pages/ShowcasePage";
@@ -69,12 +73,25 @@ function Site() {
         </BrightShell>
       </DesignProvider>
     );
+  if (design === "planner" || design === "skyline")
+    return (
+      <DesignProvider value={design}>
+        <PlannerShell variant={design}>
+          <motion.main key={pathname} className="flex flex-1 flex-col" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
+            <Outlet />
+          </motion.main>
+        </PlannerShell>
+        <DesignSwitcher />
+        <ScrollProgress />
+        <BackToTop />
+      </DesignProvider>
+    );
   return (
     <DesignProvider value={design}>
       <div className="flex min-h-svh flex-col">
         <TopBar />
-        {design !== "garden" && <BrandHeader />}
-        {design === "portal" || design === "civic" || design === "garden" ? <PortalNav /> : <MainNav />}
+        {design !== "garden" && design !== "horizon" && <BrandHeader />}
+        {design === "portal" || design === "civic" || design === "garden" || design === "horizon" ? <PortalNav /> : <MainNav />}
         <QuickStrip />
         <motion.main
           key={pathname}
@@ -112,6 +129,9 @@ export default function App() {
           <Route path="/design-9" element={<GardenPage />} />
           <Route path="/design-10" element={<DashboardPage />} />
           <Route path="/design-11" element={<BrightPage />} />
+          <Route path="/design-12" element={<HorizonPage />} />
+          <Route path="/design-13" element={<PlannerPage />} />
+          <Route path="/design-14" element={<SkylinePage />} />
           <Route path="/sitemap" element={<SitemapPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>

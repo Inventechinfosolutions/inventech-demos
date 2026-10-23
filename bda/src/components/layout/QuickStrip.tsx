@@ -8,7 +8,7 @@ import { cn, external } from "@/lib/utils";
 export function QuickStrip() {
   const { t } = useLang();
   const { design, pick } = useDesign();
-  if (design === "showcase" || design === "portal" || design === "civic" || design === "garden") return null;
+  if (design === "showcase" || design === "portal" || design === "civic" || design === "garden" || design === "horizon") return null;
 
   const withButton = design === "modern" || design === "geometric" || design === "orbit";
   const links = design === "geometric" || design === "orbit" ? QUICK_STRIP.slice(0, 8) : QUICK_STRIP;

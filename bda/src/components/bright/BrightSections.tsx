@@ -87,8 +87,18 @@ const HERO = {
     "ಯೋಜಿತ ಬಡಾವಣೆಗಳು. ಸುಸ್ಥಿರ ಅಭಿವೃದ್ಧಿ. ಚೈತನ್ಯಶೀಲ ಸಮುದಾಯಗಳು. ನಾಳೆಗಾಗಿ ಜಾಗತಿಕ ನಗರ.",
   ),
   cta: t2("Explore BDA Services", "ಬಿಡಿಎ ಸೇವೆಗಳನ್ನು ಅನ್ವೇಷಿಸಿ"),
-  credit: t2("Photo: Varthur skyline by SlowPhoton, CC BY-SA 4.0", "ಛಾಯಾಚಿತ್ರ: ವರ್ತೂರು, SlowPhoton, CC BY-SA 4.0"),
 };
+
+const CREDITS: { label: Text; href: string }[] = [
+  {
+    label: t2("Metro photo: Augustus Binu, CC BY-SA 3.0", "ಮೆಟ್ರೋ ಚಿತ್ರ: Augustus Binu, CC BY-SA 3.0"),
+    href: "https://commons.wikimedia.org/wiki/File:Bangalore_Metro_One_Evening_View.JPG",
+  },
+  {
+    label: t2("Skyline: SlowPhoton, CC BY-SA 4.0", "ನಗರದೃಶ್ಯ: SlowPhoton, CC BY-SA 4.0"),
+    href: "https://commons.wikimedia.org/wiki/File:Skyline_of_Varthur,_Bangalore.jpg",
+  },
+];
 
 const STAT_ICONS: { icon: Icon; tone: string }[] = [
   { icon: HouseLine, tone: "text-blue-600" },
@@ -98,13 +108,25 @@ const STAT_ICONS: { icon: Icon; tone: string }[] = [
 ];
 
 const ORBIT: { key: AreaKey; icon: Icon; tone: string; angle: number }[] = [
-  { key: "departments", icon: UsersThree, tone: "from-orange-400 to-orange-500", angle: 192 },
-  { key: "services", icon: Gear, tone: "from-teal-400 to-teal-500", angle: 228 },
-  { key: "property", icon: Buildings, tone: "from-blue-500 to-blue-600", angle: 266 },
-  { key: "planning", icon: ChartLineUp, tone: "from-emerald-400 to-emerald-500", angle: 304 },
-  { key: "information", icon: FileText, tone: "from-pink-400 to-rose-500", angle: 340 },
-  { key: "news", icon: Megaphone, tone: "from-sky-500 to-blue-600", angle: 16 },
+  { key: "departments", icon: UsersThree, tone: "from-orange-50 to-orange-200 text-orange-500", angle: 196 },
+  { key: "services", icon: Gear, tone: "from-sky-50 to-sky-200 text-sky-600", angle: 230 },
+  { key: "property", icon: Buildings, tone: "from-blue-50 to-blue-200 text-blue-600", angle: 268 },
+  { key: "planning", icon: ChartLineUp, tone: "from-emerald-50 to-emerald-200 text-emerald-600", angle: 306 },
+  { key: "information", icon: FileText, tone: "from-pink-50 to-pink-200 text-rose-500", angle: 342 },
+  { key: "news", icon: Megaphone, tone: "from-sky-50 to-blue-200 text-blue-600", angle: 16 },
 ];
+
+const ORBIT_R = 43;
+const arcPoint = (r: number, deg: number) => {
+  const a = (deg * Math.PI) / 180;
+  return [50 + r * Math.cos(a), 50 + r * Math.sin(a)] as const;
+};
+const arc = (r: number, from: number, to: number) => {
+  const [x1, y1] = arcPoint(r, from);
+  const [x2, y2] = arcPoint(r, to);
+  return `M${x1.toFixed(2)} ${y1.toFixed(2)}A${r} ${r} 0 ${to - from > 180 ? 1 : 0} 1 ${x2.toFixed(2)} ${y2.toFixed(2)}`;
+};
+const ARC_DOTS = [176, 212, 249, 287, 324, 360, 34];
 
 const SWAY = "animate-sway group-hover/orbit:[animation-play-state:paused] motion-reduce:animate-none";
 const SWAY_BACK = "animate-sway-reverse group-hover/orbit:[animation-play-state:paused] motion-reduce:animate-none";
@@ -120,18 +142,18 @@ function OrbitBubble({ item, index, size = "lg" }: { item: (typeof ORBIT)[number
       initial={{ opacity: 0, scale: 0.4 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, ease: EASE, delay: 0.4 + index * 0.08 }}
-      className="group flex flex-col items-center gap-1.5 text-center"
+      className="group flex w-28 flex-col items-center gap-1.5 text-center"
     >
       <span
         className={cn(
-          "grid place-items-center rounded-full bg-gradient-to-br text-white shadow-[0_14px_26px_-12px_rgba(15,31,61,0.6)] ring-4 ring-white transition-transform duration-300 group-hover:scale-110",
+          "grid place-items-center rounded-full bg-gradient-to-br shadow-[0_16px_30px_-14px_rgba(15,31,61,0.45)] ring-[5px] ring-white/90 transition-all duration-300 group-hover:scale-110 group-hover:from-brand group-hover:to-brand group-hover:text-white",
           item.tone,
-          size === "lg" ? "size-14 xl:size-16" : "size-12",
+          size === "lg" ? "size-16 xl:size-[72px]" : "size-14",
         )}
       >
-        <I size={size === "lg" ? 28 : 24} weight="duotone" />
+        <I size={size === "lg" ? 34 : 28} weight="duotone" />
       </span>
-      <span className="rounded-full bg-white/80 px-2 py-0.5 text-[12px] font-semibold leading-tight text-navy backdrop-blur transition-colors duration-300 group-hover:bg-brand group-hover:text-white">
+      <span className="rounded-full px-2 py-0.5 text-[13px] font-semibold leading-tight text-navy transition-colors duration-300 [text-shadow:0_1px_10px_#fff,0_0_4px_#fff] group-hover:bg-brand group-hover:text-white group-hover:[text-shadow:none]">
         {t(areaLabel(item.key))}
       </span>
     </motion.a>
@@ -140,28 +162,47 @@ function OrbitBubble({ item, index, size = "lg" }: { item: (typeof ORBIT)[number
 
 function Orbit() {
   return (
-    <div className="group/orbit relative mx-auto aspect-square w-full max-w-[560px]">
-      <svg viewBox="0 0 100 100" className="absolute inset-0 size-full text-brand" aria-hidden>
-        <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" strokeOpacity="0.25" strokeWidth="0.35" strokeDasharray="1 1.5" />
-        <circle cx="50" cy="50" r="38.5" fill="none" stroke="white" strokeWidth="1.4" />
+    <div className="group/orbit relative mx-auto aspect-square w-full max-w-[600px]">
+      <span className="absolute -inset-[6%] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.9)_36%,rgba(255,255,255,0.35)_46%,transparent_56%)]" aria-hidden />
+      <svg viewBox="0 0 100 100" className="absolute inset-0 size-full overflow-visible text-brand" aria-hidden>
+        <circle cx="50" cy="50" r="48.5" fill="none" stroke="white" strokeWidth="2.2" strokeOpacity="0.8" />
+        <DrawPath d={arc(ORBIT_R, 160, 400)} fill="none" stroke="currentColor" strokeOpacity="0.35" strokeWidth="0.3" />
+        <DrawPath d={arc(ORBIT_R + 3.2, 200, 330)} fill="none" stroke="currentColor" strokeOpacity="0.18" strokeWidth="0.25" strokeDasharray="0.6 1.4" delay={0.4} />
+        {ARC_DOTS.map((deg, i) => {
+          const [x, y] = arcPoint(ORBIT_R + (i % 2 ? 3.2 : 0), deg);
+          return (
+            <motion.circle
+              key={deg}
+              cx={x}
+              cy={y}
+              r={i % 3 === 0 ? 0.75 : 0.5}
+              className="fill-navy"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 0.7, scale: 1 }}
+              transition={{ delay: 1 + i * 0.1 }}
+              style={{ transformOrigin: `${x}px ${y}px`, transformBox: "view-box" }}
+            />
+          );
+        })}
       </svg>
       <span className="absolute inset-0 animate-spin-slow motion-reduce:animate-none" aria-hidden>
-        <span className="absolute left-1/2 top-[6%] size-2.5 -translate-x-1/2 rounded-full bg-brand shadow-[0_0_0_5px_rgba(255,255,255,0.8)]" />
+        <span className="absolute left-1/2 top-[7%] size-2.5 -translate-x-1/2 rounded-full bg-brand shadow-[0_0_0_5px_rgba(255,255,255,0.85)]" />
       </span>
+      <span className="absolute inset-[16%] rounded-full bg-white/60 shadow-[0_0_60px_10px_rgba(255,255,255,0.9)] backdrop-blur-sm" aria-hidden />
       <motion.div
         initial={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.9, ease: EASE }}
-        className="absolute inset-[17%] overflow-hidden rounded-full shadow-[0_30px_60px_-28px_rgba(15,31,61,0.65)] ring-[10px] ring-white"
+        className="absolute inset-[19%] overflow-hidden rounded-full shadow-[0_30px_70px_-26px_rgba(37,99,235,0.55)] ring-4 ring-white"
       >
-        <img src={asset(PHOTOS.skyline)} alt="" className="size-full scale-110 object-cover object-[55%_60%] motion-safe:animate-[drift_18s_ease-in-out_infinite]" />
-        <span className="absolute inset-0 bg-brand opacity-10 mix-blend-color" aria-hidden />
+        <img src={asset(PHOTOS.metro)} alt="" className="size-full scale-110 object-cover object-[50%_60%] motion-safe:animate-[drift_18s_ease-in-out_infinite]" />
+        <span className="absolute inset-0 bg-gradient-to-b from-sky-200/10 via-transparent to-sky-900/10" aria-hidden />
       </motion.div>
       <div className={cn("absolute inset-0", SWAY)} style={{ transformOrigin: "50% 50%" }}>
         {ORBIT.map((o, i) => {
-          const rad = (o.angle * Math.PI) / 180;
+          const [x, y] = arcPoint(ORBIT_R, o.angle);
           return (
-            <div key={o.key} className="absolute -translate-x-1/2 -translate-y-[30%]" style={{ left: `${50 + 44 * Math.cos(rad)}%`, top: `${50 + 44 * Math.sin(rad)}%` }}>
+            <div key={o.key} className="absolute -translate-x-1/2 -translate-y-[32%]" style={{ left: `${x}%`, top: `${y}%` }}>
               <div className={SWAY_BACK}>
                 <Float index={i}>
                   <OrbitBubble item={o} index={i} />
@@ -180,11 +221,21 @@ export function BrightHero() {
   const services = areaOf("services");
   return (
     <section className="relative grid items-center gap-8 overflow-x-clip px-4 pb-4 pt-2 md:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-4">
-      <span
-        aria-hidden
-        className="pointer-events-none absolute left-[38%] top-10 hidden size-24 bg-[radial-gradient(circle,var(--color-brand)_1.2px,transparent_1.4px)] bg-[length:12px_12px] opacity-30 lg:block"
-      />
-      <div>
+      <div aria-hidden className="pointer-events-none absolute inset-0 hidden overflow-hidden sm:block">
+        <img
+          src={asset(PHOTOS.skyline)}
+          alt=""
+          className="absolute -right-[4%] top-[30%] h-[62%] w-[74%] object-cover object-[50%_88%] opacity-80 contrast-125 saturate-150 [mask-image:radial-gradient(ellipse_60%_55%_at_55%_55%,#000_40%,transparent_80%)] motion-safe:animate-[kenburns_26s_ease-in-out_infinite_alternate]"
+        />
+        <svg viewBox="0 0 800 520" preserveAspectRatio="none" className="absolute right-0 top-0 h-full w-[75%]">
+          <path d="M40 470 C 220 300 360 520 560 360 S 790 250 820 120" fill="none" stroke="white" strokeWidth="26" strokeOpacity="0.55" strokeLinecap="round" />
+          <path d="M0 520 C 200 380 380 560 600 420 S 800 330 840 240" fill="none" stroke="white" strokeWidth="12" strokeOpacity="0.45" strokeLinecap="round" />
+          <path d="M120 40 C 260 -20 420 60 520 20" fill="none" stroke="var(--color-brand)" strokeWidth="1.5" strokeOpacity="0.2" />
+        </svg>
+        <span className="absolute left-[34%] top-[46%] size-24 bg-[radial-gradient(circle,var(--color-brand)_1.2px,transparent_1.4px)] bg-[length:12px_12px] opacity-30" />
+        <span className="absolute right-[6%] top-[58%] size-20 bg-[radial-gradient(circle,var(--color-brand)_1.2px,transparent_1.4px)] bg-[length:12px_12px] opacity-25" />
+      </div>
+      <div className="relative z-10">
         <h1 className="font-serif text-[44px] leading-[1.02] text-navy transition-colors duration-500 sm:text-[60px] xl:text-[72px]">
           <RiseLines lines={[{ text: t(HERO.pre) }, { text: t(HERO.accent), className: "text-brand transition-colors duration-500" }]} />
         </h1>
@@ -226,12 +277,12 @@ export function BrightHero() {
           })}
         </ul>
       </div>
-      <div className="hidden sm:block">
+      <div className="relative z-10 hidden sm:block">
         <Orbit />
       </div>
       <div className="sm:hidden">
-        <div className="mx-auto mb-5 aspect-square w-3/4 overflow-hidden rounded-full ring-8 ring-white">
-          <img src={asset(PHOTOS.skyline)} alt="" className="size-full object-cover object-[55%_60%]" />
+        <div className="mx-auto mb-5 aspect-square w-3/4 overflow-hidden rounded-full shadow-[0_24px_50px_-24px_rgba(37,99,235,0.6)] ring-8 ring-white">
+          <img src={asset(PHOTOS.metro)} alt="" className="size-full object-cover object-[50%_60%]" />
         </div>
         <div className="grid grid-cols-3 gap-y-4">
           {ORBIT.map((o, i) => (
@@ -239,13 +290,18 @@ export function BrightHero() {
           ))}
         </div>
       </div>
-      <a
-        href="https://commons.wikimedia.org/wiki/File:Skyline_of_Varthur,_Bangalore.jpg"
-        {...external("https://commons.wikimedia.org/")}
-        className="absolute bottom-0 right-4 hidden rounded-full bg-white/70 px-2 py-0.5 text-[9.5px] text-muted backdrop-blur transition-colors hover:bg-brand hover:text-white md:right-8 lg:block"
-      >
-        {t(HERO.credit)}
-      </a>
+      <span className="absolute bottom-0 right-4 z-10 hidden gap-1 text-[9.5px] text-muted md:right-8 lg:flex">
+        {CREDITS.map((c) => (
+          <a
+            key={c.href}
+            href={c.href}
+            {...external(c.href)}
+            className="rounded-full bg-white/70 px-2 py-0.5 backdrop-blur transition-colors hover:bg-brand hover:text-white"
+          >
+            {t(c.label)}
+          </a>
+        ))}
+      </span>
     </section>
   );
 }
@@ -386,7 +442,7 @@ const MAP_ROADS = [
   "M140 18 C 148 90 150 170 156 246",
 ];
 
-function GreenMap() {
+export function GreenMap() {
   return (
     <svg viewBox="0 0 300 260" className="absolute inset-0 size-full drop-shadow-[0_24px_30px_rgba(15,31,61,0.25)]" preserveAspectRatio="none" aria-hidden>
       <defs>

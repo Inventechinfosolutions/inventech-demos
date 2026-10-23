@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 import type { Text } from "@/lib/i18n";
 
-export type Design = "photo" | "illustrated" | "showcase" | "modern" | "geometric" | "orbit" | "portal" | "civic" | "garden" | "dashboard" | "bright";
+export type Design = "photo" | "illustrated" | "showcase" | "modern" | "geometric" | "orbit" | "portal" | "civic" | "garden" | "dashboard" | "bright" | "horizon" | "planner" | "skyline";
 
 export const DESIGNS: { id: Design; path: string; label: Text; style: Text; summary: Text; image: string }[] = [
   {
@@ -125,6 +125,39 @@ export const DESIGNS: { id: Design; path: string; label: Text; style: Text; summ
     },
     image: "images/previews/design-11.jpg",
   },
+  {
+    id: "horizon",
+    path: "/design-12",
+    label: { en: "Design 12", kn: "ವಿನ್ಯಾಸ 12" },
+    style: { en: "Green Horizon", kn: "ಹಸಿರು ದಿಗಂತ" },
+    summary: {
+      en: "Fresh green portal: a skyline hero with a fan of Explore BDA cards, quick citizen services, slanted initiative cards, a Property & Land map with stats, updates and important links.",
+      kn: "ತಾಜಾ ಹಸಿರು ಪೋರ್ಟಲ್: ಬಿಡಿಎ ಅನ್ವೇಷಣಾ ಕಾರ್ಡ್‌ಗಳ ಬೀಸಣಿಗೆಯೊಂದಿಗೆ ನಗರದೃಶ್ಯ, ತ್ವರಿತ ನಾಗರಿಕ ಸೇವೆಗಳು, ಓರೆಯಾದ ಉಪಕ್ರಮ ಕಾರ್ಡ್‌ಗಳು, ಅಂಕಿಅಂಶಗಳೊಂದಿಗೆ ಆಸ್ತಿ ಮತ್ತು ಭೂಮಿ ನಕ್ಷೆ, ಅಪ್‌ಡೇಟ್‌ಗಳು ಮತ್ತು ಪ್ರಮುಖ ಕೊಂಡಿಗಳು.",
+    },
+    image: "images/previews/design-12.jpg",
+  },
+  {
+    id: "planner",
+    path: "/design-13",
+    label: { en: "Design 13", kn: "ವಿನ್ಯಾಸ 13" },
+    style: { en: "City Planner", kn: "ನಗರ ಯೋಜಕ" },
+    summary: {
+      en: "Warm one-screen portal: a side services menu, a serif hero with an illustrated city and metro, a BDA zones map, colour service tiles, announcements, departments, online services, key figures and gallery.",
+      kn: "ಬೆಚ್ಚನೆಯ ಒಂದೇ ಪರದೆಯ ಪೋರ್ಟಲ್: ಪಕ್ಕದ ಸೇವಾ ಮೆನು, ಚಿತ್ರಿತ ನಗರ ಮತ್ತು ಮೆಟ್ರೋದೊಂದಿಗೆ ಮುಖಭಾಗ, ಬಿಡಿಎ ವಲಯಗಳ ನಕ್ಷೆ, ಬಣ್ಣದ ಸೇವಾ ಟೈಲ್‌ಗಳು, ಪ್ರಕಟಣೆಗಳು, ವಿಭಾಗಗಳು, ಆನ್‌ಲೈನ್ ಸೇವೆಗಳು, ಪ್ರಮುಖ ಅಂಕಿಅಂಶಗಳು ಮತ್ತು ಗ್ಯಾಲರಿ.",
+    },
+    image: "images/previews/design-13.jpg",
+  },
+  {
+    id: "skyline",
+    path: "/design-14",
+    label: { en: "Design 14", kn: "ವಿನ್ಯಾಸ 14" },
+    style: { en: "Skyline Photo", kn: "ಸ್ಕೈಲೈನ್ ಫೋಟೋ" },
+    summary: {
+      en: "One-screen portal over an aerial Bengaluru skyline photo: pill search, glass zones map with a zone picker, photo service tiles, an announcements timeline, colour department tiles and a light skyline footer.",
+      kn: "ಬೆಂಗಳೂರಿನ ವೈಮಾನಿಕ ಸ್ಕೈಲೈನ್ ಫೋಟೋ ಮೇಲೆ ಒಂದೇ ಪರದೆಯ ಪೋರ್ಟಲ್: ಹುಡುಕಾಟ, ವಲಯ ಆಯ್ಕೆಯೊಂದಿಗೆ ಗಾಜಿನ ನಕ್ಷೆ, ಫೋಟೋ ಸೇವಾ ಟೈಲ್‌ಗಳು, ಪ್ರಕಟಣೆಗಳ ಟೈಮ್‌ಲೈನ್, ಬಣ್ಣದ ವಿಭಾಗ ಟೈಲ್‌ಗಳು ಮತ್ತು ತಿಳಿ ಬಣ್ಣದ ಅಡಿಭಾಗ.",
+    },
+    image: "images/previews/design-14.jpg",
+  },
 ];
 
 const DesignContext = createContext<Design>("photo");
@@ -136,6 +169,7 @@ export function useDesign() {
   return {
     design,
     isPhoto: design === "photo",
+    light: design === "garden" || design === "horizon",
     root: DESIGNS.find((d) => d.id === design)!.path,
     pick: <T,>(photo: T, other: T) => (design === "photo" ? photo : other),
   };

@@ -57,7 +57,7 @@ function Group({ link }: { link: IaLink }) {
   );
 }
 
-function AreaLinks({ area }: { area: IaArea }) {
+export function AreaLinks({ area }: { area: IaArea }) {
   const { t } = useLang();
   if (area.key === "departments") {
     return (
@@ -112,20 +112,12 @@ function AreaLinks({ area }: { area: IaArea }) {
   );
 }
 
-function MegaPanel({ area, onEnter, onLeave }: { area: IaArea; onEnter: () => void; onLeave: () => void }) {
+/** Mega menu body: the area intro card beside its grouped links. */
+export function MegaContent({ area, className }: { area: IaArea; className?: string }) {
   const { t } = useLang();
   const helpline = HIGHLIGHTS[0];
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -8 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -8 }}
-      transition={{ duration: 0.22, ease: EASE }}
-      onMouseEnter={onEnter}
-      onMouseLeave={onLeave}
-      className="absolute inset-x-0 top-full border-b border-line bg-white shadow-[0_30px_60px_-30px_rgba(11,44,107,0.45)]"
-    >
-      <div className="mx-auto grid max-w-site grid-cols-[260px_1fr] gap-8 px-5 py-6 lg:px-8">
+    <div className={cn("grid grid-cols-[260px_1fr] gap-8", className)}>
         <AnimatePresence mode="wait">
           <motion.div
             key={area.key}
@@ -158,7 +150,22 @@ function MegaPanel({ area, onEnter, onLeave }: { area: IaArea; onEnter: () => vo
             <AreaLinks area={area} />
           </motion.div>
         </AnimatePresence>
-      </div>
+    </div>
+  );
+}
+
+function MegaPanel({ area, onEnter, onLeave }: { area: IaArea; onEnter: () => void; onLeave: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -8 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -8 }}
+      transition={{ duration: 0.22, ease: EASE }}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+      className="absolute inset-x-0 top-full border-b border-line bg-white shadow-[0_30px_60px_-30px_rgba(11,44,107,0.45)]"
+    >
+      <MegaContent area={area} className="mx-auto max-w-site px-5 py-6 lg:px-8" />
     </motion.div>
   );
 }
@@ -257,7 +264,7 @@ function Drawer({ onClose }: { onClose: () => void }) {
 
 export function PortalNav() {
   const { t, lang } = useLang();
-  const { root, design } = useDesign();
+  const { root, design, light } = useDesign();
   const { pathname } = useLocation();
   const [open, setOpen] = useState<AreaKey | null>(null);
   const [drawer, setDrawer] = useState(false);
@@ -286,7 +293,7 @@ export function PortalNav() {
       <nav
         className={cn(
           "sticky top-0 z-40 shadow-sm backdrop-blur",
-          design === "garden" ? "border-b border-white bg-white/80" : "border-y border-line bg-white/95",
+          light ? "border-b border-white bg-white/80" : "border-y border-line bg-white/95",
         )}
         onMouseLeave={hide}
         onBlur={(e) => {
@@ -294,7 +301,7 @@ export function PortalNav() {
         }}
       >
         <div className="relative mx-auto flex max-w-site items-stretch px-5 lg:px-8">
-          {design === "garden" && (
+          {light && (
             <Link to={root} className="mr-auto flex min-w-0 items-center gap-2.5 py-2 pr-4 xl:shrink-0">
               <img src={asset("images/bda-logo.jpg")} alt="BDA" className="size-10 shrink-0 rounded-full sm:size-12" />
               <span className="min-w-0 leading-tight">
@@ -303,12 +310,12 @@ export function PortalNav() {
               </span>
             </Link>
           )}
-          {design === "civic" || design === "garden" ? (
+          {design === "civic" || light ? (
             <Link
               to={root}
               className={cn(
                 "relative mr-1 items-center px-3 py-3 text-[13px] font-semibold text-brand transition-colors hover:bg-brand hover:text-white",
-                design === "garden" ? "hidden md:flex" : "flex",
+                light ? "hidden md:flex" : "flex",
               )}
             >
               {t(TEXT.home)}
@@ -319,7 +326,7 @@ export function PortalNav() {
               <House weight="fill" size={18} />
             </Link>
           )}
-          <ul className={cn("hidden items-stretch xl:flex", design === "garden" ? "" : "flex-1")}>
+          <ul className={cn("hidden items-stretch xl:flex", light ? "" : "flex-1")}>
             {AREAS.map((a) => {
               const on = open === a.key;
               return (
@@ -331,7 +338,7 @@ export function PortalNav() {
                     onFocus={() => show(a.key)}
                     className={cn(
                       "relative flex items-center gap-1 text-[13px] font-semibold transition-colors",
-                      design === "garden" ? "px-1.5 text-[12.5px] min-[1400px]:px-2" : "px-3",
+                      light ? "px-1.5 text-[12.5px] min-[1400px]:px-2" : "px-3",
                       on ? "text-white" : "text-navy hover:bg-brand hover:text-white",
                     )}
                   >
@@ -349,7 +356,7 @@ export function PortalNav() {
             aria-current={pathname === "/sitemap" ? "page" : undefined}
             className={cn(
               "relative my-auto ml-auto flex shrink-0 items-center gap-1.5 rounded-full bg-gradient-to-r from-brand to-brand-bright px-2.5 py-2 text-[12.5px] font-bold text-white shadow-[0_6px_16px_-6px_rgba(29,78,216,0.7)] ring-2 ring-amber-300/80 transition-all hover:-translate-y-0.5 hover:from-navy hover:to-navy sm:px-3.5",
-              design === "garden" && "xl:max-[1399px]:px-2.5",
+              light && "xl:max-[1399px]:px-2.5",
             )}
           >
             <span className="absolute -right-1 -top-1 flex size-2.5">
@@ -357,7 +364,7 @@ export function PortalNav() {
               <span className="relative size-2.5 rounded-full bg-amber-400 ring-2 ring-white" />
             </span>
             <TreeStructure weight="bold" className="size-4" />
-            <span className={cn("hidden sm:inline", design === "garden" && "xl:max-[1399px]:hidden")}>{t(TEXT.sitemap)}</span>
+            <span className={cn("hidden sm:inline", light && "xl:max-[1399px]:hidden")}>{t(TEXT.sitemap)}</span>
           </Link>
           <button
             type="button"

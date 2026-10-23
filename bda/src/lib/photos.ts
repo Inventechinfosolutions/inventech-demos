@@ -6,4 +6,5 @@ export const PHOTOS = {
   layoutSigns: "images/layout-signs.jpg",
   layoutBoard: "images/layout-board.jpg",
   skyline: "images/bengaluru-skyline.jpg",
+  metro: "images/bengaluru-metro.jpg",
 } as const;

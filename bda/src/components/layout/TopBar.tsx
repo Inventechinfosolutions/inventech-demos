@@ -22,6 +22,7 @@ const SEARCH = { en: "Search services", kn: "ಸೇವೆಗಳನ್ನು ಹ�
 const GRIEVANCE = { en: "Raise a Grievance", kn: "ದೂರು ಸಲ್ಲಿಸಿ" };
 const LOGIN = { en: "Login", kn: "ಲಾಗಿನ್" };
 const CIVIC_SEARCH = { en: "Search services, layouts...", kn: "ಸೇವೆಗಳು, ಬಡಾವಣೆಗಳನ್ನು ಹುಡುಕಿ..." };
+const INLINE_SEARCH = { en: "Search services, layouts, departments...", kn: "ಸೇವೆ, ಬಡಾವಣೆ, ವಿಭಾಗಗಳನ್ನು ಹುಡುಕಿ..." };
 
 const LOGINS = [
   ONLINE_SERVICES.find((s) => s.icon === "ptax")!,
@@ -108,7 +109,35 @@ export function SearchBox({ className, placeholder = SEARCH }: { className?: str
   );
 }
 
-function LightTopBar() {
+function InlineSearch() {
+  const { t } = useLang();
+  const { query, setQuery } = usePrefs();
+  return (
+    <form
+      role="search"
+      className="relative hidden w-72 md:block xl:w-80"
+      onSubmit={(e) => {
+        e.preventDefault();
+        document.getElementById("services")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }}
+    >
+      <MagnifyingGlass className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
+      <input
+        type="search"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder={t(INLINE_SEARCH)}
+        aria-label={t(INLINE_SEARCH)}
+        className="w-full rounded-full border border-line bg-white py-1.5 pl-9 pr-10 text-[12.5px] text-ink shadow-sm outline-none placeholder:text-muted focus:border-brand focus:ring-2 focus:ring-brand/20"
+      />
+      <button type="submit" aria-label={t(SEARCH)} className="absolute right-1 top-1/2 grid size-7 -translate-y-1/2 place-items-center rounded-full bg-navy text-white transition-colors hover:bg-brand">
+        <MagnifyingGlass weight="bold" className="size-3.5" />
+      </button>
+    </form>
+  );
+}
+
+function LightTopBar({ inlineSearch = false }: { inlineSearch?: boolean }) {
   const { t, lang, setLang } = useLang();
   const { scaleIndex, setScaleIndex } = usePrefs();
   const [searching, setSearching] = useState(false);
@@ -118,7 +147,7 @@ function LightTopBar() {
         <div className="flex min-w-0 items-center gap-2">
           <img src={asset("images/karnataka-emblem.png")} alt="" className="h-8 w-auto" />
           <span className="font-semibold">{t(ORG.govt)}</span>
-          <span className="ml-3 hidden items-center gap-2 border-l border-line pl-3 xl:flex">
+          <span className={cn("ml-3 hidden items-center gap-2 border-l border-line pl-3", !inlineSearch && "xl:flex")}>
             {[LEADERS.left, LEADERS.right].map((l) => (
               <span key={l.photo} className="flex items-center gap-2 rounded-full bg-page py-0.5 pl-0.5 pr-3">
                 <img src={asset(l.photo)} alt={t(l.name)} className="size-8 rounded-full object-cover object-top ring-2 ring-white" />
@@ -131,6 +160,7 @@ function LightTopBar() {
           </span>
         </div>
         <div className="flex items-center gap-3">
+          {inlineSearch && <InlineSearch />}
           <div className="flex items-center gap-1">
             {LANGS.map((l, i) => (
               <span key={l.value} className="flex items-center gap-1">
@@ -161,7 +191,7 @@ function LightTopBar() {
               </button>
             ))}
           </div>
-          <div className="hidden items-center md:flex">
+          <div className={cn("hidden items-center", !inlineSearch && "md:flex")}>
             <AnimatePresence initial={false}>
               {searching && (
                 <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: 224, opacity: 1 }} exit={{ width: 0, opacity: 0 }} className="mr-1.5 overflow-hidden">
@@ -179,9 +209,17 @@ function LightTopBar() {
               <MagnifyingGlass weight="bold" className="size-4" />
             </button>
           </div>
-          <LoginMenu light />
+          {inlineSearch ? <LoginButton /> : <LoginMenu light />}
         </div>
       </div>
+    </div>
+  );
+}
+
+function LoginButton() {
+  return (
+    <div className="rounded-full bg-navy text-white [&_button]:border-transparent [&_button]:py-1.5">
+      <LoginMenu />
     </div>
   );
 }
@@ -189,8 +227,8 @@ function LightTopBar() {
 export function TopBar() {
   const { t, lang, setLang } = useLang();
   const { scaleIndex, setScaleIndex } = usePrefs();
-  const { design } = useDesign();
-  if (design === "garden") return <LightTopBar />;
+  const { design, light } = useDesign();
+  if (light) return <LightTopBar inlineSearch={design === "horizon"} />;
   const [helpline, grievance] = HIGHLIGHTS;
   return (
     <div className="bg-navy text-white">

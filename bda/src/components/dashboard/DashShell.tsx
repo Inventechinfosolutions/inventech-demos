@@ -1,7 +1,8 @@
-import { Bell, Check, Headset, House, List, MagnifyingGlass, Palette, TreeStructure, X, type Icon } from "@phosphor-icons/react";
+import { Bell, CaretRight, Check, Headset, House, List, MagnifyingGlass, Palette, TreeStructure, X, type Icon } from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router";
+import { RailFlyoutProvider, useFlyoutTrigger } from "@/components/layout/RailFlyout";
 import { LoginMenu } from "@/components/layout/TopBar";
 import { NewBadge } from "@/components/portal/SitemapCallout";
 import { ORG, SERVICES } from "@/lib/content";
@@ -44,28 +45,37 @@ export const areaLabel = (key: AreaKey) => NAV_AREAS.find((n) => n.key === key)?
 
 const svc = (icon: (typeof SERVICES)[number]["icon"]) => SERVICES.find((s) => s.icon === icon)!.href;
 
-function SideLink({ icon: I, label, href, to, onClick, active, full, small }: { icon: Icon; label: string; href?: string; to?: string; onClick?: () => void; active?: boolean; full: boolean; small?: boolean }) {
+function SideLink({ icon: I, label, href, to, onClick, active, full, small, open, menu }: { icon: Icon; label: string; href?: string; to?: string; onClick?: () => void; active?: boolean; full: boolean; small?: boolean; open?: boolean; menu?: object }) {
   const cls = cn(
     "group relative flex items-center gap-3 rounded-xl px-3 font-medium transition-colors duration-300 hover:bg-brand hover:text-white",
     small ? "py-2 text-[12.5px] text-white/65" : "py-2.5 text-[13.5px] text-white/85",
     !full && "md:max-lg:justify-center md:max-lg:px-0",
     active && "bg-gradient-to-r from-brand to-brand-bright text-white shadow-[0_12px_24px_-12px_rgba(0,0,0,0.7)]",
+    open && "bg-brand text-white",
   );
   const body = (
     <>
       <I size={small ? 18 : 21} weight={active ? "fill" : "duotone"} className="shrink-0 transition-transform duration-300 group-hover:scale-110" />
-      <span className={cn("leading-snug", !full && "md:max-lg:sr-only")}>{label}</span>
+      <span className={cn("flex-1 leading-snug", !full && "md:max-lg:sr-only")}>{label}</span>
+      {menu && <CaretRight size={12} weight="bold" className={cn("shrink-0 opacity-50 transition-transform duration-300", open && "translate-x-0.5 opacity-100", !full && "md:max-lg:hidden")} />}
     </>
   );
   if (to) return <Link to={to} title={label} className={cls} aria-current={active ? "page" : undefined}>{body}</Link>;
-  if (href) return <a href={href} {...external(href)} title={label} className={cls}>{body}</a>;
+  if (href) return <a href={href} {...external(href)} title={menu ? undefined : label} className={cls} {...menu}>{body}</a>;
   return <button type="button" onClick={onClick} title={label} className={cn(cls, "w-full text-left")}>{body}</button>;
 }
 
+function AreaSideLink({ areaKey, full }: { areaKey: AreaKey; full: boolean }) {
+  const { t } = useLang();
+  const a = areaOf(areaKey);
+  const { open, props } = useFlyoutTrigger(areaKey);
+  return <SideLink icon={a.icon} label={t(areaLabel(areaKey))} href={a.href} full={full} open={open} menu={full ? undefined : props} />;
+}
+
 /** Line drawing of Bengaluru landmarks: a temple gopuram, Vidhana Soudha and new towers. */
-function Landmarks() {
+export function Landmarks({ className = "w-full text-white/40" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 200 116" className="w-full text-white/40" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinejoin="round" aria-hidden>
+    <svg viewBox="0 0 200 116" className={className} fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinejoin="round" aria-hidden>
       <path d="M2 112h196" />
       <path d="M14 112V76h22v36M15 76l2-8h16l2 8M18 68l2-7h10l2 7M21 61l2-6h4l2 6M25 55v-5" />
       <path d="M19 84h12M19 92h12M19 100h12M22 112v-6h6v6" />
@@ -106,14 +116,11 @@ function Sidebar({ full = false, onNavigate }: { full?: boolean; onNavigate?: ()
         <motion.div variants={ITEM_X}>
           <SideLink icon={House} label={t(TEXT.home)} to="/design-10" active full={full} />
         </motion.div>
-        {NAV_AREAS.map(({ key }) => {
-          const a = areaOf(key);
-          return (
-            <motion.div key={key} variants={ITEM_X}>
-              <SideLink icon={a.icon} label={t(areaLabel(key))} href={a.href} full={full} />
-            </motion.div>
-          );
-        })}
+        {NAV_AREAS.map(({ key }) => (
+          <motion.div key={key} variants={ITEM_X}>
+            <AreaSideLink areaKey={key} full={full} />
+          </motion.div>
+        ))}
         <motion.div variants={ITEM_X} className="mt-2">
         <Link
           to="/sitemap"
@@ -391,7 +398,9 @@ function Shell({ children }: { children: ReactNode }) {
     <div className="flex min-h-svh bg-page transition-colors duration-500">
       <aside className="hidden shrink-0 bg-navy-deep transition-colors duration-500 md:block md:w-[80px] lg:w-[208px]">
         <div className="sticky top-0 h-svh">
-          <Sidebar />
+          <RailFlyoutProvider>
+            <Sidebar />
+          </RailFlyoutProvider>
         </div>
       </aside>
       <AnimatePresence>
@@ -432,7 +441,7 @@ export function DashboardShell({ children }: { children: ReactNode }) {
   return (
     <DashThemeProvider>
       {(theme) => (
-        <div style={themeStyle(theme)}>
+        <div data-shell-root style={themeStyle(theme)}>
           <Shell>{children}</Shell>
         </div>
       )}

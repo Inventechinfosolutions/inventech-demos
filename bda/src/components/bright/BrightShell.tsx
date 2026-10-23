@@ -1,9 +1,10 @@
-import { Bell, CaretDoubleLeft, Headset, House, List, MapPin, Palette, TreeStructure, X, type Icon } from "@phosphor-icons/react";
+import { Bell, CaretDoubleLeft, CaretRight, Headset, House, List, MapPin, Palette, TreeStructure, X, type Icon } from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState, type ReactNode } from "react";
 import { Link } from "react-router";
 import { areaOf, ThemePicker, TopSearch } from "@/components/dashboard/DashShell";
 import { ITEM_X, stagger } from "@/components/dashboard/motion";
+import { RailFlyoutProvider, useFlyoutTrigger } from "@/components/layout/RailFlyout";
 import { LoginMenu } from "@/components/layout/TopBar";
 import { NewBadge } from "@/components/portal/SitemapCallout";
 import { ORG, SERVICES } from "@/lib/content";
@@ -37,17 +38,18 @@ const RAIL: { key: AreaKey; label: Text }[] = [
   { key: "news", label: t2("News & Updates", "ಸುದ್ದಿ ಮತ್ತು ಅಪ್‌ಡೇಟ್‌ಗಳು") },
 ];
 
-function RailItem({ icon: I, label, href, to, onClick, active, wide }: { icon: Icon; label: string; href?: string; to?: string; onClick?: () => void; active?: boolean; wide: boolean }) {
+function RailItem({ icon: I, label, href, to, onClick, active, wide, open, menu }: { icon: Icon; label: string; href?: string; to?: string; onClick?: () => void; active?: boolean; wide: boolean; open?: boolean; menu?: object }) {
   const cls = cn(
     "group flex items-center rounded-2xl text-navy transition-colors duration-300 hover:bg-brand hover:text-white",
     wide ? "gap-3 px-3 py-2.5 text-[13.5px] font-medium" : "flex-col gap-1 px-1 py-2 text-center text-[10.5px] font-semibold leading-tight",
+    open && "bg-brand text-white",
   );
   const icon = (
     <span
       className={cn(
         "grid shrink-0 place-items-center rounded-xl transition-colors duration-300",
         wide ? "size-9" : "size-10",
-        active ? "bg-brand text-white shadow-[0_10px_20px_-10px_rgba(0,0,0,0.5)] group-hover:bg-white group-hover:text-brand" : "text-navy group-hover:text-white",
+        active ? "bg-brand text-white shadow-[0_10px_20px_-10px_rgba(0,0,0,0.5)] group-hover:bg-white group-hover:text-brand" : open ? "text-white" : "text-navy group-hover:text-white",
       )}
     >
       <I size={22} weight={active ? "fill" : "duotone"} />
@@ -56,7 +58,8 @@ function RailItem({ icon: I, label, href, to, onClick, active, wide }: { icon: I
   const body = (
     <>
       {icon}
-      <span className={cn(active && "text-brand group-hover:text-white")}>{label}</span>
+      <span className={cn(active && "text-brand group-hover:text-white", wide && "flex-1")}>{label}</span>
+      {menu && wide && <CaretRight size={12} weight="bold" className={cn("shrink-0 opacity-50 transition-transform duration-300", open && "translate-x-0.5 opacity-100")} />}
     </>
   );
   const el = to ? (
@@ -64,7 +67,7 @@ function RailItem({ icon: I, label, href, to, onClick, active, wide }: { icon: I
       {body}
     </Link>
   ) : href ? (
-    <a href={href} {...external(href)} className={cls}>
+    <a href={href} {...external(href)} className={cls} {...menu}>
       {body}
     </a>
   ) : (
@@ -79,6 +82,13 @@ function RailItem({ icon: I, label, href, to, onClick, active, wide }: { icon: I
   );
 }
 
+function AreaRailItem({ item, wide }: { item: (typeof RAIL)[number]; wide: boolean }) {
+  const { t } = useLang();
+  const a = areaOf(item.key);
+  const { open, props } = useFlyoutTrigger(item.key);
+  return <RailItem icon={a.icon} label={t(item.label)} href={a.href} wide={wide} open={open} menu={"onMouseEnter" in props ? props : undefined} />;
+}
+
 function Rail({ wide, onNavigate }: { wide: boolean; onNavigate?: () => void }) {
   const { t } = useLang();
   const { setPicker } = useDashTheme();
@@ -90,10 +100,9 @@ function Rail({ wide, onNavigate }: { wide: boolean; onNavigate?: () => void }) 
       onClick={(e) => (e.target as HTMLElement).closest("a") && onNavigate?.()}
     >
       <RailItem icon={House} label={t(TEXT.home)} to="/design-11" active wide={wide} />
-      {RAIL.map((r) => {
-        const a = areaOf(r.key);
-        return <RailItem key={r.key} icon={a.icon} label={t(r.label)} href={a.href} wide={wide} />;
-      })}
+      {RAIL.map((r) => (
+        <AreaRailItem key={r.key} item={r} wide={wide} />
+      ))}
       <motion.div variants={ITEM_X} className="mt-1 grid">
       <Link
         to="/sitemap"
@@ -212,7 +221,9 @@ function Shell({ children }: { children: ReactNode }) {
       <aside className={cn("hidden shrink-0 border-r border-line bg-white transition-[width] duration-300 md:block", wide ? "w-[220px]" : "w-[96px]")}>
         <div className="sticky top-0 flex h-svh flex-col">
           <div className="min-h-0 flex-1">
-            <Rail wide={wide} />
+            <RailFlyoutProvider>
+              <Rail wide={wide} />
+            </RailFlyoutProvider>
           </div>
           <button
             type="button"
@@ -261,7 +272,7 @@ export function BrightShell({ children }: { children: ReactNode }) {
   return (
     <DashThemeProvider>
       {(theme) => (
-        <div style={themeStyle(theme)}>
+        <div data-shell-root style={themeStyle(theme)}>
           <Shell>{children}</Shell>
         </div>
       )}
