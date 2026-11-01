@@ -58,4 +58,5 @@ export const DEMOS = [
   { id: "guest-house", name: "Guest House Booking", pinVersion: 1, spa: true },
   { id: "ocss", name: "CSMS · Claim Settlement Management System", pinVersion: 1, spa: true },
   { id: "pension", name: "PensionFlow AI · Pension Recovery Management", pinVersion: 1, spa: true },
+  { id: "dpir", name: "DPIR", pinVersion: 1 },
 ];

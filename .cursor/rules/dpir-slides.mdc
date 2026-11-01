@@ -1,0 +1,24 @@
+---
+description: DIPR presentation slide content and readability rules
+globs: dpir/**
+alwaysApply: false
+---
+
+# DIPR slides: no small sub-text
+
+The deck is presented on a screen; small secondary lines cannot be read.
+
+- Do not add small explanatory sub-lines under headings, banners, chips, steps or cards
+  (e.g. a one-line description under "One Platform. Complete Advertising Lifecycle.",
+  or a paragraph under the slide subtitle).
+- Do not invent extra copy. Use only the content the user provides for the slide.
+- Every visible text should be at least ~13px at 1440x900 (`clamp(13px, ...)` minimum).
+- Prefer one strong heading plus short labels over heading + small paragraph.
+
+```tsx
+// BAD: small sub-line under a heading
+<span className="text-[length:clamp(10px,1.4vh,13px)] text-white/75">A centralized, secure ...</span>
+
+// GOOD: heading only, readable size
+<span className="font-display text-[length:clamp(16px,2.4vh,22px)] font-bold">One Platform. Complete Advertising Lifecycle.</span>
+```
