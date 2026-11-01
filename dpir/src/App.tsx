@@ -15,6 +15,19 @@ import { ApprovalScene } from "@/scenes/ApprovalScene";
 import { AssetScene } from "@/scenes/AssetScene";
 import { ExecutionScene } from "@/scenes/ExecutionScene";
 import { VendorScene } from "@/scenes/VendorScene";
+import { FieldScene } from "@/scenes/FieldScene";
+import { VerifyScene } from "@/scenes/VerifyScene";
+import { MonitorScene } from "@/scenes/MonitorScene";
+import { DashboardScene } from "@/scenes/DashboardScene";
+import { ReportsScene } from "@/scenes/ReportsScene";
+import { AccessScene } from "@/scenes/AccessScene";
+import { IntegrationScene } from "@/scenes/IntegrationScene";
+import { ArchitectureScene } from "@/scenes/ArchitectureScene";
+import { QualityScene } from "@/scenes/QualityScene";
+import { RoadmapScene } from "@/scenes/RoadmapScene";
+import { SupportScene } from "@/scenes/SupportScene";
+import { SummaryScene } from "@/scenes/SummaryScene";
+import { EcosystemScene } from "@/scenes/EcosystemScene";
 import stageBg from "@/assets/stage-bg.jpg";
 import headerPhoto from "@/assets/title-bg.webp";
 import { ThanksScene } from "@/scenes/ThanksScene";
@@ -30,6 +43,19 @@ const TITLE_HIGHLIGHT: Record<string, string> = {
   assets: "One Centralized Repository.",
   execution: "Multiple Advertising Channels.",
   vendors: "Execution Partners",
+  field: "to the Field",
+  verify: "Verifiable Evidence",
+  monitor: "Centralized Monitoring",
+  dashboard: "One Consolidated Dashboard.",
+  reports: "Actionable Reports",
+  access: "Controlled and Accountable.",
+  integration: "DIPR Digital Ecosystem",
+  architecture: "Application Architecture",
+  quality: "Every Stage of Development",
+  roadmap: "18-Week Implementation Roadmap",
+  support: "Operational Support and Continuity",
+  summary: "Complete Advertising Intelligence",
+  ecosystem: "Application Ecosystem",
 };
 
 function headTitle(id: string, title: string) {
@@ -118,6 +144,19 @@ export default function App() {
             {p.scene.id === "assets" && <AssetScene beat={p.beat} />}
             {p.scene.id === "execution" && <ExecutionScene beat={p.beat} />}
             {p.scene.id === "vendors" && <VendorScene beat={p.beat} />}
+            {p.scene.id === "field" && <FieldScene beat={p.beat} />}
+            {p.scene.id === "verify" && <VerifyScene beat={p.beat} />}
+            {p.scene.id === "monitor" && <MonitorScene beat={p.beat} />}
+            {p.scene.id === "dashboard" && <DashboardScene beat={p.beat} />}
+            {p.scene.id === "reports" && <ReportsScene beat={p.beat} />}
+            {p.scene.id === "access" && <AccessScene beat={p.beat} />}
+            {p.scene.id === "integration" && <IntegrationScene beat={p.beat} />}
+            {p.scene.id === "architecture" && <ArchitectureScene beat={p.beat} />}
+            {p.scene.id === "quality" && <QualityScene beat={p.beat} />}
+            {p.scene.id === "roadmap" && <RoadmapScene beat={p.beat} />}
+            {p.scene.id === "support" && <SupportScene beat={p.beat} />}
+            {p.scene.id === "summary" && <SummaryScene beat={p.beat} />}
+            {p.scene.id === "ecosystem" && <EcosystemScene beat={p.beat} />}
             {p.scene.id === "thanks" && <ThanksScene />}
           </SlideViewport>
         )}

@@ -137,10 +137,10 @@ export function VendorScene({ beat }: { beat: number }) {
   );
 }
 
-function FlowBar({ step }: { step: number }) {
+export function FlowBar({ step, steps = STEPS }: { step: number; steps?: { label: string; icon: CessIcon; color: string }[] }) {
   return (
-    <ol className="mx-auto flex w-full max-w-[1180px] shrink-0 items-center justify-between gap-1">
-      {STEPS.map((s, i) => {
+    <ol className="mx-auto flex w-full max-w-[1440px] shrink-0 items-center justify-between gap-1">
+      {steps.map((s, i) => {
         const I = s.icon;
         const done = i < step;
         const on = i === step;
@@ -151,21 +151,21 @@ function FlowBar({ step }: { step: number }) {
                 initial={false}
                 animate={{ opacity: i <= step ? 1 : 0.3 }}
                 className="h-[3px] min-w-4 flex-1 rounded"
-                style={{ background: i <= step ? `linear-gradient(90deg, ${STEPS[i - 1].color}, ${s.color})` : "#cbd5e1" }}
+                style={{ background: i <= step ? `linear-gradient(90deg, ${steps[i - 1].color}, ${s.color})` : "#cbd5e1" }}
               />
             )}
             <motion.span
               initial={false}
               animate={{ scale: on ? 1.06 : 1, opacity: done || on ? 1 : 0.45 }}
               transition={{ duration: 0.4 }}
-              className="flex shrink-0 items-center gap-2 rounded-full border-2 bg-white py-1 pr-4 pl-1"
+              className="flex min-w-0 items-center gap-2 rounded-full border-2 bg-white py-1 pr-4 pl-1"
               style={{ borderColor: done || on ? s.color : "#e2e8f0", boxShadow: on ? `0 0 0 5px ${s.color}22, 0 12px 24px -14px ${s.color}` : undefined }}
             >
-              <span className="grid size-[clamp(28px,4.2vh,38px)] place-items-center rounded-full text-white" style={{ background: done || on ? s.color : "#cbd5e1" }}>
+              <span className="grid size-[clamp(28px,4.2vh,38px)] shrink-0 place-items-center rounded-full text-white" style={{ background: done || on ? s.color : "#cbd5e1" }}>
                 {done ? <Check weight="bold" className="size-1/2" /> : <I weight="bold" className="size-1/2" />}
               </span>
-              <span className="font-display text-[length:clamp(14px,2vh,18px)] font-bold whitespace-nowrap" style={{ color: done || on ? s.color : "#64748b" }}>
-                {i + 1}. {s.label}
+              <span className="font-display min-w-0 text-[length:clamp(14px,2vh,18px)] leading-tight font-bold text-balance" style={{ color: done || on ? s.color : "#64748b" }}>
+                {i + 1}.{"\u00a0"}{s.label}
               </span>
             </motion.span>
           </li>
