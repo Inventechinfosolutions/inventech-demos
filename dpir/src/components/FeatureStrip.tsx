@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useState, type ReactNode } from "react";
 import { Check, CheckCircle, SealCheck, type CessIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -12,8 +13,12 @@ export type Feature = { title: string; icon: CessIcon; color: string; items: str
  */
 export function FeatureStrip({ features, active, outcome, outcomeShown }: { features: Feature[]; active: number; outcome: ReactNode; outcomeShown: boolean }) {
   const [peek, setPeek] = useState<number | null>(null);
+  const many = features.length > 5;
+  const cols = many
+    ? `repeat(${features.length}, minmax(0,auto)) minmax(clamp(200px,17vw,340px),1fr)`
+    : `repeat(${features.length}, minmax(0,1fr)) minmax(0,${features.length > 4 ? 2.6 : 1.9}fr)`;
   return (
-    <div className="relative grid shrink-0 gap-[clamp(6px,0.7vw,12px)]" style={{ gridTemplateColumns: `repeat(${features.length}, minmax(0,1fr)) minmax(0,${features.length > 4 ? 2.6 : 1.9}fr)` }}>
+    <div className="relative grid shrink-0 gap-[clamp(6px,0.7vw,12px)]" style={{ gridTemplateColumns: cols }}>
       {features.map((f, i) => {
         const I = f.icon;
         const on = active === i;
@@ -25,13 +30,16 @@ export function FeatureStrip({ features, active, outcome, outcomeShown }: { feat
             onMouseLeave={() => setPeek(null)}
             initial={false}
             animate={{ opacity: on || done ? 1 : 0.45, y: on ? -3 : 0 }}
-            className="relative flex items-center gap-2.5 rounded-2xl border bg-white/95 px-3 py-[clamp(6px,1vh,10px)] shadow-[0_14px_30px_-24px_rgba(7,20,51,0.7)]"
+            className={cn(
+              "relative flex items-center rounded-2xl border bg-white/95 py-[clamp(6px,1vh,10px)] shadow-[0_14px_30px_-24px_rgba(7,20,51,0.7)]",
+              many ? "gap-2 px-2" : "gap-2.5 px-3",
+            )}
             style={{ borderColor: on ? f.color : "#e2e8f0", boxShadow: on ? `0 0 0 2px ${f.color}, 0 16px 30px -20px ${f.color}` : undefined }}
           >
             <span className="grid size-[clamp(32px,4.6vh,42px)] shrink-0 place-items-center rounded-full text-white shadow" style={{ background: f.color }}>
               {done ? <Check weight="bold" className="size-1/2" /> : <I weight="fill" className="size-1/2" />}
             </span>
-            <span className="font-display text-[length:clamp(14px,1.95vh,17px)] leading-tight font-bold text-navy">{f.title}</span>
+            <span className="font-display text-[length:clamp(14px,1.95vh,17px)] leading-tight font-bold text-balance text-navy">{f.title}</span>
             <AnimatePresence>
               {peek === i && (
                 <motion.ul

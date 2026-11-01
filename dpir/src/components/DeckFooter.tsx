@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { CaretLeft, CaretRight } from "@/lib/icons";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -15,6 +16,11 @@ type Props = {
 
 export function DeckFooter({ slide, beat, scene, onGoTo, onPrev, onNext }: Props) {
   const beatPct = ((beat + 1) / scene.beats) * 100;
+  const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    navRef.current?.querySelector<HTMLElement>('[aria-current="step"]')?.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
+  }, [slide]);
 
   return (
     <footer
@@ -23,7 +29,7 @@ export function DeckFooter({ slide, beat, scene, onGoTo, onPrev, onNext }: Props
       onClick={(e) => e.stopPropagation()}
       onDoubleClick={(e) => e.stopPropagation()}
     >
-      <nav aria-label="Scenes" className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <nav ref={navRef} aria-label="Scenes" className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {SCENES.map((s, i) => {
           const current = i === slide;
           return (
@@ -31,6 +37,7 @@ export function DeckFooter({ slide, beat, scene, onGoTo, onPrev, onNext }: Props
               key={s.id}
               type="button"
               title={s.title}
+              aria-current={current ? "step" : undefined}
               onClick={() => onGoTo(i, 0)}
               className={cn(
                 "flex h-8 shrink-0 items-center justify-center rounded-full text-[10px] font-extrabold tracking-wide transition-all",
