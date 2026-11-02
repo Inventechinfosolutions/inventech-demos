@@ -96,14 +96,15 @@ const FEATURES: Feature[] = [
   },
 ];
 
-const stageAt = (beat: number) => (beat >= 4 ? 4 : beat >= 3 ? 3 : beat >= 1 ? 2 : 1);
+const stageAt = (beat: number) => (beat >= 4 ? 4 : beat >= 3 ? 3 : beat >= 1 ? 2 : beat >= 0 ? 1 : 0);
 const tabAt = (beat: number): Tab => (beat >= 4 ? "Schedule" : beat >= 3 ? "History" : beat >= 2 ? "Budget" : "Media Plan");
 
 /**
- * Beats: 0 submitted campaign, 1 campaign planning (under review), 2 budget management,
- * 3 approval management (approved), 4 scheduling (scheduled), 5 expected outcome.
+ * Beats: 0 draft campaign, 1 submitted, 2 campaign planning (under review), 3 budget management,
+ * 4 approval management (approved), 5 scheduling (scheduled), 6 expected outcome.
  */
-export function ApprovalScene({ beat }: { beat: number }) {
+export function ApprovalScene({ beat: slideBeat }: { beat: number }) {
+  const beat = slideBeat - 1;
   const stage = stageAt(beat);
   const [tab, setTab] = useState<Tab>(tabAt(beat));
   useEffect(() => setTab(tabAt(beat)), [beat]);
@@ -196,7 +197,19 @@ function CampaignDetail({ beat, stage, tab, setTab }: { beat: number; stage: num
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
               <ArrowLeft className="size-[1.1em] shrink-0 text-navy/60" />
-              <span className="font-display min-w-0 text-[length:clamp(14.5px,1.95vh,17px)] leading-tight font-bold text-navy">{CAMPAIGN.name}</span>
+              <span className="font-display min-w-0 flex-1 text-[length:clamp(14.5px,1.95vh,17px)] leading-tight font-bold text-navy">{CAMPAIGN.name}</span>
+              <AnimatePresence>
+                {stage === 0 && (
+                  <motion.span
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    className="flex shrink-0 items-center gap-1.5 rounded-lg bg-[#2563eb] px-2.5 py-1 font-bold whitespace-nowrap text-white shadow"
+                  >
+                    <UploadSimple weight="bold" className="size-[1.1em]" /> Submit for Review
+                  </motion.span>
+                )}
+              </AnimatePresence>
 
             </div>
             <div className="mt-0.5 flex flex-wrap items-center gap-x-4 text-ink/75">

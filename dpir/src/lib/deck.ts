@@ -44,7 +44,7 @@ export const SCENES: SceneMeta[] = [
     title: "From Campaign Request to Approved Media Plan",
     kicker: "Campaign planning, budgeting and approval",
     nav: "Approval",
-    beats: 6,
+    beats: 7,
     notes:
       "Once the campaign is registered, it needs to be reviewed and approved before execution. DIPR officials review the campaign details, proposed media channels, schedules and budget. At this stage, the campaign moves from registration to planning and approval. The department can review the proposed advertising activities, budget and schedule before allowing execution to proceed. The system maintains the campaign's status and associated information, providing a common view for authorized officers.",
   },
