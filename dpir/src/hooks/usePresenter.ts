@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { SCENES } from "@/lib/deck";
+import { SCENES, THANKS_INDEX } from "@/lib/deck";
 
 function parseHash() {
   const m = location.hash.match(/^#(\d+)(?:\/(\d+))?$/);
@@ -29,7 +29,7 @@ export function usePresenter() {
     if (overview || help) return;
     const max = SCENES[slide].beats;
     if (beat < max - 1) setBeat(beat + 1);
-    else if (slide < SCENES.length - 1) goTo(slide + 1, 0);
+    else if (slide < SCENES.length - 1 && slide !== THANKS_INDEX) goTo(slide + 1, 0);
   }, [beat, goTo, help, overview, slide]);
 
   const prev = useCallback(() => {
@@ -95,7 +95,7 @@ export function usePresenter() {
         goTo(0, 0);
       } else if (key === "End") {
         e.preventDefault();
-        goTo(SCENES.length - 1, 0);
+        goTo(THANKS_INDEX, 0);
       } else if (/^[0-9]$/.test(key)) {
         goTo(Number(key), 0);
       }

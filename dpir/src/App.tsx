@@ -5,7 +5,7 @@ import { SlideViewport } from "@/components/SlideViewport";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { usePresenter } from "@/hooks/usePresenter";
-import { DEPT, SCENES } from "@/lib/deck";
+import { BACKUP_START, DEPT, SCENES, THANKS_INDEX, slideLabel } from "@/lib/deck";
 import { cn } from "@/lib/utils";
 import { UnderstandingScene } from "@/scenes/UnderstandingScene";
 import { ChallengeScene } from "@/scenes/ChallengeScene";
@@ -28,6 +28,10 @@ import { RoadmapScene } from "@/scenes/RoadmapScene";
 import { SupportScene } from "@/scenes/SupportScene";
 import { SummaryScene } from "@/scenes/SummaryScene";
 import { EcosystemScene } from "@/scenes/EcosystemScene";
+import { SecuritySimpleScene } from "@/scenes/SecuritySimpleScene";
+import { PlatformScene } from "@/scenes/PlatformScene";
+import { DeliveryScene } from "@/scenes/DeliveryScene";
+import { GoLiveScene } from "@/scenes/GoLiveScene";
 import stageBg from "@/assets/stage-bg.jpg";
 import headerPhoto from "@/assets/title-bg.webp";
 import { ThanksScene } from "@/scenes/ThanksScene";
@@ -48,6 +52,10 @@ const TITLE_HIGHLIGHT: Record<string, string> = {
   monitor: "Centralized Monitoring",
   dashboard: "One Consolidated Dashboard.",
   reports: "Actionable Reports",
+  security: "Controlled and Accountable.",
+  platform: "Application Architecture",
+  delivery: "18-Week Implementation Roadmap",
+  golive: "Operational Support and Continuity",
   access: "Controlled and Accountable.",
   integration: "DIPR Digital Ecosystem",
   architecture: "Application Architecture",
@@ -117,7 +125,7 @@ export default function App() {
             </div>
           </div>
           <div className="rounded-full bg-navy-deep/60 px-2 py-1 font-display text-[10px] tracking-widest ring-1 ring-white/15 backdrop-blur-sm sm:px-3 sm:text-xs">
-            {`${String(p.slide).padStart(2, "0")} / ${String(SCENES.length - 2).padStart(2, "0")}`}
+            {p.slide >= BACKUP_START ? `Backup ${p.slide - BACKUP_START + 1}` : `${slideLabel(p.slide)} / ${String(THANKS_INDEX - 1).padStart(2, "0")}`}
           </div>
           <Button variant="ghost" size="icon" className="size-8 shrink-0 text-white hover:bg-white/10 sm:size-9" onClick={() => p.setOverview(true)}>
             <SquaresFour weight="bold" className="size-4" />
@@ -149,6 +157,10 @@ export default function App() {
             {p.scene.id === "monitor" && <MonitorScene beat={p.beat} />}
             {p.scene.id === "dashboard" && <DashboardScene beat={p.beat} />}
             {p.scene.id === "reports" && <ReportsScene beat={p.beat} />}
+            {p.scene.id === "security" && <SecuritySimpleScene beat={p.beat} />}
+            {p.scene.id === "platform" && <PlatformScene beat={p.beat} />}
+            {p.scene.id === "delivery" && <DeliveryScene beat={p.beat} />}
+            {p.scene.id === "golive" && <GoLiveScene beat={p.beat} />}
             {p.scene.id === "access" && <AccessScene beat={p.beat} />}
             {p.scene.id === "integration" && <IntegrationScene beat={p.beat} />}
             {p.scene.id === "architecture" && <ArchitectureScene beat={p.beat} />}
@@ -178,7 +190,7 @@ export default function App() {
                   i === p.slide && "ring-2 ring-teal-bright",
                 )}
               >
-                <span className="block text-[11px] tracking-widest text-teal-bright">{i === 0 ? "Open" : String(i).padStart(2, "0")}</span>
+                <span className="block text-[11px] tracking-widest text-teal-bright">{i === 0 ? "Open" : i >= BACKUP_START ? `Backup ${i - BACKUP_START + 1}` : slideLabel(i)}</span>
                 <span className="font-display mt-2 block text-base sm:text-lg">{s.title}</span>
                 <span className="mt-2 block text-xs text-white/60 sm:text-sm">{s.kicker}</span>
               </button>

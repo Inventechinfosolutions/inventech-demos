@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { CaretLeft, CaretRight } from "@/lib/icons";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { SCENES, type SceneMeta } from "@/lib/deck";
+import { BACKUP_START, SCENES, slideLabel, type SceneMeta } from "@/lib/deck";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -33,8 +33,9 @@ export function DeckFooter({ slide, beat, scene, onGoTo, onPrev, onNext }: Props
         {SCENES.map((s, i) => {
           const current = i === slide;
           return (
+            <span key={s.id} className="contents">
+            {i === BACKUP_START && <span className="ml-2 shrink-0 border-l border-white/20 pl-3 text-[9px] font-bold tracking-[0.12em] text-white/45 uppercase">Backup</span>}
             <button
-              key={s.id}
               type="button"
               title={s.title}
               aria-current={current ? "step" : undefined}
@@ -51,15 +52,14 @@ export function DeckFooter({ slide, beat, scene, onGoTo, onPrev, onNext }: Props
             >
               {current ? (
                 <span className="flex items-center gap-1 sm:gap-1.5">
-                  <span className="opacity-70">{i === 0 ? "•" : String(i).padStart(2, "0")}</span>
+                  <span className="opacity-70">{slideLabel(i)}</span>
                   <span className="max-w-[5.5rem] truncate sm:max-w-none">{s.nav}</span>
                 </span>
-              ) : i === 0 ? (
-                "•"
               ) : (
-                String(i).padStart(2, "0")
+                slideLabel(i)
               )}
             </button>
+            </span>
           );
         })}
       </nav>
