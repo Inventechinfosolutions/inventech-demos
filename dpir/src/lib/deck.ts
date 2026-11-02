@@ -26,7 +26,7 @@ export const SCENES: SceneMeta[] = [
     beats: 8,
     notes:
       "Our understanding is that DIPR is looking for more than an advertisement recording application. The requirement is to establish an integrated platform that connects campaign planning, creative asset management, advertising execution and field-level verification. The solution must support multiple advertising channels, provide a mobile application for field personnel, capture verifiable Proof-of-Display evidence and consolidate operational information into dashboards and reports. All these capabilities must operate within a secure, integrated and maintainable application environment.",
-    source: "DIPR tender: Project Overview and Objectives (page 5), Technical Requirements and Deliverables (page 6)",
+    source: "DIPR RFP: Project Overview and Objectives (page 5), Technical Requirements and Deliverables (page 6)",
   },
   {
     id: "challenge",
@@ -84,12 +84,12 @@ export const SCENES: SceneMeta[] = [
   },
   {
     id: "vendors",
-    title: "Connecting Campaign Activities with Execution Partners",
-    kicker: "Vendor coordination and campaign tracking",
-    nav: "Vendors",
+    title: "Connecting Campaign Activities with Empanelled Agencies",
+    kicker: "Agency coordination and campaign tracking",
+    nav: "Agencies",
     beats: 7,
     notes:
-      "Once the media plan is finalized, advertising execution activities need to be coordinated with the respective vendors. The platform maintains vendor-related information and associates execution activities with the relevant campaigns. Once activities are assigned, DIPR needs to know which activities have been completed and which are still pending. The application maintains campaign-wise execution information and provides visibility into the progress of associated activities. This also creates a structured reference for subsequent evidence verification and reporting.",
+      "Once the media plan is finalized, advertising execution activities need to be coordinated with the respective empanelled agencies. The platform maintains agency-related information and associates execution activities with the relevant campaigns. Once activities are assigned, DIPR needs to know which activities have been completed and which are still pending. The application maintains campaign-wise execution information and provides visibility into the progress of associated activities. This also creates a structured reference for subsequent evidence verification and reporting.",
   },
   {
     id: "field",
@@ -107,7 +107,7 @@ export const SCENES: SceneMeta[] = [
     nav: "Verification",
     beats: 8,
     notes:
-      "Evidence submitted from the field arrives in the Proof of Display module against its campaign and activity. A DIPR officer reviews the photo and video, the GPS coordinates and timestamp, and the device information recorded at capture. The evidence is checked against the approved creative and vendor details, and the officer approves it, rejects it or requests a revisit. Each decision is recorded in the verification workflow, turning a display claim into verifiable evidence.",
+      "Evidence submitted from the field arrives in the Proof of Display module against its campaign and activity. A DIPR officer reviews the photo and video, the GPS coordinates and timestamp, and the device information recorded at capture. The evidence is checked against the approved creative and agency details, and the officer approves it, rejects it or requests a revisit. Each decision is recorded in the verification workflow, turning a display claim into verifiable evidence.",
   },
   {
     id: "monitor",
@@ -134,7 +134,7 @@ export const SCENES: SceneMeta[] = [
     nav: "Reports",
     beats: 7,
     notes:
-      "The information captured across the advertising lifecycle is available as structured reports. Officials can filter campaign records by campaign, media channel, status and date range, and view campaign, financial, compliance and vendor reports. Reports can be exported in PDF and CSV formats or scheduled periodically, and access to reports and analytics is controlled by user role. This supports campaign reviews, administrative monitoring and management decisions.",
+      "The information captured across the advertising lifecycle is available as structured reports. Officials can filter campaign records by campaign, media channel, status and date range, and view campaign, financial, compliance and agency reports. Reports can be exported in PDF and CSV formats or scheduled periodically, and access to reports and analytics is controlled by user role. This supports campaign reviews, administrative monitoring and management decisions.",
   },
   {
     id: "access",
@@ -161,7 +161,7 @@ export const SCENES: SceneMeta[] = [
     nav: "Architecture",
     beats: 7,
     notes:
-      "The application is organised in six layers. The presentation layer provides web and mobile access for different user groups. The application layer delivers the business services, from campaign management and asset inventory to proof-of-display, reporting, user management, vendor execution and workflow. The integration layer provides secure APIs for DIPR systems and third-party services. The data management layer holds campaign data, the asset repository, evidence, GPS metadata and audit records. The security layer covers role-based access, authentication, encryption, API security, audit logging and data retention, and the infrastructure layer handles hosting, storage, backup, monitoring and maintenance. Together they provide a robust, secure and scalable platform.",
+      "The application is organised in six layers. The presentation layer provides web and mobile access for different user groups. The application layer delivers the business services, from campaign management and asset inventory to proof-of-display, reporting, user management, agency execution and workflow. The integration layer provides secure APIs for DIPR systems and third-party services. The data management layer holds campaign data, the asset repository, evidence, GPS metadata and audit records. The security layer covers role-based access, authentication, encryption, API security, audit logging and data retention, and the infrastructure layer handles hosting, storage, backup, monitoring and maintenance. Together they provide a robust, secure and scalable platform.",
   },
   {
     id: "quality",
@@ -170,7 +170,7 @@ export const SCENES: SceneMeta[] = [
     nav: "Quality",
     beats: 8,
     notes:
-      "Every stage from development to production release is validated. Functional testing covers campaign creation, approvals, asset handling, vendor assignment, proof-of-display and reporting. Integration testing checks the web and mobile applications, APIs, external services and data synchronization. Mobile testing covers Android and iOS compatibility, media and GPS capture, offline collection and synchronization. Security testing validates authentication, role-based access, API security, encryption and vulnerabilities, and user acceptance testing with DIPR users leads to sign-off. Test strategy, plans, cases, defect records, UAT documentation and a release readiness report are delivered, giving a thoroughly tested application ready for production.",
+      "Every stage from development to production release is validated. Functional testing covers campaign creation, approvals, asset handling, agency assignment, proof-of-display and reporting. Integration testing checks the web and mobile applications, APIs, external services and data synchronization. Mobile testing covers Android and iOS compatibility, media and GPS capture, offline collection and synchronization. Security testing validates authentication, role-based access, API security, encryption and vulnerabilities, and user acceptance testing with DIPR users leads to sign-off. Test strategy, plans, cases, defect records, UAT documentation and a release readiness report are delivered, giving a thoroughly tested application ready for production.",
   },
   {
     id: "roadmap",
@@ -179,7 +179,7 @@ export const SCENES: SceneMeta[] = [
     nav: "Roadmap",
     beats: 7,
     notes:
-      "Implementation is planned over 18 weeks in five phases. Weeks 1 to 3 cover requirements finalization with DIPR, UI/UX and prototype development. Weeks 4 to 7 cover development of the core modules and integration with DIPR systems and external services. Weeks 8 to 11 cover system and integration testing, bug fixing, performance checks and user acceptance testing. Weeks 12 to 16 cover production deployment, data configuration, user setup, training and handover, and weeks 17 and 18 cover post-deployment support, stabilization and go-live confirmation. The result is a fully deployed and tested Advertisement Monitoring Tool within the prescribed 18-week period.",
+      "Implementation is planned over 18 weeks in five phases. Weeks 1 to 3 cover requirements finalization with DIPR, UI/UX and prototype development. Weeks 4 to 7 cover development of the core modules and integration with DIPR systems and external services. Weeks 8 to 11 cover system and integration testing, defect rectification, performance checks and user acceptance testing. Weeks 12 to 16 cover production deployment, data configuration, user setup, training and handover, and weeks 17 and 18 cover post-deployment support, stabilization and go-live confirmation. The result is a fully deployed and tested Advertisement Monitoring Tool within the prescribed 18-week period.",
   },
   {
     id: "support",
@@ -188,7 +188,7 @@ export const SCENES: SceneMeta[] = [
     nav: "Support",
     beats: 6,
     notes:
-      "Delivery continues beyond go-live. Deployment and handover cover production deployment, hosting configuration or government hosting handover, application and storage setup, readiness validation and system handover. Documentation includes the architecture document, technical documentation, user manuals, administrator guides, API documentation and deployment and maintenance documentation. Training covers DIPR administrators and end users, with role-based demonstrations, knowledge transfer and operational handover. Maintenance and support follow the service-level commitments in the tender, including 99.5 percent uptime and defined response times by priority, with resolution timelines as agreed in the contract.",
+      "Delivery continues beyond go-live. Deployment and handover cover production deployment, hosting at the Karnataka State Data Centre or a MeitY-empanelled cloud, application and storage setup, readiness validation and system handover. Documentation includes the architecture document, technical documentation, user manuals, administrator guides, API documentation and deployment and maintenance documentation. Training covers DIPR administrators and end users, with role-based demonstrations, knowledge transfer and operational handover. Maintenance and support follow the service-level commitments in the RFP, including 99.5 percent uptime and defined response times by priority, with resolution timelines as agreed in the Agreement.",
   },
   {
     id: "summary",
@@ -197,7 +197,7 @@ export const SCENES: SceneMeta[] = [
     nav: "Summary",
     beats: 8,
     notes:
-      "The proposed Advertisement Monitoring Tool brings the complete advertising lifecycle into one integrated platform. Campaigns, budgets, schedules, approvals and vendors are managed centrally. Creatives, metadata, versions and geo-tagged assets are maintained in a unified inventory. Photographs, videos, GPS coordinates and timestamps support proof-of-display verification. Campaign progress, expenditure, compliance and user activities are monitored transparently, and consolidated dashboards, reports and KPIs support informed decisions. One campaign, multiple channels, verified execution and complete visibility.",
+      "The proposed Advertisement Monitoring Tool brings the complete advertising lifecycle into one integrated platform. Campaigns, budgets, schedules, approvals and agencies are managed centrally. Creatives, metadata, versions and geo-tagged assets are maintained in a unified inventory. Photographs, videos, GPS coordinates and timestamps support proof-of-display verification. Campaign progress, expenditure, compliance and user activities are monitored transparently, and consolidated dashboards, reports and KPIs support informed decisions. One campaign, multiple channels, verified execution and complete visibility.",
   },
   {
     id: "ecosystem",
@@ -206,7 +206,7 @@ export const SCENES: SceneMeta[] = [
     nav: "Ecosystem",
     beats: 8,
     notes:
-      "The Advertisement Monitoring Tool acts as a centralized platform connecting DIPR officials, advertising vendors, field personnel and external systems through web and mobile applications. DIPR officials handle administration, approvals, monitoring and reports; vendors handle campaign execution, asset deployment and updates; field teams handle verification, photo and video capture, GPS and evidence submission. The web and mobile applications sit on integrated application services and an integration and data management layer of secure APIs, a data repository and media storage. The platform covers print, digital and outdoor channels and integrates with external, DIPR and third-party verification services, delivering centralized management, multi-channel execution, evidence-based verification, real-time visibility and data-driven decisions.",
+      "The Advertisement Monitoring Tool acts as a centralized platform connecting DIPR officials, empanelled advertising agencies, field personnel and external systems through web and mobile applications. DIPR officials handle administration, approvals, monitoring and reports; agencies handle campaign execution, asset deployment and updates; field teams handle verification, photo and video capture, GPS and evidence submission. The web and mobile applications sit on integrated application services and an integration and data management layer of secure APIs, a data repository and media storage. The platform covers print, digital and outdoor channels and integrates with external, DIPR and third-party verification services, delivering centralized management, multi-channel execution, evidence-based verification, real-time visibility and data-driven decisions.",
   },
   { id: "thanks", title: "Thank You", kicker: "Advertisement Monitoring Tool", nav: "Thanks", beats: 1 },
 ];

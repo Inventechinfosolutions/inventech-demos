@@ -38,7 +38,7 @@ const NAV: NavItem[] = [
   { label: "Campaigns", icon: Megaphone },
   { label: "Execution", icon: Broadcast },
   { label: "Assets", icon: Image },
-  { label: "Vendors", icon: Storefront },
+  { label: "Agencies", icon: Storefront },
   { label: "Proof-of-Display", icon: Camera },
   { label: "Verification", icon: SealCheck },
   { label: "Reports", icon: ChartBar },

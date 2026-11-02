@@ -42,7 +42,7 @@ const NAV: NavItem[] = [
   { label: "Campaigns", icon: Megaphone },
   { label: "Media Library", icon: Images },
   { label: "Approvals", icon: SealCheck },
-  { label: "Vendors", icon: Handshake },
+  { label: "Agencies", icon: Handshake },
   { label: "Field Monitoring", icon: GpsFix },
   { label: "Reports", icon: ChartBar },
   { label: "Users & Roles", icon: UsersThree },

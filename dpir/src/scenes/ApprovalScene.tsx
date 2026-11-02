@@ -29,7 +29,7 @@ import {
 } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import imgCampaign from "@/assets/title-bg.webp";
-import imgReviewer from "@/assets/photos/sol-web.webp";
+import imgReviewer from "@/assets/photos/eco-agency.webp";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -44,10 +44,10 @@ const NAV: NavItem[] = [
 ];
 
 const STAGES: { label: string; icon: CessIcon; color: string; when: string; detail: string }[] = [
-  { label: "Draft", icon: FileText, color: "#64748b", when: "01-07-2026 10:30 AM", detail: "Created by Campaign Officer" },
+  { label: "Draft", icon: FileText, color: "#64748b", when: "01-07-2026 10:30 AM", detail: "Created by Smt. Kavitha R., Campaign Officer" },
   { label: "Submitted", icon: UploadSimple, color: "#2563eb", when: "02-07-2026 11:15 AM", detail: "Submitted for review" },
-  { label: "Under Review", icon: MagnifyingGlass, color: "#ea580c", when: "03-07-2026 02:20 PM", detail: "With Joint Director (Advt.)" },
-  { label: "Approved", icon: CheckCircle, color: "#16a34a", when: "05-07-2026 04:10 PM", detail: "Media plan and budget approved" },
+  { label: "Under Review", icon: MagnifyingGlass, color: "#ea580c", when: "03-07-2026 02:20 PM", detail: "With Shri Manjunath S., Joint Director (Advt.)" },
+  { label: "Approved", icon: CheckCircle, color: "#16a34a", when: "05-07-2026 04:10 PM", detail: "Administrative approval by Shri Hemanth Kumar B., Director" },
   { label: "Scheduled", icon: CalendarCheck, color: "#7c3aed", when: "06-07-2026 09:00 AM", detail: "Ready for execution" },
 ];
 
@@ -61,9 +61,9 @@ const PLAN: { channel: string; icon: CessIcon; color: string; details: string; q
 ];
 
 const HISTORY = [
-  { v: "v3", what: "Approved by Director", who: "05-07-2026", tone: "#16a34a" },
-  { v: "v2", what: "Outdoor locations revised in media plan", who: "04-07-2026 · Campaign Officer", tone: "#ea580c" },
-  { v: "v1", what: "Campaign created and submitted", who: "02-07-2026 · Campaign Officer", tone: "#2563eb" },
+  { v: "v3", what: "Administrative approval by Director", who: "05-07-2026 · Shri Hemanth Kumar B.", tone: "#16a34a" },
+  { v: "v2", what: "Outdoor locations revised in media plan", who: "04-07-2026 · Smt. Kavitha R., Campaign Officer", tone: "#ea580c" },
+  { v: "v1", what: "Campaign created and submitted", who: "02-07-2026 · Smt. Kavitha R., Campaign Officer", tone: "#2563eb" },
 ];
 
 const CHECKS = ["Review campaign details", "Verify media plan and schedules", "Check budget information", "Approve or request changes"];
@@ -325,7 +325,7 @@ function MediaPlan() {
 
 function Budget() {
   const tiles: { label: string; value: string; icon: CessIcon; color: string }[] = [
-    { label: "Total Budget", value: `₹ ${CAMPAIGN.budget}`, icon: Coins, color: "#d97706" },
+    { label: "Sanctioned Budget", value: `₹ ${CAMPAIGN.budget}`, icon: Coins, color: "#d97706" },
     { label: "Allocated", value: "₹ 35,00,000", icon: Wallet, color: "#16a34a" },
     { label: "Actual Expenditure", value: "₹ 0", icon: Receipt, color: "#ea580c" },
   ];

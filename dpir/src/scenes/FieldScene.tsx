@@ -370,7 +370,7 @@ function LoginScreen() {
       <span className="font-display text-[18px] font-bold text-navy">DIPR Field</span>
       <div className="flex w-full items-center gap-2 rounded-lg border border-slate-200 bg-white px-2.5 py-2">
         <User weight="bold" className="size-[16px] shrink-0 text-[#1d4fc4]" />
-        <span className="h-[6px] w-2/3 rounded-full bg-[#c9d8ee]" />
+        <span className="truncate text-[13px] font-semibold text-navy">Ravi Kumar H.</span>
       </div>
       <div className="flex gap-3">
         {[0, 1, 2, 3].map((i) => (
@@ -423,11 +423,12 @@ function Trail({ rects, active, finished }: { rects: Rect[]; active: number; fin
             {cur && (
               <motion.circle
                 cy={TRAIL_Y}
-                r={10}
+                r={20}
                 fill="none"
                 stroke={STEPS[i].color}
                 strokeWidth={2}
-                animate={{ r: [8, 20], opacity: [0.8, 0] }}
+                style={{ transformBox: "fill-box", transformOrigin: "center" }}
+                animate={{ scale: [0.4, 1], opacity: [0.8, 0] }}
                 transition={{ duration: 1.4, repeat: Infinity, ease: "easeOut" }}
               />
             )}
@@ -893,11 +894,12 @@ function FieldMap({ located }: { located: boolean }) {
         {[0, 1].map((i) => (
           <motion.circle
             key={i}
-            r={10}
+            r={40}
             fill="none"
             stroke={located ? "#e11d48" : "#1d4fc4"}
             strokeWidth={2}
-            animate={{ r: [6, located ? 26 : 40], opacity: [0.8, 0] }}
+            style={{ transformBox: "fill-box", transformOrigin: "center" }}
+            animate={{ scale: [0.15, located ? 0.65 : 1], opacity: [0.8, 0] }}
             transition={{ duration: located ? 1.6 : 1.2, delay: i * 0.7, repeat: Infinity, ease: "easeOut" }}
           />
         ))}

@@ -46,7 +46,7 @@ const NAV: NavItem[] = [
   { label: "Proof of Display", icon: Camera },
   { label: "Verification", icon: SealCheck },
   { label: "Reports", icon: ChartBar },
-  { label: "Vendors", icon: Storefront },
+  { label: "Agencies", icon: Storefront },
   { label: "Users & Roles", icon: UserGear },
 ];
 
@@ -216,7 +216,7 @@ function EvidenceList({ beat, status }: { beat: number; status: Status }) {
       </div>
       <span className="flex shrink-0 items-center gap-1.5 rounded-md border px-2 py-0.5 text-ink/55">
         <MagnifyingGlass className="size-[1em] shrink-0" />
-        <span className="truncate">Search by location, vendor…</span>
+        <span className="truncate">Search by location, agency…</span>
       </span>
       <div className="grid min-h-0 flex-1 auto-rows-fr gap-1">
         {EVIDENCE.map((e, i) => {
@@ -384,7 +384,7 @@ function DetailsPanel({ beat }: { beat: number }) {
           <Row k="Campaign ID" v={<span className="font-mono text-[#1d4fc4]">{CAMPAIGN.id}</span>} />
           <Row k="Media Channel" v="Outdoor" />
           <Row k="Location" v="Majestic Circle, Bengaluru" />
-          <Row k="Vendor" v="Outdoor Karnataka Ads" />
+          <Row k="Agency" v="Nandi Outdoor Media" />
           <Row k="Asset" v={<span className="break-all">SK_Clean_Green_Hoarding_v2.jpg</span>} hot={beat === 4} />
         </div>
       </Hot>
@@ -397,7 +397,7 @@ function DetailsPanel({ beat }: { beat: number }) {
           <span className="block truncate text-ink/75">12.9716° N, 77.5946° E</span>
         </InfoItem>
         <InfoItem icon={DeviceMobile} title="Device Information" hot={beat === 3} color="#e11d48">
-          <span className="block truncate text-ink/75">iPhone 14 · App 1.2.3</span>
+          <span className="block truncate text-ink/75">Samsung Galaxy M34 · App v1.2.3</span>
           <span className="block truncate text-ink/75">ID 8F2D-9K1A · 4G</span>
           <span className="block truncate text-ink/75">Captured Offline: No</span>
         </InfoItem>
@@ -408,9 +408,9 @@ function DetailsPanel({ beat }: { beat: number }) {
 
 function WorkflowPanel({ beat, status }: { beat: number; status: Status }) {
   const stages: { label: string; when: string; done: boolean; on: boolean; tone: string }[] = [
-    { label: "Submitted", when: "10:24 AM · Vendor", done: true, on: false, tone: "#16a34a" },
-    { label: "Under Verification", when: beat >= 1 ? "11:15 AM · DIPR Officer" : "Pending", done: beat >= 5, on: beat >= 1 && beat < 5, tone: "#ea580c" },
-    { label: "Verified", when: beat >= 5 ? "11:42 AM · DIPR Officer" : "Pending", done: beat >= 5, on: false, tone: "#16a34a" },
+    { label: "Submitted", when: "10:24 AM · Nandi Outdoor Media", done: true, on: false, tone: "#16a34a" },
+    { label: "Under Verification", when: beat >= 1 ? "11:15 AM · Shri Prakash N." : "Pending", done: beat >= 5, on: beat >= 1 && beat < 5, tone: "#ea580c" },
+    { label: "Verified", when: beat >= 5 ? "11:42 AM · Shri Prakash N." : "Pending", done: beat >= 5, on: false, tone: "#16a34a" },
     { label: "Closed", when: beat >= 6 ? "11:45 AM" : "Pending", done: beat >= 6, on: false, tone: "#475569" },
   ];
   return (

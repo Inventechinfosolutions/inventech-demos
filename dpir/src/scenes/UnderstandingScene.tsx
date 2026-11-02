@@ -26,7 +26,7 @@ const CAPS: Cap[] = [
     key: "campaign",
     n: "01",
     title: "Campaign Planning & Management",
-    body: "Manage campaign creation, approvals, scheduling, budgeting and vendor assignments.",
+    body: "Manage campaign creation, approvals, scheduling, budgeting and agency assignments.",
     color: "#2563eb",
     soft: "#eff5ff",
     icon: CalendarBlank,

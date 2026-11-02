@@ -1,13 +1,11 @@
 import { motion } from "motion/react";
 import { useState, type ReactNode } from "react";
-import digitalImg from "@/assets/ecosystem/digital.jpg";
-import fieldImg from "@/assets/ecosystem/field.jpg";
-import mobileImg from "@/assets/ecosystem/mobile.jpg";
-import officialsImg from "@/assets/ecosystem/officials.jpg";
-import outdoorImg from "@/assets/ecosystem/outdoor.jpg";
-import printImg from "@/assets/ecosystem/print.jpg";
-import vendorsImg from "@/assets/ecosystem/vendors.jpg";
-import webImg from "@/assets/ecosystem/web.jpg";
+import agencyImg from "@/assets/photos/eco-agency.webp";
+import fieldImg from "@/assets/photos/eco-field.webp";
+import officialsImg from "@/assets/photos/eco-officials.webp";
+import digitalImg from "@/assets/photos/media-digital.webp";
+import outdoorImg from "@/assets/photos/media-outdoor.webp";
+import printImg from "@/assets/photos/media-print.webp";
 import { FitBox } from "@/components/FitBox";
 import {
   ArrowsClockwise,
@@ -15,6 +13,8 @@ import {
   ChartBar,
   CloudArrowUp,
   Database,
+  Desktop,
+  DeviceMobile,
   Eye,
   GearSix,
   Images,
@@ -37,7 +37,7 @@ type Side = { img: string; title: string; sub?: string; desc?: string; tint: str
 
 const PEOPLE: Side[] = [
   { img: officialsImg, title: "DIPR Officials", desc: "Administration, approvals, monitoring and reports.", tint: "#e8f0fd", accent: "#1d4fc4" },
-  { img: vendorsImg, title: "Vendors", sub: "Execution partners", desc: "Campaign execution, asset deployment and updates.", tint: "#efeafd", accent: "#6d28d9" },
+  { img: agencyImg, title: "Empanelled Agencies", sub: "Media and advertising agencies", desc: "Campaign execution, asset deployment and updates.", tint: "#efeafd", accent: "#6d28d9" },
   { img: fieldImg, title: "Field Teams", sub: "Monitoring officers", desc: "Field verification, photo/video capture, GPS and evidence submission.", tint: "#e9f6ec", accent: "#16a34a" },
 ];
 
@@ -51,7 +51,7 @@ const SERVICES: { label: string; icon: CessIcon }[] = [
   { label: "Campaign Management", icon: Megaphone },
   { label: "Asset Inventory", icon: Stack },
   { label: "Proof-of-Display", icon: Camera },
-  { label: "Vendor & User Management", icon: UsersThree },
+  { label: "Agency & User Management", icon: UsersThree },
   { label: "Reporting & Analytics", icon: ChartBar },
   { label: "Security & Audit", icon: ShieldCheck },
 ];
@@ -109,7 +109,7 @@ export function EcosystemScene({ beat }: { beat: number }) {
             </motion.span>
           </span>
           <p className="font-display text-[18px] leading-snug font-semibold text-navy">
-            The Advertisement Monitoring Tool acts as a centralized platform connecting DIPR officials, advertising vendors, field personnel and
+            The Advertisement Monitoring Tool acts as a centralized platform connecting DIPR officials, empanelled advertising agencies, field personnel and
             external systems through web and mobile applications.
           </p>
         </motion.div>
@@ -279,14 +279,7 @@ function SidePanel({
               className="grid grid-cols-[112px_minmax(0,1fr)] items-center gap-2.5 overflow-hidden rounded-lg border px-2"
               style={{ background: s.tint, borderColor: `${s.accent}33` }}
             >
-              <motion.img
-                src={s.img}
-                alt={s.title}
-                draggable={false}
-                className="block h-[104px] w-[112px] object-contain mix-blend-multiply"
-                animate={{ y: [0, -3, 0] }}
-                transition={{ duration: 2.2 + i * 0.3, repeat: Infinity, ease: "easeInOut" }}
-              />
+              <img src={s.img} alt={s.title} draggable={false} className="block h-[96px] w-[112px] rounded-md object-cover" />
               <div className="min-w-0">{renderText(s)}</div>
             </motion.div>
           );
@@ -321,11 +314,11 @@ function Platform({ beat }: { beat: number }) {
 
       <div className="flex min-h-0 flex-1 flex-col gap-2.5 p-2.5">
         <div className="grid h-[128px] shrink-0 grid-cols-2 gap-2.5">
-          <AppCard on={beat >= 2} focus={beat === 2} img={webImg} title="Web Application" desc="Administration · Campaigns · Approvals · Assets · Reports" />
+          <AppCard on={beat >= 2} focus={beat === 2} icon={Desktop} title="Web Application" desc="Administration · Campaigns · Approvals · Assets · Reports" />
           <AppCard
             on={beat >= 2}
             focus={beat === 2}
-            img={mobileImg}
+            icon={DeviceMobile}
             title="Mobile Application"
             desc="Field Tasks · Photo/Video · GPS · Offline Capture · Sync"
             extra={
@@ -385,7 +378,7 @@ function Platform({ beat }: { beat: number }) {
   );
 }
 
-function AppCard({ on, focus, img, title, desc, extra }: { on: boolean; focus: boolean; img: string; title: string; desc: string; extra?: ReactNode }) {
+function AppCard({ on, focus, icon: I, title, desc, extra }: { on: boolean; focus: boolean; icon: CessIcon; title: string; desc: string; extra?: ReactNode }) {
   return (
     <motion.div
       initial={false}
@@ -397,14 +390,13 @@ function AppCard({ on, focus, img, title, desc, extra }: { on: boolean; focus: b
       transition={{ duration: 0.45, ease: EASE }}
       className="flex items-center gap-2.5 overflow-hidden rounded-lg border border-[#c9d8ee] bg-linear-to-br from-[#eaf1fd] to-white px-2.5"
     >
-      <motion.img
-        src={img}
-        alt={title}
-        draggable={false}
-        className="block h-[108px] w-auto max-w-[120px] shrink-0 object-contain mix-blend-multiply"
+      <motion.span
+        className="grid size-[84px] shrink-0 place-items-center rounded-2xl bg-[#1d4fc4] text-white shadow-[0_14px_26px_-14px_#1d4fc4]"
         animate={{ y: [0, -3, 0] }}
         transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-      />
+      >
+        <I weight="duotone" className="size-[48px]" />
+      </motion.span>
       {extra}
       <div className="min-w-0">
         <span className="font-display block text-[18px] leading-tight font-bold text-navy">{title}</span>

@@ -1,11 +1,6 @@
 import { motion, type MotionProps } from "motion/react";
-import assetImg from "@/assets/summary/asset.png";
-import campaignImg from "@/assets/summary/campaign.png";
-import executionImg from "@/assets/summary/execution.png";
-import hubImg from "@/assets/summary/hub.png";
-import intelligenceImg from "@/assets/summary/intelligence.png";
-import transparencyImg from "@/assets/summary/transparency.png";
 import { useState, type ReactNode } from "react";
+import { AmtDevices } from "@/components/AmtDevices";
 import { FitBox } from "@/components/FitBox";
 import {
   CalendarCheck,
@@ -13,12 +8,15 @@ import {
   ChartBar,
   ChartLineUp,
   CheckCircle,
+  ClipboardText,
   Coins,
   CurrencyInr,
   FileText,
   FolderSimple,
   Gauge,
   Image,
+  Images,
+  MagnifyingGlass,
   MapPin,
   Megaphone,
   SealCheck,
@@ -51,13 +49,13 @@ const PILLARS: Pillar[] = [
   {
     no: "01",
     title: "Centralized Campaign Management",
-    desc: "Manage advertising campaigns, budgets, schedules, approvals and vendors through one platform.",
+    desc: "Manage advertising campaigns, budgets, schedules, approvals and agencies through one platform.",
     color: "#1d4fc4",
     chips: [
       { label: "Campaigns", icon: Target },
       { label: "Budgets & Schedules", icon: Coins },
       { label: "Approvals & Workflows", icon: CheckCircle },
-      { label: "Vendors & Execution", icon: UsersThree },
+      { label: "Agencies & Execution", icon: UsersThree },
     ],
     art: CampaignArt,
     at: { x: 0, y: 302, w: 470, h: 188 },
@@ -303,12 +301,7 @@ function Hub({ focus }: { focus: boolean }) {
       transition={{ duration: 0.6, ease: EASE }}
       className="relative w-full overflow-hidden"
     >
-      <img
-        src={hubImg}
-        alt="DIPR Advertisement Monitoring Tool"
-        draggable={false}
-        className="block w-full mix-blend-multiply [mask-image:radial-gradient(ellipse_72%_76%_at_50%_50%,#000_72%,transparent_100%)]"
-      />
+      <AmtDevices focus={null} color="#1d4fc4" />
       <motion.span
         aria-hidden
         className="pointer-events-none absolute top-[8%] h-[70%] w-[24%] -skew-x-12 bg-linear-to-r from-transparent via-white/40 to-transparent"
@@ -319,15 +312,11 @@ function Hub({ focus }: { focus: boolean }) {
   );
 }
 
-function ArtImage({ src, alt, motionProps }: { src: string; alt: string; motionProps: MotionProps }) {
+function ArtIcon({ icon: I, color, motionProps }: { icon: CessIcon; color: string; motionProps: MotionProps }) {
   return (
-    <motion.img
-      src={src}
-      alt={alt}
-      draggable={false}
-      className="block h-[86px] w-[88px] object-contain mix-blend-multiply"
-      {...motionProps}
-    />
+    <motion.span className="grid size-[80px] place-items-center rounded-2xl text-white shadow-[0_14px_26px_-14px_rgba(7,20,51,0.6)]" style={{ background: color }} {...motionProps}>
+      <I weight="duotone" className="size-[46px]" />
+    </motion.span>
   );
 }
 
@@ -337,23 +326,23 @@ const float = (y: number, duration: number): MotionProps => ({
 });
 
 function CampaignArt() {
-  return <ArtImage src={campaignImg} alt="Campaign checklist" motionProps={{ animate: { rotate: [0, -3, 0] }, transition: { duration: 2, repeat: Infinity, ease: "easeInOut" } }} />;
+  return <ArtIcon icon={ClipboardText} color="#1d4fc4" motionProps={{ animate: { rotate: [0, -3, 0] }, transition: { duration: 2, repeat: Infinity, ease: "easeInOut" } }} />;
 }
 
 function AssetArt() {
-  return <ArtImage src={assetImg} alt="Creative assets" motionProps={float(3, 2)} />;
+  return <ArtIcon icon={Images} color="#7c3aed" motionProps={float(3, 2)} />;
 }
 
 function ExecutionArt() {
-  return <ArtImage src={executionImg} alt="Geo-tagged proof of display" motionProps={float(4, 1.8)} />;
+  return <ArtIcon icon={MapPin} color="#16a34a" motionProps={float(4, 1.8)} />;
 }
 
 function TransparencyArt() {
-  return <ArtImage src={transparencyImg} alt="Monitoring dashboard" motionProps={{ animate: { scale: [1, 1.05, 1] }, transition: { duration: 2.2, repeat: Infinity, ease: "easeInOut" } }} />;
+  return <ArtIcon icon={MagnifyingGlass} color="#ea580c" motionProps={{ animate: { scale: [1, 1.05, 1] }, transition: { duration: 2.2, repeat: Infinity, ease: "easeInOut" } }} />;
 }
 
 function IntelligenceArt() {
-  return <ArtImage src={intelligenceImg} alt="Performance trend" motionProps={float(3, 2.4)} />;
+  return <ArtIcon icon={ChartLineUp} color="#0d9488" motionProps={float(3, 2.4)} />;
 }
 
 function Capabilities({ on, focus }: { on: boolean; focus: boolean }) {

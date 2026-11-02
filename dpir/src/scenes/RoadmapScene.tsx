@@ -42,10 +42,10 @@ const PHASES: { name: string; weeks: string; desc: string; icon: CessIcon; color
   {
     name: "Testing & UAT",
     weeks: "Weeks 8 – 11",
-    desc: "System testing, bug fixes and UAT",
+    desc: "System testing, defect fixes and UAT",
     icon: ListChecks,
     color: "#16a34a",
-    activities: ["System and integration testing.", "Bug fixing, performance checks and User Acceptance Testing (UAT)."],
+    activities: ["System and integration testing.", "Defect rectification, performance checks and User Acceptance Testing (UAT)."],
   },
   {
     name: "Deployment & Handover",

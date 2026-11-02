@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { useState, type ReactNode } from "react";
 import { FitBox } from "@/components/FitBox";
 import { Count } from "@/scenes/MonitorScene";
-import trainingScene from "@/assets/photos/training-scene.jpg";
+import trainingScene from "@/assets/photos/training.webp";
 import {
   BookOpen,
   CalendarCheck,
@@ -100,7 +100,7 @@ type Item = [string, string?];
 
 const DEPLOYMENT: Item[] = [
   ["Production deployment."],
-  ["Hosting configuration or Government hosting handover."],
+  ["Hosting at Karnataka State Data Centre or MeitY-empanelled cloud, as finalized."],
   ["Application configuration."],
   ["Database and media storage setup."],
   ["Production readiness validation", "(e.g., performance, security, availability)."],
@@ -133,7 +133,7 @@ const TRAINING: Item[] = [
 
 const SLA: { param: string; icon: CessIcon; color: string; commitment: ReactNode }[] = [
   {
-    param: "System availability",
+    param: "System uptime (monthly)",
     icon: Monitor,
     color: "#1d4fc4",
     commitment: (
@@ -142,10 +142,10 @@ const SLA: { param: string; icon: CessIcon; color: string; commitment: ReactNode
       </>
     ),
   },
-  { param: "Critical bug fix", icon: Warning, color: "#dc2626", commitment: "Response within 4 hours" },
-  { param: "High-priority issues", icon: WarningCircle, color: "#ea7a0b", commitment: "Response within 8 business hours" },
-  { param: "Medium-priority issues", icon: Clock, color: "#2563eb", commitment: "Response within 2 business days" },
-  { param: "Low-priority issues", icon: CheckCircle, color: "#16a34a", commitment: "Response within 5 business days" },
+  { param: "Severity 1 – Critical", icon: Warning, color: "#dc2626", commitment: "Response within 4 hours" },
+  { param: "Severity 2 – High", icon: WarningCircle, color: "#ea7a0b", commitment: "Response within 8 working hours" },
+  { param: "Severity 3 – Medium", icon: Clock, color: "#2563eb", commitment: "Response within 2 working days" },
+  { param: "Severity 4 – Low", icon: CheckCircle, color: "#16a34a", commitment: "Response within 5 working days" },
 ];
 
 /** Lifecycle stage reached on each beat. */
@@ -382,20 +382,11 @@ function DeployArt() {
 
 function TrainingArt() {
   return (
-    <div className="relative h-[189px] w-[252px]">
-      <img src={trainingScene} alt="" className="size-full object-contain mix-blend-multiply" draggable={false} />
-      <div className="absolute top-[12.5%] left-[37%] flex h-[42.5%] w-[53%] items-center justify-center gap-2">
-        <motion.span animate={{ rotate: [0, -10, 0] }} transition={{ duration: 1.6, repeat: Infinity }}>
-          <Megaphone weight="fill" className="size-[26px] text-[#1d4fc4]" />
-        </motion.span>
-        <span className="font-display text-[13px] leading-tight font-bold text-navy">
-          DIPR
-          <br />
-          Application
-          <br />
-          Training
-        </span>
-      </div>
+    <div className="relative h-[189px] w-[252px] overflow-hidden rounded-xl shadow-[0_14px_28px_-18px_rgba(7,20,51,0.7)]">
+      <img src={trainingScene} alt="" className="size-full object-cover" draggable={false} />
+      <span className="font-display absolute inset-x-2 bottom-2 flex items-center gap-1.5 rounded-lg bg-white/95 px-2 py-1 text-[13px] leading-tight font-bold text-navy">
+        <Megaphone weight="fill" className="size-[18px] shrink-0 text-[#1d4fc4]" /> DIPR Application Training
+      </span>
     </div>
   );
 }
@@ -406,8 +397,8 @@ function SlaBody({ focus }: { focus: boolean }) {
       <div className="flex items-center gap-2.5 rounded-lg border border-[#d3def2] bg-[#f5f8fd] px-3 py-2 leading-tight text-navy">
         <CalendarCheck weight="duotone" className="size-[30px] shrink-0 text-[#1d4fc4]" />
         <span>
-          Service-level commitments as specified in the tender
-          <span className="block text-[13px] text-ink/75">(Resolution timelines will be as agreed in the contract/SLA).</span>
+          Service-level commitments as specified in the RFP
+          <span className="block text-[13px] text-ink/75">(Resolution timelines will be as agreed in the Agreement/SLA).</span>
         </span>
       </div>
       <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border border-[#cfd9e8]">
@@ -441,7 +432,7 @@ function SlaBody({ focus }: { focus: boolean }) {
       </div>
       <div className="flex items-center gap-2.5 rounded-lg border border-[#c4b5fd] bg-[#f3efff] px-3 py-2.5 leading-tight font-semibold text-navy">
         <Info weight="fill" className="size-[26px] shrink-0 text-[#7c3aed]" />
-        Resolution timelines will be as agreed in the contract/SLA.
+        Resolution timelines will be as agreed in the Agreement/SLA.
       </div>
     </div>
   );

@@ -38,7 +38,7 @@ const NAV: NavItem[] = [
   { label: "Dashboard", icon: SquaresFour },
   { label: "Campaigns", icon: Megaphone },
   { label: "Execution", icon: Broadcast },
-  { label: "Vendors", icon: Storefront },
+  { label: "Agencies", icon: Storefront },
   { label: "Assignments", icon: ListChecks },
   { label: "Proofs", icon: Camera },
   { label: "Reports", icon: ChartBar },
@@ -46,7 +46,7 @@ const NAV: NavItem[] = [
 
 const STEPS: { label: string; icon: CessIcon; color: string }[] = [
   { label: "Media Plan Finalized", icon: ClipboardText, color: "#2563eb" },
-  { label: "Assign to Vendors", icon: UsersThree, color: "#4f46e5" },
+  { label: "Assign to Agencies", icon: UsersThree, color: "#4f46e5" },
   { label: "Schedule Execution", icon: CalendarCheck, color: "#ea580c" },
   { label: "Track Progress", icon: ListChecks, color: "#7c3aed" },
   { label: "Verify Evidence", icon: SealCheck, color: "#16a34a" },
@@ -71,9 +71,9 @@ const TONE: Record<Status, string> = {
 };
 
 const VENDORS: { name: string; role: string; ch: Ch; done: number; total: number }[] = [
-  { name: "Karnataka Media Services", role: "Print media partner", ch: "Print", done: 21, total: 25 },
-  { name: "Digital Reach Media", role: "Digital media partner", ch: "Digital", done: 2, total: 3 },
-  { name: "Outdoor Karnataka Ads", role: "Outdoor media partner", ch: "Outdoor", done: 8, total: 12 },
+  { name: "Sri Chamundi Advertisers", role: "Empanelled print agency", ch: "Print", done: 21, total: 25 },
+  { name: "Kaveri Digital Media Pvt. Ltd.", role: "Empanelled digital agency", ch: "Digital", done: 2, total: 3 },
+  { name: "Nandi Outdoor Media", role: "Empanelled outdoor agency", ch: "Outdoor", done: 8, total: 12 },
 ];
 
 type Row = { ch: Ch; act: string; sub: string; vendor: number; date: string; status: Status; proof: { label: string; img: string; when: string; note: string } };
@@ -90,11 +90,11 @@ const ROWS: Row[] = [
 const statusAt = (r: Row, beat: number): Status => (beat >= 3 ? r.status : beat >= 2 ? "Scheduled" : beat >= 1 ? "Assigned" : "Not Started");
 
 const FEATURES: Feature[] = [
-  { title: "Vendor Assignment", icon: UsersThree, color: "#4f46e5", items: ["Maintain vendor-related campaign information.", "Associate vendors with advertising activities."] },
+  { title: "Agency Assignment", icon: UsersThree, color: "#4f46e5", items: ["Maintain agency-related campaign information.", "Associate agencies with advertising activities."] },
   { title: "Execution Scheduling", icon: CalendarCheck, color: "#2563eb", items: ["Maintain schedules and execution status."] },
   { title: "Progress Tracking", icon: ListChecks, color: "#ea580c", items: ["Track assigned campaign activities.", "Record publication and display details."] },
   { title: "Evidence Association", icon: FileText, color: "#16a34a", items: ["Associate submitted evidence with campaign activities."] },
-  { title: "Consolidated Visibility", icon: Eye, color: "#db2777", items: ["Review execution progress.", "Maintain campaign-wise vendor records."] },
+  { title: "Consolidated Visibility", icon: Eye, color: "#db2777", items: ["Review execution progress.", "Maintain campaign-wise agency records."] },
 ];
 
 /**
@@ -210,10 +210,10 @@ function Assignments({ beat }: { beat: number }) {
           </div>
           <span className="flex min-w-0 flex-1 items-center gap-1.5 rounded-md border bg-white px-2 py-0.5 text-ink/60">
             <MagnifyingGlass className="size-[1.1em] shrink-0" />
-            <span className="truncate">Search by activity, vendor or location</span>
+            <span className="truncate">Search by activity, agency or location</span>
           </span>
           <span className="flex shrink-0 items-center gap-1 rounded-md border bg-white px-2 py-0.5 text-navy">
-            All Vendors <CaretDown className="size-[0.9em]" />
+            All Agencies <CaretDown className="size-[0.9em]" />
           </span>
         </div>
 
@@ -221,7 +221,7 @@ function Assignments({ beat }: { beat: number }) {
           <div className={cn(cols, "shrink-0 bg-slate-50 px-2 py-1 font-semibold text-navy/70")}>
             <span>Channel</span>
             <span>Activity / Location</span>
-            <span>Vendor</span>
+            <span>Agency</span>
             <span>Creative</span>
             <span>Scheduled Date</span>
             <span>Status</span>
@@ -405,13 +405,13 @@ function VendorPanel({ beat, hover, onHover }: { beat: number; hover: number | n
       className="flex shrink-0 flex-col gap-[clamp(3px,0.6vh,6px)] rounded-lg border bg-white p-[clamp(5px,0.6vw,9px)]"
     >
       <div className="flex items-center justify-between gap-2">
-        <span className="font-display font-bold whitespace-nowrap text-navy">Campaign Vendors</span>
+        <span className="font-display font-bold whitespace-nowrap text-navy">Empanelled Agencies</span>
         <motion.span
           animate={beat === 1 ? { scale: [1, 1.08, 1] } : { scale: 1 }}
           transition={{ duration: 1.2, repeat: beat === 1 ? Infinity : 0 }}
           className="flex items-center gap-1 rounded-md bg-[#1d4fc4] px-2 py-0.5 font-semibold whitespace-nowrap text-white"
         >
-          <Plus weight="bold" className="size-[0.95em]" /> Assign Vendor
+          <Plus weight="bold" className="size-[0.95em]" /> Assign Agency
         </motion.span>
       </div>
       {VENDORS.map((v, i) => {

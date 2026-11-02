@@ -42,7 +42,7 @@ const TITLE_HIGHLIGHT: Record<string, string> = {
   approval: "Approved Media Plan",
   assets: "One Centralized Repository.",
   execution: "Multiple Advertising Channels.",
-  vendors: "Execution Partners",
+  vendors: "Empanelled Agencies",
   field: "to the Field",
   verify: "Verifiable Evidence",
   monitor: "Centralized Monitoring",

@@ -29,8 +29,8 @@ import imgDigital from "@/assets/photos/media-digital.webp";
 import imgOutdoor from "@/assets/photos/media-outdoor.webp";
 import imgPrint from "@/assets/photos/media-print.webp";
 import imgMobile from "@/assets/photos/sol-mobile.webp";
-import imgVendors from "@/assets/photos/sol-vendors.webp";
-import imgWeb from "@/assets/photos/sol-web.webp";
+import imgVendors from "@/assets/photos/eco-officials.webp";
+import imgWeb from "@/assets/photos/training.webp";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -45,7 +45,7 @@ const NODE_COLOR: Record<NodeKey, string> = {
   hub: "#0b1f4a",
 };
 
-const WEB_ITEMS = ["Campaign administration", "Planning and approvals", "Asset management", "Vendor coordination", "Dashboards and reports", "User and access management"];
+const WEB_ITEMS = ["Campaign administration", "Planning and approvals", "Asset management", "Agency coordination", "Dashboards and reports", "User and access management"];
 const MOBILE_ITEMS = ["Field task management", "Photo and video capture", "GPS and timestamp capture", "Offline data collection", "Online synchronization", "Evidence submission"];
 const VENDOR_ITEMS = ["Receive assignments", "Execute advertisements", "Upload proof of display", "Track campaign status"];
 
@@ -60,7 +60,7 @@ const CAPABILITIES: { label: string; icon: CessIcon; color: string; node: NodeKe
   { label: "Centralized advertising asset inventory", icon: FolderSimple, color: "#7c3aed", node: "web" },
   { label: "Print, digital and outdoor media management", icon: Newspaper, color: "#16a34a", node: "media" },
   { label: "Campaign scheduling, budgeting and approvals", icon: CalendarCheck, color: "#ea580c", node: "web" },
-  { label: "Vendor assignment and execution tracking", icon: Handshake, color: "#0d9488", node: "vendors" },
+  { label: "Agency assignment and execution tracking", icon: Handshake, color: "#0d9488", node: "vendors" },
   { label: "Proof-of-Display (PoD) capture and verification", icon: SealCheck, color: "#dc2626", node: "mobile" },
   { label: "GPS-enabled field monitoring", icon: GpsFix, color: "#2563eb", node: "mobile" },
   { label: "Mobile and offline data capture", icon: WifiSlash, color: "#16a34a", node: "mobile" },
@@ -155,7 +155,7 @@ export function SolutionScene({ beat }: { beat: number }) {
           <PhotoList photo={imgMobile} items={MOBILE_ITEMS} color={NODE_COLOR.mobile} shown={isShown("mobile")} />
         </NodeCard>
 
-        <NodeCard anchor="vendors" shown={isShown("vendors")} color={NODE_COLOR.vendors} icon={Handshake} title="Vendors" role="Execution Partners" {...hoverProps("vendors")}>
+        <NodeCard anchor="vendors" shown={isShown("vendors")} color={NODE_COLOR.vendors} icon={Handshake} title="Agencies" role="Empanelled Agencies" {...hoverProps("vendors")}>
           <PhotoList photo={imgVendors} items={VENDOR_ITEMS} color={NODE_COLOR.vendors} shown={isShown("vendors")} />
         </NodeCard>
 

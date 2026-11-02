@@ -44,17 +44,17 @@ const MATRIX: { fn: string; icon: CessIcon; allow: RoleId[] }[] = [
   { fn: "User & Role Management", icon: UsersThree, allow: ["sa", "da"] },
   { fn: "Campaign Registration & Planning", icon: Megaphone, allow: ["sa", "da", "co"] },
   { fn: "Approval Workflow", icon: SealCheck, allow: ["sa", "da", "aa"] },
-  { fn: "Media Execution & Vendor Management", icon: Storefront, allow: ["sa", "da", "co"] },
+  { fn: "Media Execution & Agency Management", icon: Storefront, allow: ["sa", "da", "co"] },
   { fn: "Proof-of-Display (Evidence)", icon: Image, allow: ["sa", "da", "co", "fo"] },
   { fn: "Reports & Dashboards", icon: ChartBar, allow: ["sa", "da", "aa", "ro"] },
   { fn: "System Configuration", icon: GearSix, allow: ["sa", "da"] },
 ];
 
 const AUDIT: { when: string; user: string; role: RoleId; action: string; icon: CessIcon; tone: string; module: string; details: string }[] = [
-  { when: "30 Apr 2025, 11:24 AM", user: "cofficer@dipr.gov.in", role: "co", action: "Created Campaign", icon: ClipboardText, tone: "#2563eb", module: "Campaign Management", details: "CID-2025-014 – “Water Conservation Drive”" },
-  { when: "30 Apr 2025, 01:10 PM", user: "aauthority@dipr.gov.in", role: "aa", action: "Approved Campaign", icon: CheckCircle, tone: "#16a34a", module: "Approval Workflow", details: "CID-2025-014 – Approved (Media Plan & Budget)" },
-  { when: "01 May 2025, 10:05 AM", user: "fofficer@dipr.gov.in", role: "fo", action: "Uploaded Evidence", icon: Image, tone: "#2563eb", module: "Proof-of-Display", details: "Outdoor Display – Location A (Photo + GPS)" },
-  { when: "01 May 2025, 04:30 PM", user: "rofficer@dipr.gov.in", role: "ro", action: "Generated Report", icon: ChartBar, tone: "#2563eb", module: "Reports & Analytics", details: "Campaign Execution Report (Apr 2025)" },
+  { when: "30 Jul 2026, 11:24 AM", user: "Smt. Kavitha R.", role: "co", action: "Created Campaign", icon: ClipboardText, tone: "#2563eb", module: "Campaign Management", details: "DIPR-CAM-2026-0091 – “Water Conservation Drive”" },
+  { when: "30 Jul 2026, 01:10 PM", user: "Shri Hemanth Kumar B.", role: "aa", action: "Approved Campaign", icon: CheckCircle, tone: "#16a34a", module: "Approval Workflow", details: "DIPR-CAM-2026-0091 – Media plan approved" },
+  { when: "01 Aug 2026, 10:05 AM", user: "Shri Ravi Kumar H.", role: "fo", action: "Uploaded Evidence", icon: Image, tone: "#2563eb", module: "Proof-of-Display", details: "Outdoor Display – Location A (Photo + GPS)" },
+  { when: "01 Aug 2026, 04:30 PM", user: "Smt. Deepa M.", role: "ro", action: "Generated Report", icon: ChartBar, tone: "#2563eb", module: "Reports & Analytics", details: "Campaign Execution Report (Jul 2026)" },
 ];
 
 const CARDS: { title: string; icon: CessIcon; color: string; items: string[] }[] = [

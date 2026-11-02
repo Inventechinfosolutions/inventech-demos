@@ -60,7 +60,7 @@ const CHANNELS: Channel[] = [
     stats: ["25 Planned", "19 Published", "6 Remaining"],
     stats2: ["25 Planned", "21 Published", "4 Remaining"],
     progress: [76, 85],
-    vendor: "Print vendor assigned",
+    vendor: "Print agency assigned",
     docs: "Tear sheets linked",
   },
   {
@@ -97,7 +97,7 @@ const CHANNELS: Channel[] = [
     stats: ["12 Planned", "9 Installed", "3 Remaining"],
     stats2: ["12 Planned", "10 Installed", "2 Remaining"],
     progress: [72, 80],
-    vendor: "Outdoor vendor assigned",
+    vendor: "Outdoor agency assigned",
     docs: "Geo-tagged photos linked",
   },
 ];
@@ -110,7 +110,7 @@ const FEATURES: Feature[] = [
     title: "Common Execution",
     icon: ListChecks,
     color: "#2563eb",
-    items: ["Campaign-wise activity management.", "Vendor assignment.", "Scheduling and status tracking.", "Media-wise execution records.", "Supporting document and asset association."],
+    items: ["Campaign-wise activity management.", "Agency assignment.", "Scheduling and status tracking.", "Media-wise execution records.", "Supporting document and asset association."],
   },
 ];
 
@@ -214,7 +214,7 @@ function CampaignCard({ overall, pct, hover, setHover }: { overall: number; pct:
             ["Campaign ID", CAMPAIGN.id],
             ["Duration", "01-08-2026 to 30-09-2026"],
             ["Category", CAMPAIGN.category],
-            ["Total Budget", `₹ ${CAMPAIGN.budget}`],
+            ["Sanctioned Budget", `₹ ${CAMPAIGN.budget}`],
           ].map(([k, v]) => (
             <span key={k}>
               <span className="block text-ink/60">{k}</span>

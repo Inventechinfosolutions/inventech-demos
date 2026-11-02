@@ -57,7 +57,7 @@ const NAV: { label: string; icon: CessIcon }[] = [
   { label: "Dashboard", icon: SquaresFour },
   { label: "Campaigns", icon: Megaphone },
   { label: "Media Library", icon: Images },
-  { label: "Vendors", icon: Handshake },
+  { label: "Agencies", icon: Handshake },
   { label: "Field Monitoring", icon: GpsFix },
   { label: "Reports", icon: ChartBar },
   { label: "Master Data", icon: Database },
@@ -350,7 +350,7 @@ function CreateForm({
               <Field label="Start Date" value={CAMPAIGN.start} on={info} icon={CalendarBlank} />
               <Field label="End Date" value={CAMPAIGN.end} on={info} delay={250} icon={CalendarBlank} />
               <Field label="Publication Schedule" value={CAMPAIGN.schedule} on={info} delay={500} select />
-              <Field label="Proposed Budget (₹)" value={CAMPAIGN.budget} on={info} delay={800} />
+              <Field label="Estimated Cost (₹)" value={CAMPAIGN.budget} on={info} delay={800} />
             </div>
           </Section>
         </div>
@@ -441,7 +441,7 @@ function SummaryCard({ shown, media, focus }: { shown: boolean; media: Record<Me
   const ring = (k: Exclude<Focus, null>) => (shown && focus === k ? `0 0 0 2px ${BLUE}` : undefined);
   const info: { label: string; value: string; icon: CessIcon; k: Exclude<Focus, null> }[] = [
     { label: "Campaign ID", value: CAMPAIGN.id, icon: Tag, k: "reg" },
-    { label: "Total Budget (₹)", value: CAMPAIGN.budget, icon: CurrencyInr, k: "info" },
+    { label: "Estimated Cost (₹)", value: CAMPAIGN.budget, icon: CurrencyInr, k: "info" },
     { label: "Category", value: CAMPAIGN.category, icon: ClipboardText, k: "reg" },
     { label: "End Date", value: CAMPAIGN.end, icon: CalendarBlank, k: "info" },
     { label: "Start Date", value: CAMPAIGN.start, icon: CalendarBlank, k: "info" },

@@ -122,7 +122,7 @@ function DashboardScreen() {
         <Kpi value="68" label="Active Campaigns" tone="#2563eb" />
         <Kpi value="1,245" label="Ad Releases" tone="#7c3aed" />
         <Kpi value="832" label="Verified Displays" tone="#16a34a" />
-        <Kpi value="₹12.8 Cr" label="Total Spend" tone="#ea580c" />
+        <Kpi value="₹12.8 Cr" label="Total Expenditure" tone="#ea580c" />
       </div>
       <div className="grid min-h-0 flex-1 grid-cols-[1.1fr_1fr] gap-[2%]">
         <div className="relative overflow-hidden rounded-md bg-white ring-1 ring-black/5">
@@ -164,7 +164,7 @@ function DashboardScreen() {
 }
 
 function CampaignScreen({ color }: { color: string }) {
-  const steps = ["Plan", "Approve", "Schedule", "Assign vendor", "Track budget"];
+  const steps = ["Plan", "Approve", "Schedule", "Assign agency", "Track budget"];
   return (
     <div className="grid h-full grid-cols-[1.25fr_1fr] gap-[3%]">
       <div className="grid grid-cols-7 content-start gap-[3px] rounded-md bg-white p-[4%] ring-1 ring-black/5">
@@ -200,7 +200,7 @@ function CampaignScreen({ color }: { color: string }) {
         <div className="mt-1 h-[6px] overflow-hidden rounded-full bg-[#eef2f7]">
           <motion.div className="h-full rounded-full" style={{ background: color }} initial={{ width: 0 }} animate={{ width: "64%" }} transition={{ duration: 1, delay: 0.6 }} />
         </div>
-        <span className="text-muted-foreground">Budget used 64%</span>
+        <span className="text-muted-foreground">Budget utilised 64%</span>
       </div>
     </div>
   );
@@ -328,7 +328,7 @@ function SecurityScreen({ color }: { color: string }) {
     ["Commissioner", "Approve"],
     ["Deputy Director", "Plan & review"],
     ["Field Officer", "Capture PoD"],
-    ["Vendor", "Upload proof"],
+    ["Agency", "Upload proof"],
     ["Auditor", "Read only"],
   ];
   return (

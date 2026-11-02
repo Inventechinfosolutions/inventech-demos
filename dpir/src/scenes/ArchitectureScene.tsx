@@ -68,7 +68,7 @@ const LAYERS: Layer[] = [
       { title: "Proof-of-Display", icon: Image },
       { title: "Reporting & Analytics", icon: ChartBar },
       { title: "User & Access Management", icon: UsersThree },
-      { title: "Vendor & Execution Management", icon: Handshake },
+      { title: "Agency & Execution Management", icon: Handshake },
       { title: "Notification & Workflow Services", icon: TreeStructure },
     ],
   },
@@ -125,7 +125,7 @@ const LAYERS: Layer[] = [
     from: "#2e1065",
     stack: false,
     cells: [
-      { title: "Application Hosting", note: "(on DIPR / Government Infrastructure as finalized)", icon: HardDrives },
+      { title: "Application Hosting", note: "(Karnataka State Data Centre / MeitY-empanelled cloud, as finalized)", icon: HardDrives },
       { title: "Database & Media Storage", note: "(structured data, images, videos, documents)", icon: Database },
       { title: "Backup & Recovery", note: "(regular backups, restoration and DR)", icon: CloudArrowUp },
       { title: "Application Monitoring", note: "(availability, performance, alerts)", icon: Pulse },
@@ -141,7 +141,7 @@ const HIGHLIGHTS: { title: string; text: string; icon: CessIcon }[] = [
   { title: "Interoperable and Extensible", text: "Secure APIs for DIPR systems and third-party services.", icon: LinkSimple },
   { title: "Centralized Data Management", text: "Structured data with a repository for advertisement assets and field evidence.", icon: Database },
   { title: "Built-in Security", text: "Role-based access, encryption and audit trails for accountability.", icon: ShieldCheck },
-  { title: "Reliable and Scalable", text: "Hosted on approved infrastructure with backup, monitoring and maintainability.", icon: CloudArrowUp },
+  { title: "Reliable and Scalable", text: "Hosted at the State Data Centre or MeitY-empanelled cloud with backup, monitoring and maintainability.", icon: CloudArrowUp },
 ];
 
 /**

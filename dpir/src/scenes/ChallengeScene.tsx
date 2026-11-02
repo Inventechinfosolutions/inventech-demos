@@ -36,7 +36,7 @@ type Activity = { n: string; title: string; body: string; color: string; icon: C
 const ACTIVITIES: Activity[] = [
   { n: "01", title: "Campaign Planning", body: "Defining campaign objectives, schedules and budgets.", color: "#2563eb", icon: CalendarCheck, photo: imgPlanning },
   { n: "02", title: "Creative Management", body: "Managing advertisement designs, media files and versions.", color: "#7c3aed", icon: ImageIcon, photo: imgCreative },
-  { n: "03", title: "Vendor Coordination", body: "Assigning and coordinating advertising execution.", color: "#0d9488", icon: Handshake, photo: imgVendor },
+  { n: "03", title: "Agency Coordination", body: "Assigning and coordinating advertising execution.", color: "#0d9488", icon: Handshake, photo: imgVendor },
   { n: "04", title: "Publication and Display", body: "Managing advertisements across print, digital and outdoor media.", color: "#ea580c", icon: Megaphone, photo: imgPublication },
   { n: "05", title: "Field Monitoring", body: "Collecting evidence of actual advertisement display.", color: "#0284c7", icon: Binoculars, photo: imgField },
   { n: "06", title: "Verification", body: "Validating submitted photographs, videos and associated metadata.", color: "#dc2626", icon: SealCheck, photo: imgVerify },

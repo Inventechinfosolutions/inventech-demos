@@ -44,7 +44,7 @@ const NAV: NavItem[] = [
   { label: "Campaigns", icon: Megaphone },
   { label: "Execution", icon: Broadcast },
   { label: "Assets", icon: Image },
-  { label: "Vendors", icon: Storefront },
+  { label: "Agencies", icon: Storefront },
   { label: "Proof-of-Display", icon: Camera },
   { label: "Verification", icon: SealCheck },
   { label: "Reports", icon: ChartBar },
@@ -53,7 +53,7 @@ const NAV: NavItem[] = [
 
 const FEATURES: Feature[] = [
   { title: "Search and Filter", icon: MagnifyingGlass, color: "#2563eb", items: ["Search and filter campaign records."] },
-  { title: "Report Categories", icon: Stack, color: "#7c3aed", items: ["View campaign, financial, compliance and vendor reports."] },
+  { title: "Report Categories", icon: Stack, color: "#7c3aed", items: ["View campaign, financial, compliance and agency reports."] },
   { title: "PDF and CSV Export", icon: DownloadSimple, color: "#e11d48", items: ["Export reports in PDF and CSV formats."] },
   { title: "Scheduled Reports", icon: CalendarCheck, color: "#ea580c", items: ["Schedule periodic reports (e.g., daily, weekly, monthly)."] },
   { title: "Role-based Access", icon: LockKey, color: "#0d9488", items: ["Role-based access to reports and analytics."] },
@@ -63,7 +63,7 @@ const TABS: { label: string; icon: CessIcon }[] = [
   { label: "Campaign Reports", icon: ClipboardText },
   { label: "Financial Reports", icon: Coins },
   { label: "Compliance Reports", icon: ShieldCheck },
-  { label: "Vendor & Media Reports", icon: UsersThree },
+  { label: "Agency & Media Reports", icon: UsersThree },
   { label: "Analytics", icon: ChartLineUp },
 ];
 
@@ -75,7 +75,7 @@ const REPORTS: { label: string; icon: CessIcon }[] = [
   { label: "Budget Utilization Report", icon: CurrencyInr },
   { label: "Proof-of-Display (PoD) Report", icon: Image },
   { label: "Verification & Compliance Report", icon: ShieldCheck },
-  { label: "Vendor-wise Activity Report", icon: UsersThree },
+  { label: "Agency-wise Activity Report", icon: UsersThree },
   { label: "Media Channel-wise Report", icon: Monitor },
 ];
 

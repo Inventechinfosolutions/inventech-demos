@@ -46,7 +46,7 @@ const DEPT: Group = {
   from: "#0b1f4a",
   items: [
     { label: "Campaign / Communication Management System", note: "(if available)", icon: ClipboardText },
-    { label: "Financial / Expenditure System", note: "(if available)", icon: CurrencyInr },
+    { label: "Financial / Expenditure System (Khajane-II)", note: "(if available)", icon: CurrencyInr },
     { label: "Document Management System", note: "(if available)", icon: FolderSimple },
     { label: "User Directory / SSO", note: "(if available)", icon: UsersThree },
   ],
@@ -75,7 +75,7 @@ const EXTERNAL: Group = {
   from: "#115e59",
   items: [
     { label: "Geospatial / Maps Services", note: "(e.g., location visualization)", icon: MapTrifold },
-    { label: "Notification Services", note: "(e.g., SMS / Email alerts)", icon: EnvelopeSimple },
+    { label: "Notification Services", note: "(e.g., NIC SMS gateway, email alerts)", icon: EnvelopeSimple },
     { label: "Other Authorized Services", note: "(as per DIPR requirements)", icon: CloudArrowUp },
   ],
 };
