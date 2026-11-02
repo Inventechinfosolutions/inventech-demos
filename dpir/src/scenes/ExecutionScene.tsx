@@ -60,7 +60,7 @@ const CHANNELS: Channel[] = [
     stats: ["25 Planned", "19 Published", "6 Remaining"],
     stats2: ["25 Planned", "21 Published", "4 Remaining"],
     progress: [76, 85],
-    vendor: "Print agency assigned",
+    vendor: "Sri Chamundi Advertisers",
     docs: "Tear sheets linked",
   },
   {
@@ -78,7 +78,7 @@ const CHANNELS: Channel[] = [
     stats: ["3 Planned", "2 Live", "1 Scheduled"],
     stats2: ["3 Planned", "3 Live", "0 Scheduled"],
     progress: [60, 70],
-    vendor: "Digital agency assigned",
+    vendor: "Kaveri Digital Media Pvt. Ltd.",
     docs: "Screenshots linked",
   },
   {
@@ -97,7 +97,7 @@ const CHANNELS: Channel[] = [
     stats: ["12 Planned", "9 Installed", "3 Remaining"],
     stats2: ["12 Planned", "10 Installed", "2 Remaining"],
     progress: [72, 80],
-    vendor: "Outdoor agency assigned",
+    vendor: "Nandi Outdoor Media",
     docs: "Geo-tagged photos linked",
   },
 ];

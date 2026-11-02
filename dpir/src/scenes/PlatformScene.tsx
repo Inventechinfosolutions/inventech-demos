@@ -6,6 +6,9 @@ import {
   ChartBar,
   ClockCounterClockwise,
   Database,
+  Fingerprint,
+  Key,
+  LockKey,
   Desktop,
   DeviceMobile,
   FolderSimple,
@@ -75,6 +78,17 @@ const LAYERS: { name: string; icon: CessIcon; color: string; tiles: Tile[] }[] =
     ],
   },
   {
+    name: "Security",
+    icon: ShieldCheck,
+    color: "#dc2626",
+    tiles: [
+      { label: "Role-Based Access Control", icon: LockKey },
+      { label: "SSO and Multi-Factor Authentication", icon: Fingerprint },
+      { label: "Encryption in Transit and at Rest", icon: Key },
+      { label: "Audit Trail of User Actions", icon: ClockCounterClockwise },
+    ],
+  },
+  {
     name: "Hosting",
     icon: HardDrives,
     color: "#ea7a0b",
@@ -86,12 +100,12 @@ const LAYERS: { name: string; icon: CessIcon; color: string; tiles: Tile[] }[] =
   },
 ];
 
-/** Beats: 0 users, 1 applications, 2 core modules, 3 secure integration, 4 hosting, 5 expected outcome. */
+/** Beats: 0 users, 1 applications, 2 core modules, 3 secure integration, 4 security, 5 hosting, 6 expected outcome. */
 export function PlatformScene({ beat }: { beat: number }) {
   return (
     <FitBox w={1440} h={744}>
       <div className="flex size-full flex-col gap-3 text-ink">
-        <div className="flex min-h-0 flex-1 flex-col gap-2.5">
+        <div className="flex min-h-0 flex-1 flex-col gap-2">
           {LAYERS.map((l, i) => {
             const L = l.icon;
             const shown = beat >= i;
@@ -106,7 +120,7 @@ export function PlatformScene({ beat }: { beat: number }) {
                   boxShadow: focus ? `0 0 0 2.5px ${l.color}, 0 20px 36px -24px ${l.color}` : "0 14px 28px -24px rgba(7,20,51,0.6)",
                 }}
                 transition={{ duration: 0.45, ease: EASE }}
-                className="flex min-h-0 flex-1 items-stretch gap-3 rounded-2xl border border-[#c9d8ee] bg-white/95 p-2.5"
+                className="flex min-h-0 flex-1 items-stretch gap-3 rounded-2xl border border-[#c9d8ee] bg-white/95 p-2"
               >
                 <div
                   className="font-display flex w-[250px] shrink-0 items-center gap-3 rounded-xl px-4 text-[21px] leading-tight font-bold text-white"
@@ -138,7 +152,7 @@ export function PlatformScene({ beat }: { beat: number }) {
             );
           })}
         </div>
-        <Outcome shown={beat >= 5}>A secure, scalable platform connected to DIPR systems and authorized external services.</Outcome>
+        <Outcome shown={beat >= 6}>A secure, scalable and accountable platform connected to DIPR systems and authorized services.</Outcome>
       </div>
     </FitBox>
   );

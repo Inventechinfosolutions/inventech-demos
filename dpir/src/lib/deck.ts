@@ -31,15 +31,6 @@ export const SCENES: SceneMeta[] = [
     source: "DIPR RFP: Project Overview and Objectives (page 5), Technical Requirements and Deliverables (page 6)",
   },
   {
-    id: "challenge",
-    title: "Managing Advertising Activities Across Multiple Channels",
-    kicker: "The current business challenge",
-    nav: "Challenge",
-    beats: 4,
-    notes:
-      "Consider a single advertising campaign. It may involve multiple newspapers, digital platforms and outdoor locations. Each activity generates its own information and supporting evidence. The department needs to bring these records together so that campaign status, execution details, verification evidence and expenditure can be reviewed in a consistent manner.",
-  },
-  {
     id: "solution",
     title: "One Integrated Platform for the Complete Advertising Lifecycle",
     kicker: "Introducing the proposed solution",
@@ -47,15 +38,6 @@ export const SCENES: SceneMeta[] = [
     beats: 5,
     notes:
       "The solution is designed around two complementary interfaces. The web application provides DIPR officials with centralized administration, campaign management, approvals and reporting. The mobile application supports field personnel in capturing advertisement evidence, recording location information and synchronizing field activities with the central platform. Both interfaces operate as part of one integrated application ecosystem.",
-  },
-  {
-    id: "campaign",
-    title: "Every Campaign Begins with a Structured Digital Request",
-    kicker: "A new campaign enters the system",
-    nav: "Campaign",
-    beats: 7,
-    notes:
-      "We begin with a new campaign request. DIPR initiates a public awareness campaign to communicate an important Government of Karnataka initiative, to be published through newspapers, digital platforms and outdoor advertising locations. The campaign officer enters the basic information, selects the required advertising channels and records the proposed schedule and budget. Once registered, the campaign becomes the common reference point for all subsequent activities. This avoids maintaining separate campaign information for different media channels.",
   },
   {
     id: "approval",
@@ -85,15 +67,6 @@ export const SCENES: SceneMeta[] = [
       "The campaign is now ready for execution. DIPR coordinates the advertising activities across different media channels, each with its own publication and display requirements, and the platform maintains campaign-wise execution information. The same campaign may be executed through several different media. For example, the campaign may appear in newspapers, on digital platforms and at outdoor locations. Rather than maintaining separate campaign records, the application connects the different advertising activities to the same campaign. This provides DIPR with a consolidated view of campaign execution.",
   },
   {
-    id: "vendors",
-    title: "Connecting Campaign Activities with Empanelled Agencies",
-    kicker: "Agency coordination and campaign tracking",
-    nav: "Agencies",
-    beats: 7,
-    notes:
-      "Once the media plan is finalized, advertising execution activities need to be coordinated with the respective empanelled agencies. The platform maintains agency-related information and associates execution activities with the relevant campaigns. Once activities are assigned, DIPR needs to know which activities have been completed and which are still pending. The application maintains campaign-wise execution information and provides visibility into the progress of associated activities. This also creates a structured reference for subsequent evidence verification and reporting.",
-  },
-  {
     id: "field",
     title: "Taking Advertisement Monitoring from the Office to the Field",
     kicker: "Mobile application for field verification",
@@ -112,67 +85,31 @@ export const SCENES: SceneMeta[] = [
       "Evidence submitted from the field arrives in the Proof of Display module against its campaign and activity. A DIPR officer reviews the photo and video, the GPS coordinates and timestamp, and the device information recorded at capture. The evidence is checked against the approved creative and agency details, and the officer approves it, rejects it or requests a revisit. Each decision is recorded in the verification workflow, turning a display claim into verifiable evidence.",
   },
   {
-    id: "monitor",
-    title: "Identifying Execution Gaps Through Centralized Monitoring",
-    kicker: "Compliance and exception monitoring",
-    nav: "Monitoring",
-    beats: 6,
-    notes:
-      "With execution and verification information in one place, DIPR can see where campaigns are falling behind. The dashboard shows planned versus actual activities by media channel, the status of evidence verification, and an exception queue of activities that are pending, delayed, missing evidence or awaiting verification. Officers can review each exception, examine the supporting evidence and track unresolved cases, while the system maintains audit records of actions and decisions.",
-  },
-  {
     id: "dashboard",
     title: "Every Campaign. Every Channel. One Consolidated Dashboard.",
     kicker: "Management dashboard",
     nav: "Dashboard",
-    beats: 8,
+    beats: 10,
     notes:
-      "All of this information comes together in one management dashboard. DIPR officials and management can see the status of every campaign, the allocated budget against actual expenditure by media channel, the progress of execution activities, and the outcome of Proof-of-Display verification. Media-wise execution and campaign-level KPIs make it possible to review progress, expenditure and verification status from a single view.",
-  },
-  {
-    id: "reports",
-    title: "Turning Campaign Information into Actionable Reports",
-    kicker: "Reports and analytics",
-    nav: "Reports",
-    beats: 7,
-    notes:
-      "The information captured across the advertising lifecycle is available as structured reports. Officials can filter campaign records by campaign, media channel, status and date range, and view campaign, financial, compliance and agency reports. Reports can be exported in PDF and CSV formats or scheduled periodically, and access to reports and analytics is controlled by user role. This supports campaign reviews, administrative monitoring and management decisions.",
-  },
-  {
-    id: "security",
-    title: "Every User. Every Action. Controlled and Accountable.",
-    kicker: "Security, access control and audit",
-    nav: "Security",
-    beats: 5,
-    notes:
-      "The application is organised around six defined user roles, from the Super Administrator to Field and Reporting Officers. Role-based access control, single sign-on and multi-factor authentication where requested control who can do what. Data is encrypted in transit and at rest, API access is secured, and every create, approve, verify and report action is recorded in the audit trail for review and inspection.",
+      "All of this information comes together in one management dashboard. DIPR officials and management can see the status of every campaign, the allocated budget against actual expenditure by media channel, the progress of execution activities, and the outcome of Proof-of-Display verification. Media-wise execution and campaign-level KPIs make it possible to review progress, expenditure and verification status from a single view. Exception alerts flag delayed activities, missing evidence and pending verification, and campaign, financial, compliance and agency reports can be exported to PDF and CSV or scheduled periodically.",
   },
   {
     id: "platform",
     title: "A Secure, Scalable and Integrated Application Architecture",
-    kicker: "Users, applications, core modules, secure integration and hosting",
+    kicker: "Users, applications, core modules, integration, security and hosting",
     nav: "Architecture",
-    beats: 6,
+    beats: 7,
     notes:
-      "DIPR officials, empanelled agencies and field teams use the web and mobile applications. Both run on the same core modules: campaign management, asset repository, execution tracking, proof-of-display, reports and user access. Secure APIs connect the platform with Khajane-II, document management, the user directory and SSO, verification services, maps and the NIC SMS gateway. The platform is hosted at the Karnataka State Data Centre or a MeitY-empanelled cloud, with backup, recovery and monitoring.",
+      "DIPR officials, empanelled agencies and field teams use the web and mobile applications. Both run on the same core modules: campaign management, asset repository, execution tracking, proof-of-display, reports and user access. Secure APIs connect the platform with Khajane-II, document management, the user directory and SSO, verification services, maps and the NIC SMS gateway. Role-based access, single sign-on with multi-factor authentication, encryption in transit and at rest, and an audit trail of every user action keep the platform secure and accountable. It is hosted at the Karnataka State Data Centre or a MeitY-empanelled cloud, with backup, recovery and monitoring.",
   },
   {
     id: "delivery",
-    title: "A Structured 18-Week Implementation Roadmap",
-    kicker: "Phased delivery with quality gates",
+    title: "18-Week Implementation Roadmap and Operational Support",
+    kicker: "Phased delivery, quality gates, handover and service-level commitments",
     nav: "Roadmap",
-    beats: 3,
+    beats: 5,
     notes:
-      "Implementation is planned over 18 weeks in five phases: requirements and prototype, development and integration, testing and UAT, deployment and handover, and support and stabilization. Quality is built in through functional, integration and security testing, including VAPT by a CERT-In empanelled auditor, followed by user acceptance testing and sign-off before production release.",
-  },
-  {
-    id: "golive",
-    title: "Beyond Go-Live – Operational Support and Continuity",
-    kicker: "Deployment, training, documentation and service-level commitments",
-    nav: "Support",
-    beats: 4,
-    notes:
-      "After development the platform is deployed at the Karnataka State Data Centre or a MeitY-empanelled cloud, validated for production readiness and handed over. DIPR administrators and end users are trained, and the architecture document, user manual, API guide and maintenance guide are delivered. Support follows the RFP service levels: 99.5 percent monthly uptime and defined response times for each severity level.",
+      "Implementation is planned over 18 weeks in five phases: requirements and prototype, development and integration, testing and UAT, deployment and handover, and support and stabilization. Quality is built in through functional and integration testing, security testing including VAPT by a CERT-In empanelled auditor, and user acceptance testing and sign-off before production release. DIPR administrators and end users are trained, documentation is delivered and the system is handed over. Support follows the RFP service levels: 99.5 percent monthly uptime and defined response times for each severity level.",
   },
   {
     id: "summary",
@@ -184,6 +121,56 @@ export const SCENES: SceneMeta[] = [
       "The proposed Advertisement Monitoring Tool brings the complete advertising lifecycle into one integrated platform. Campaigns, budgets, schedules, approvals and agencies are managed centrally. Creatives, metadata, versions and geo-tagged assets are maintained in a unified inventory. Photographs, videos, GPS coordinates and timestamps support proof-of-display verification. Campaign progress, expenditure, compliance and user activities are monitored transparently, and consolidated dashboards, reports and KPIs support informed decisions. One campaign, multiple channels, verified execution and complete visibility.",
   },
   { id: "thanks", title: "Thank You", kicker: "Advertisement Monitoring Tool", nav: "Thanks", beats: 1 },
+  {
+    id: "challenge",
+    title: "Managing Advertising Activities Across Multiple Channels",
+    kicker: "The current business challenge",
+    nav: "Challenge",
+    beats: 4,
+    backup: true,
+    notes:
+      "Consider a single advertising campaign. It may involve multiple newspapers, digital platforms and outdoor locations. Each activity generates its own information and supporting evidence. The department needs to bring these records together so that campaign status, execution details, verification evidence and expenditure can be reviewed in a consistent manner.",
+  },
+  {
+    id: "campaign",
+    title: "Every Campaign Begins with a Structured Digital Request",
+    kicker: "A new campaign enters the system",
+    nav: "Campaign",
+    beats: 7,
+    backup: true,
+    notes:
+      "We begin with a new campaign request. DIPR initiates a public awareness campaign to communicate an important Government of Karnataka initiative, to be published through newspapers, digital platforms and outdoor advertising locations. The campaign officer enters the basic information, selects the required advertising channels and records the proposed schedule and budget. Once registered, the campaign becomes the common reference point for all subsequent activities. This avoids maintaining separate campaign information for different media channels.",
+  },
+  {
+    id: "vendors",
+    title: "Connecting Campaign Activities with Empanelled Agencies",
+    kicker: "Agency coordination and campaign tracking",
+    nav: "Agencies",
+    beats: 7,
+    backup: true,
+    notes:
+      "Once the media plan is finalized, advertising execution activities need to be coordinated with the respective empanelled agencies. The platform maintains agency-related information and associates execution activities with the relevant campaigns. Once activities are assigned, DIPR needs to know which activities have been completed and which are still pending. The application maintains campaign-wise execution information and provides visibility into the progress of associated activities. This also creates a structured reference for subsequent evidence verification and reporting.",
+  },
+  {
+    id: "monitor",
+    title: "Identifying Execution Gaps Through Centralized Monitoring",
+    kicker: "Compliance and exception monitoring",
+    nav: "Monitoring",
+    beats: 6,
+    backup: true,
+    notes:
+      "With execution and verification information in one place, DIPR can see where campaigns are falling behind. The dashboard shows planned versus actual activities by media channel, the status of evidence verification, and an exception queue of activities that are pending, delayed, missing evidence or awaiting verification. Officers can review each exception, examine the supporting evidence and track unresolved cases, while the system maintains audit records of actions and decisions.",
+  },
+  {
+    id: "reports",
+    title: "Turning Campaign Information into Actionable Reports",
+    kicker: "Reports and analytics",
+    nav: "Reports",
+    beats: 7,
+    backup: true,
+    notes:
+      "The information captured across the advertising lifecycle is available as structured reports. Officials can filter campaign records by campaign, media channel, status and date range, and view campaign, financial, compliance and agency reports. Reports can be exported in PDF and CSV formats or scheduled periodically, and access to reports and analytics is controlled by user role. This supports campaign reviews, administrative monitoring and management decisions.",
+  },
   {
     id: "access",
     title: "Every User. Every Action. Controlled and Accountable.",

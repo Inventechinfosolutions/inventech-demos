@@ -13,6 +13,8 @@ import {
   ChartPieSlice,
   CheckCircle,
   CurrencyInr,
+  FileCsv,
+  FilePdf,
   Hourglass,
   House,
   Image,
@@ -26,6 +28,7 @@ import {
   Storefront,
   Trophy,
   Wallet,
+  Warning,
   X,
   type CessIcon,
 } from "@/lib/icons";
@@ -45,12 +48,14 @@ const NAV: NavItem[] = [
 ];
 
 const FEATURES: Feature[] = [
-  { title: "Campaign Status", icon: ChartPieSlice, color: "#2563eb", items: ["Active, completed, under approval and upcoming campaigns."] },
-  { title: "Expenditure", icon: CurrencyInr, color: "#7c3aed", items: ["Allocated budget, expenditure and budget utilization.", "Expenditure by media channel."] },
+  { title: "Campaigns", icon: ChartPieSlice, color: "#2563eb", items: ["Active, completed, under approval and upcoming campaigns."] },
+  { title: "Budget", icon: CurrencyInr, color: "#7c3aed", items: ["Allocated budget, expenditure and budget utilization.", "Expenditure by media channel."] },
   { title: "Execution", icon: ListChecks, color: "#16a34a", items: ["Completed, in progress and pending activities."] },
   { title: "Proof-of-Display", icon: Camera, color: "#ea580c", items: ["Verified, pending verification and rejected evidence."] },
-  { title: "Media-wise Execution", icon: ChartBar, color: "#0891b2", items: ["Planned, completed and pending activities by channel."] },
-  { title: "Top Campaign KPIs", icon: Trophy, color: "#db2777", items: ["Expenditure, execution and PoD verification by campaign."] },
+  { title: "By Channel", icon: ChartBar, color: "#0891b2", items: ["Planned, completed and pending activities by channel."] },
+  { title: "Top KPIs", icon: Trophy, color: "#db2777", items: ["Expenditure, execution and PoD verification by campaign."] },
+  { title: "Exceptions", icon: Warning, color: "#dc2626", items: ["Delayed activities, missing evidence and pending verification."] },
+  { title: "Reports", icon: FilePdf, color: "#0f766e", items: ["Campaign, financial, compliance and agency reports.", "Export to PDF and CSV, or schedule periodically."] },
 ];
 
 const KPIS: { label: string; value: number; icon: CessIcon; color: string }[] = [
@@ -97,11 +102,11 @@ const TOP: { name: string; cr: string; exec: string; pod: string }[] = [
 ];
 
 /** Feature tile and dashboard panel highlighted on each beat. */
-const FEATURE_AT = [-1, 0, 1, 2, 3, 4, 5, 6];
+const FEATURE_AT = [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8];
 
 /**
  * Beats: 0 campaign KPIs, 1 campaign status, 2 expenditure, 3 execution, 4 proof-of-display,
- * 5 media-wise execution, 6 top campaign KPIs, 7 expected outcome.
+ * 5 media-wise execution, 6 top campaign KPIs, 7 exception alerts, 8 reports export, 9 expected outcome.
  */
 export function DashboardScene({ beat }: { beat: number }) {
   const focus = FEATURE_AT[beat] ?? -1;
@@ -127,10 +132,10 @@ export function DashboardScene({ beat }: { beat: number }) {
       <FeatureStrip
         features={FEATURES}
         active={focus}
-        outcomeShown={beat >= 7}
+        outcomeShown={beat >= 9}
         outcome={
           <>
-            <span className="font-display font-bold text-[#15803d]">A consolidated view</span> of campaign operations: progress, expenditure and verification status.
+            <span className="font-display font-bold text-[#15803d]">A consolidated view</span> of campaign progress, expenditure, verification, exceptions and reports.
           </>
         }
       />
@@ -157,7 +162,7 @@ function Dashboard({ beat, focus }: { beat: number; focus: number }) {
     <div className="flex h-full flex-col gap-[clamp(4px,0.7vh,8px)]">
       <div className="flex shrink-0 flex-wrap items-center gap-2">
         <span className="font-display min-w-0 flex-1 text-[length:clamp(14.5px,1.95vh,17px)] leading-tight font-bold text-navy">
-          Management Dashboard – Campaigns, Expenditure, Execution & Verification
+          Management Dashboard
         </span>
         <span className="flex shrink-0 items-center gap-1 rounded-md border bg-white px-2 py-0.5 text-navy">
           All Campaigns <CaretDown className="size-[0.9em]" />
@@ -165,6 +170,31 @@ function Dashboard({ beat, focus }: { beat: number; focus: number }) {
         <span className="flex shrink-0 items-center gap-1 rounded-md border bg-white px-2 py-0.5 text-navy">
           <CalendarBlank className="size-[1em]" /> 01 Apr – 30 Sep 2026
         </span>
+        <motion.span
+          initial={false}
+          animate={{ scale: focus === 6 ? [1, 1.08, 1] : 1, boxShadow: focus === 6 ? "0 0 0 2px #dc2626" : "0 0 0 0px rgba(0,0,0,0)" }}
+          transition={{ duration: 0.6 }}
+          className="flex shrink-0 items-center gap-1 rounded-md border border-[#fecaca] bg-[#fef2f2] px-2 py-0.5 font-bold text-[#b91c1c]"
+        >
+          <Warning weight="fill" className="size-[1em]" /> 18 Exceptions
+        </motion.span>
+        {[
+          { label: "PDF", icon: FilePdf },
+          { label: "CSV", icon: FileCsv },
+        ].map((x) => {
+          const I = x.icon;
+          return (
+            <motion.span
+              key={x.label}
+              initial={false}
+              animate={{ scale: focus === 7 ? [1, 1.08, 1] : 1, boxShadow: focus === 7 ? "0 0 0 2px #0f766e" : "0 0 0 0px rgba(0,0,0,0)" }}
+              transition={{ duration: 0.6 }}
+              className="flex shrink-0 items-center gap-1 rounded-md border border-[#99f6e4] bg-[#f0fdfa] px-2 py-0.5 font-bold text-[#0f766e]"
+            >
+              <I weight="fill" className="size-[1em]" /> {x.label}
+            </motion.span>
+          );
+        })}
       </div>
 
       <div className="grid shrink-0 grid-cols-5 gap-[clamp(4px,0.5vw,8px)]">

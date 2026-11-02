@@ -28,10 +28,8 @@ import { RoadmapScene } from "@/scenes/RoadmapScene";
 import { SupportScene } from "@/scenes/SupportScene";
 import { SummaryScene } from "@/scenes/SummaryScene";
 import { EcosystemScene } from "@/scenes/EcosystemScene";
-import { SecuritySimpleScene } from "@/scenes/SecuritySimpleScene";
 import { PlatformScene } from "@/scenes/PlatformScene";
 import { DeliveryScene } from "@/scenes/DeliveryScene";
-import { GoLiveScene } from "@/scenes/GoLiveScene";
 import stageBg from "@/assets/stage-bg.jpg";
 import headerPhoto from "@/assets/title-bg.webp";
 import { ThanksScene } from "@/scenes/ThanksScene";
@@ -52,10 +50,8 @@ const TITLE_HIGHLIGHT: Record<string, string> = {
   monitor: "Centralized Monitoring",
   dashboard: "One Consolidated Dashboard.",
   reports: "Actionable Reports",
-  security: "Controlled and Accountable.",
   platform: "Application Architecture",
-  delivery: "18-Week Implementation Roadmap",
-  golive: "Operational Support and Continuity",
+  delivery: "Operational Support",
   access: "Controlled and Accountable.",
   integration: "DIPR Digital Ecosystem",
   architecture: "Application Architecture",
@@ -157,10 +153,8 @@ export default function App() {
             {p.scene.id === "monitor" && <MonitorScene beat={p.beat} />}
             {p.scene.id === "dashboard" && <DashboardScene beat={p.beat} />}
             {p.scene.id === "reports" && <ReportsScene beat={p.beat} />}
-            {p.scene.id === "security" && <SecuritySimpleScene beat={p.beat} />}
             {p.scene.id === "platform" && <PlatformScene beat={p.beat} />}
             {p.scene.id === "delivery" && <DeliveryScene beat={p.beat} />}
-            {p.scene.id === "golive" && <GoLiveScene beat={p.beat} />}
             {p.scene.id === "access" && <AccessScene beat={p.beat} />}
             {p.scene.id === "integration" && <IntegrationScene beat={p.beat} />}
             {p.scene.id === "architecture" && <ArchitectureScene beat={p.beat} />}
