@@ -13,6 +13,7 @@ All Inventech demo sites live in this repo and deploy together as one Cloudflare
 | `guest-house/` | `/guest-house/` | Vite + React app (Guest House Booking) |
 | `ocss/` | `/ocss/` | Vite + React app (CSMS claim settlement, TanStack Router) |
 | `pension/` | `/pension/` | Vite + React app (PensionFlow AI, TanStack Router) |
+| `KBOCW/` | `/KBOCW/` | Vite + React app (Integrated Monitoring Portal) |
 | `home/` | `/` | Landing page that lists every demo |
 
 ## Work on one demo

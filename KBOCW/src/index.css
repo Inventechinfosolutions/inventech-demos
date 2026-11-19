@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+@import "./theme/tokens.css";
+
+@theme inline {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Brand palette: the five source colours. */
+@theme {
+  --color-night-bordeaux: #461220;
+  --color-burnt-rose: #8c2f39;
+  --color-dusty-mauve: #b23a48;
+  --color-powder-blush: #fcb9b2;
+  --color-peach-fuzz: #fed0bb;
+}
+
+/* Tailwind's default slate, red, emerald, amber and black utilities are remapped to the brand so classes such as text-slate-600 follow the palette. */
+@theme {
+  --color-black: #461220;
+  --color-slate-300: #ded5d7;
+  --color-slate-400: #b6a2a7;
+  --color-slate-500: #8f7078;
+  --color-slate-600: #744d57;
+  --color-slate-700: #613541;
+  --color-red-50: #fff2ec;
+  --color-red-200: #fed0bb;
+  --color-red-700: #8c2f39;
+  --color-red-800: #8c2f39;
+  --color-emerald-50: #fff7f4;
+  --color-emerald-200: #fedccd;
+  --color-emerald-700: #b23a48;
+  --color-emerald-900: #8c2f39;
+  --color-amber-50: #fffaf7;
+  --color-amber-300: #fed0bb;
+  --color-amber-950: #461220;
+}
+
+/* Carbon palette reference. The Carbon token values that components use are in src/theme/tokens.css. */
+:root {
+  --onyx: #0b090a;
+  --carbon-black: #161a1d;
+  --dark-garnet: #660708;
+  --mahogany-red: #a4161a;
+  --mahogany-red-2: #ba181b;
+  --strawberry-red: #e5383b;
+  --silver: #b1a7a6;
+  --dust-grey: #d3d3d3;
+  --white-smoke: #f5f3f4;
+  --white: #ffffff;
+}
+
+/* Next palette: add the supplied colours here, then remap the hex values used in components. Status roles (success, warning, info) are still missing. */
+/* --palette-next-1: ; */
+/* --palette-next-2: ; */
+
+:root {
+  --night-bordeaux: #461220;
+  --burnt-rose: #8c2f39;
+  --dusty-mauve: #b23a48;
+  --powder-blush: #fcb9b2;
+  --peach-fuzz: #fed0bb;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--app-bg);
+  color: var(--app-ink);
+  overflow-x: clip;
+}
+
+:focus-visible {
+  outline: 2px solid var(--app-focus);
+  outline-offset: 2px;
+}
+
+.nav-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.nav-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+}
