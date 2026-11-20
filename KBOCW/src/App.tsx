@@ -1,4 +1,4 @@
-import { lazy } from "react"
+import { lazy, Suspense } from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { AnalyticsLayout } from "@/analytics/components/AnalyticsLayout"
 import { AppShell } from "@/components/layout/AppShell"
@@ -22,6 +22,11 @@ const RecentAnalysisPage = lazy(() => import("@/pages/analytics/RecentAnalysisPa
 const TemplatesPage = lazy(() => import("@/pages/analytics/TemplatesPage"))
 const HelpPage = lazy(() => import("@/pages/analytics/HelpPage"))
 
+// The gig workers extract is the largest data file in the portal, so its dashboard loads on demand.
+const GigWorkersDashboard = lazy(() => import("@/pages/GigWorkersDashboard").then((module) => ({ default: module.GigWorkersDashboard })))
+
+const KsuwssbDashboard = lazy(() => import("@/pages/KsuwssbDashboard").then((module) => ({ default: module.KsuwssbDashboard })))
+
 const basename = import.meta.env.BASE_URL.replace(/\/$/, "")
 
 export default function App() {
@@ -33,6 +38,22 @@ export default function App() {
           <Route path="departments/labour-commissionerate" element={<LabourDashboard />} />
           <Route path="departments/kbocw-welfare-board" element={<WelfareDashboard />} />
           <Route path="departments/factories-boilers" element={<FactoriesDashboard />} />
+          <Route
+            path="departments/gig-workers-welfare-board"
+            element={
+              <Suspense fallback={<div className="h-64 animate-pulse rounded-2xl bg-[color:var(--c-bg-fedfd1)]" aria-label="Loading" />}>
+                <GigWorkersDashboard />
+              </Suspense>
+            }
+          />
+          <Route
+            path="departments/ksuwssb"
+            element={
+              <Suspense fallback={<div className="h-64 animate-pulse rounded-2xl bg-[color:var(--c-bg-fedfd1)]" aria-label="Loading" />}>
+                <KsuwssbDashboard />
+              </Suspense>
+            }
+          />
           <Route path="departments/:slug" element={<PlaceholderPage />} />
           <Route path="intelligence/cross-analytics" element={<IntelligenceDashboard />} />
           <Route path="intelligence/:slug" element={<PlaceholderPage />} />

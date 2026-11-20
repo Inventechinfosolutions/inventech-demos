@@ -235,6 +235,20 @@ function singleYearScoped(def: ReportDefinition, extras: ExtraFilter[]) {
   return extras.some((extra) => scoped(extra.condition))
 }
 
+function singleMonthScoped(dataset: Dataset, def: ReportDefinition, extras: ExtraFilter[]) {
+  const date = dataset.primaryDate
+  if (!date) return false
+  if (def.dimensions.some((dimension) => dimension.fieldId === date && (dimension.grain ?? "month") === "month")) return true
+  const scoped = (condition: FilterCondition) => {
+    if (condition.fieldId !== date) return false
+    if (condition.operator === "eq") return Boolean(condition.value)
+    if ((condition.operator === "dateRange" || condition.operator === "between") && condition.value && condition.value2) return condition.value.slice(0, 7) === condition.value2.slice(0, 7)
+    return false
+  }
+  if (def.filters.combinator === "AND" && def.filters.children.some((child) => child.kind === "condition" && scoped(child))) return true
+  return extras.some((extra) => scoped(extra.condition))
+}
+
 export function validateReport(def: ReportDefinition, user: User, extras: ExtraFilter[] = []): Validation {
   const errors: Issue[] = []
   const warnings: Issue[] = []
@@ -293,6 +307,13 @@ export function validateReport(def: ReportDefinition, user: User, extras: ExtraF
           fieldId: field.id,
         })
       }
+      if (metric?.requiresSingleMonth && measure.aggregation === "sum" && !singleMonthScoped(dataset, def, extras)) {
+        errors.push({
+          code: "single-month",
+          message: `${field.label} is counted at a point in time, so adding months repeats it. Group by Month or filter to one month before adding it up.`,
+          fieldId: field.id,
+        })
+      }
     }
     const stages = new Set(
       def.measures
@@ -301,7 +322,7 @@ export function validateReport(def: ReportDefinition, user: User, extras: ExtraF
     )
     const stackedView = def.visualization.type === "stacked" || ((def.visualization.type === "area" || def.visualization.type === "column" || def.visualization.type === "bar") && def.visualization.stacked)
     if (stackedView && stages.size > 1) {
-      errors.push({ code: "stage-stack", message: "Cess assessed, collected, remitted and credited are separate stages. Stacking them would add them together. Use a column chart instead." })
+      errors.push({ code: "stage-stack", message: "These measures are separate stages of one process, such as approved and disbursed. Stacking them would add them together. Use a column chart instead." })
     }
   }
 

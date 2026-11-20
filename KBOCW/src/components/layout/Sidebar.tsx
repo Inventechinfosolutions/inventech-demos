@@ -2,9 +2,20 @@ import { NavLink } from "react-router-dom"
 import { BrandMark } from "@/components/layout/BrandMark"
 import { NAV } from "@/lib/nav"
 
-// Sections hidden from the sidebar for now. Their routes still work.
+// Sections and links hidden from the sidebar for now. Their routes still work.
 const HIDDEN_NAV_GROUPS = ["Cross-Department Intelligence"]
-const VISIBLE_NAV = NAV.filter((group) => !HIDDEN_NAV_GROUPS.includes(group.label))
+const HIDDEN_NAV_ITEMS = [
+  "/departments/construction-infrastructure",
+  "/departments/cess-financial",
+  "/departments/health-social-security",
+  "/departments/esis",
+  "/departments/groundwater-environmental",
+  "/departments/skill-development",
+]
+const VISIBLE_NAV = NAV.filter((group) => !HIDDEN_NAV_GROUPS.includes(group.label)).map((group) => ({
+  ...group,
+  items: group.items.filter((item) => !HIDDEN_NAV_ITEMS.includes(item.to)),
+}))
 
 export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
   return (
@@ -15,7 +26,7 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
           <BrandMark className="h-14 w-14 ring-[color:var(--c-border-b23a48)]/40" />
           <div className="min-w-0">
             <p className="text-[11px] font-semibold tracking-[0.18em] text-[color:var(--app-sidebar-accent)] uppercase">Karnataka</p>
-            <p className="mt-0.5 text-lg font-semibold leading-5">KBOCW</p>
+            <p className="mt-0.5 text-base font-semibold leading-5">Labour Department</p>
             <p className="text-xs leading-4 text-[color:var(--c-text-c1b0b5)]">Intelligence Portal</p>
           </div>
         </div>
@@ -30,11 +41,12 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
                       to={item.to}
                       end={item.to === "/"}
                       onClick={onClose}
+                      title={item.label}
                       className={({ isActive }) =>
-                        `block rounded-lg px-3 py-2 text-sm leading-5 ${isActive ? "bg-[color:var(--c-bg-b23a48)]/15 font-semibold text-[color:var(--c-text-ffe8de)]" : "text-[color:var(--c-text-d9cfd2)] hover:bg-white/5"}`
+                        `flex min-h-9 items-center rounded-lg px-3 py-2 text-sm leading-5 ${isActive ? "bg-[color:var(--c-bg-b23a48)]/15 font-semibold text-[color:var(--c-text-ffe8de)]" : "text-[color:var(--c-text-d9cfd2)] hover:bg-white/5"}`
                       }
                     >
-                      {item.label}
+                      {item.short ?? item.label}
                     </NavLink>
                   </li>
                 ))}

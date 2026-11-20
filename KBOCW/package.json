@@ -4,10 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "data": "node scripts/generate-secretary-data.mjs && node scripts/generate-labour-data.mjs && node scripts/generate-welfare-data.mjs && node scripts/generate-factories-data.mjs && node scripts/generate-intelligence-data.mjs",
+    "data": "node scripts/generate-labour-data.mjs && node scripts/generate-welfare-data.mjs && node scripts/generate-factories-data.mjs && node scripts/generate-intelligence-data.mjs && node scripts/generate-gig-data.mjs",
+    "check:gig": "vite build --ssr scripts/check-gig-data.ts --outDir /tmp/kbocw-gig-check --emptyOutDir && node /tmp/kbocw-gig-check/check-gig-data.js",
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check:ksu": "vite build --ssr scripts/check-ksuwssb-data.ts --outDir /tmp/kbocw-ksu-check --emptyOutDir && node /tmp/kbocw-ksu-check/check-ksuwssb-data.js"
   },
   "dependencies": {
     "echarts": "^6.1.0",

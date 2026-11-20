@@ -46,7 +46,8 @@ const TOPICS: { title: string; points: string[] }[] = [
     points: [
       "Turn on Compare two years to set two financial years side by side.",
       "KPI cards show the change between the two years.",
-      "Cess stages stay separate. Assessed, collected, remitted and credited are shown side by side, never added together.",
+      "Stages stay separate. Cess assessed and collected, assistance approved and disbursed, and fee payable and deposited are shown side by side, never added together.",
+      "Counts taken at a point in time, such as registered workers on the Gig and Unorganised Workers boards, need one month in scope. A total across months would count the same worker more than once.",
     ],
   },
   {

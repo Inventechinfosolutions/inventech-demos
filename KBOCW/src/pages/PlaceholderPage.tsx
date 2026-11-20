@@ -49,7 +49,7 @@ export function PlaceholderPage() {
       <p className="text-sm font-semibold text-[color:var(--c-text-8c2f39)]">{match?.group.label ?? "Portal"}</p>
       <h1 className="mt-2 text-3xl font-semibold tracking-tight text-[color:var(--c-text-461220)]">{title}</h1>
       <p className="mt-4 text-sm leading-6 text-slate-600">
-        This view is reserved for a later dashboard. The Secretary overview, the Labour Commissionerate dashboard, the KBOCW Welfare Board dashboard, the Factories & Boilers dashboard, and the Cross-Department Intelligence dashboard are available in this build. The navigation entry is in place so the next dashboard can be connected without changing the portal shell.
+        This view is reserved for a later dashboard. The Secretary overview, the Labour Commissionerate dashboard, the KBOCW Welfare Board dashboard, the Factories & Boilers dashboard, the Gig Workers Welfare Board dashboard, the Unorganised Workers Social Security Board dashboard, and the Cross-Department Intelligence dashboard are available in this build. The navigation entry is in place so the next dashboard can be connected without changing the portal shell.
       </p>
       {carried.length > 0 ? (
         <div className="mt-5">

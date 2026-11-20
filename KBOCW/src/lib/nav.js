@@ -19,6 +19,8 @@ export const NAV = [
             { ...department("Labour Commissionerate", "labour-commissionerate"), implemented: true },
             { ...department("KBOCW Welfare Board", "kbocw-welfare-board"), implemented: true },
             { ...department("Factories & Boilers", "factories-boilers"), implemented: true },
+            { ...department("Gig Workers Welfare Board", "gig-workers-welfare-board"), implemented: true },
+            { ...department("Unorganised Workers Social Security Board", "ksuwssb"), implemented: true, short: "Unorganised Workers Board" },
             department("Construction & Infrastructure", "construction-infrastructure"),
             department("Cess & Financial", "cess-financial"),
             department("Health & Social Security", "health-social-security"),

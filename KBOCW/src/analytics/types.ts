@@ -28,7 +28,7 @@ export type VizType =
 export type FilterOperator = "eq" | "neq" | "contains" | "gt" | "lt" | "between" | "in" | "dateRange"
 export type Combinator = "AND" | "OR"
 
-export type RoleId = "secretary" | "labour" | "welfare" | "finance" | "district" | "analyst"
+export type RoleId = "secretary" | "labour" | "welfare" | "factories" | "gig" | "ksu" | "district" | "analyst"
 export type Visibility = "private" | "shared" | "department" | "portal"
 export type ReportStatus = "draft" | "published"
 
@@ -70,7 +70,9 @@ export interface Metric {
   additive: boolean
   /** Snapshot style counts that repeat across years. Totals need one financial year in scope. */
   requiresSingleYear?: boolean
-  /** Cess pipeline stage. Different stages are never added or stacked together. */
+  /** Counts taken at the end of a month, or distinct within a month. Adding months repeats them, so a total needs one month in scope. */
+  requiresSingleMonth?: boolean
+  /** Stage of a process, such as approved or disbursed. Different stages are never added or stacked together. */
   stage?: string
   owner: string
 }

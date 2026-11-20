@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react"
-import { Link, useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import { ChartCard } from "@/components/dashboard/ChartCard"
+import { MoreCharts } from "@/components/dashboard/MoreCharts"
 import { DetailDrawer } from "@/components/dashboard/DetailDrawer"
+import { FilterSummary } from "@/components/dashboard/FilterSummary"
+import { ScopeBand } from "@/components/dashboard/ScopeBand"
 import { WelfareActions } from "@/components/welfare/WelfareActions"
 import { WelfareFiltersBar } from "@/components/welfare/WelfareFilters"
 import { WelfareFinance } from "@/components/welfare/WelfareFinance"
@@ -10,12 +13,12 @@ import { WelfareMap, type WelfareMapMetric } from "@/components/welfare/WelfareM
 import { WelfarePipeline } from "@/components/welfare/WelfarePipeline"
 import { WelfareRegisters } from "@/components/welfare/WelfareRegisters"
 import { financialYearBounds } from "@/lib/period"
-import { DEFAULT_WELFARE_FILTERS, WELFARE_LINKS, readWelfareFilters, welfareQuery } from "@/lib/welfareQuery"
+import { useBaseline } from "@/lib/useBaseline"
+import { DEFAULT_WELFARE_FILTERS, readWelfareFilters, welfareQuery } from "@/lib/welfareQuery"
 import { getWelfareDetail, getWelfareOverview, loadWelfareOptions } from "@/services/welfareService"
 import type { ChartModel, DetailModel } from "@/types/dashboard"
 import type { WelfareDrill, WelfareFilterOptions, WelfareFilters, WelfareOverview } from "@/types/welfare"
 
-const workerCharts = ["registrations", "renewals", "membership", "occupation", "age"]
 const schemeCharts = ["scheme-status", "scheme-people", "scheme-money"]
 
 function pick(charts: ChartModel[], ids: string[]) {
@@ -32,6 +35,9 @@ export function WelfareDashboard() {
   const [error, setError] = useState<string | null>(null)
   const [metric, setMetric] = useState<WelfareMapMetric>("workers")
   const [drill, setDrill] = useState<WelfareDrill | null>(null)
+  // The overview at the top always covers the default scope, so its drill-downs do too.
+  const [drillOnOverview, setDrillOnOverview] = useState(false)
+  const base = useBaseline(() => getWelfareOverview(DEFAULT_WELFARE_FILTERS))
   const [detail, setDetail] = useState<DetailModel | null>(null)
   const [detailLoading, setDetailLoading] = useState(false)
 
@@ -77,7 +83,7 @@ export function WelfareDashboard() {
 
   useEffect(() => {
     if (!drill) return
-    const active = readWelfareFilters(searchParams)
+    const active = drillOnOverview ? DEFAULT_WELFARE_FILTERS : readWelfareFilters(searchParams)
     let cancelled = false
     setDetailLoading(true)
     getWelfareDetail(drill, active)
@@ -93,7 +99,7 @@ export function WelfareDashboard() {
     return () => {
       cancelled = true
     }
-  }, [drill, filterKey, searchParams])
+  }, [drill, drillOnOverview, filterKey, searchParams])
 
   function applyFilters(next: WelfareFilters) {
     if (!next.fromDate || !next.toDate) return
@@ -112,9 +118,19 @@ export function WelfareDashboard() {
     applyFilters({ ...filters, districtId: filters.districtId === districtId ? "all" : districtId, talukId: "all" })
   }
 
-  const query = welfareQuery(filters).toString()
-  const processing = overview?.charts.find((chart) => chart.id === "processing-days")
-  const utilization = overview?.charts.find((chart) => chart.id === "utilization")
+  function openOverview(next: WelfareDrill) {
+    setDrillOnOverview(true)
+    setDrill(next)
+  }
+
+  function openFiltered(next: WelfareDrill) {
+    setDrillOnOverview(false)
+    setDrill(next)
+  }
+
+  // Everything not shown in the main view sits behind "Show more charts".
+  const shownIds = new Set(["membership", ...schemeCharts])
+  const moreCharts = (base?.charts ?? []).filter((chart) => !shownIds.has(chart.id))
 
   return (
     <div className="mx-auto min-w-0 max-w-[1440px] space-y-5">
@@ -122,42 +138,21 @@ export function WelfareDashboard() {
         {updating ? "Updating figures." : overview ? `Showing ${overview.scopeLabel}.` : "Loading the KBOCW Welfare Board dashboard."}
       </p>
 
-      <header className="flex flex-col gap-4 border-b border-[color:var(--c-border-fed4c1)] pb-4 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <p className="text-[12px] font-semibold tracking-[0.16em] text-[color:var(--c-text-8c2f39)] uppercase">Beneficiary welfare</p>
-          <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[color:var(--c-text-461220)]">KBOCW Welfare Board</h1>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">Construction Worker Registration, Welfare Schemes and Financial Assistance</p>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
-            {overview?.illustrativeNote ?? "Illustrative data. This demonstration is not connected to Karnataka Government systems."} {overview?.separationNote}
-          </p>
-        </div>
-        <nav aria-label="Related departments" className="max-w-md text-sm leading-6">
-          {WELFARE_LINKS.map((link, index) => (
-            <span key={link.to}>
-              {index > 0 ? <span className="text-slate-300"> · </span> : null}
-              <Link to={`${link.to}?${query}`} className="font-semibold text-[color:var(--c-text-8c2f39)] underline-offset-2 hover:underline">
-                {link.label}
-              </Link>
-            </span>
-          ))}
-        </nav>
-      </header>
-
-      {options ? <WelfareFiltersBar options={options} value={filters} updating={updating} onChange={applyFilters} onReset={() => setSearchParams(welfareQuery(DEFAULT_WELFARE_FILTERS), { replace: true })} /> : null}
       {error ? <p className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">{error}</p> : null}
 
-      {overview ? (
+      {base ? (
         <>
-          <WelfareKpis items={overview.kpis} onSelect={(kpiId) => setDrill({ type: "kpi", kpiId })} />
+          <ScopeBand as="h1" kicker="Beneficiary welfare · Overview" title="KBOCW Welfare Board" note={`${base.scopeLabel}. These cards and charts cover the full scope and do not change with the filters further down.`} />
+          <WelfareKpis items={base.kpis} onSelect={(kpiId) => openOverview({ type: "kpi", kpiId })} />
 
           <section className="space-y-3">
             <div>
               <p className="text-[12px] font-semibold tracking-[0.16em] text-[color:var(--c-text-8c2f39)] uppercase">Worker registration</p>
-              <h2 className="mt-1 text-xl font-semibold text-[color:var(--c-text-461220)]">Membership and coverage of registered workers</h2>
+              <h3 className="mt-1 text-xl font-semibold text-[color:var(--c-text-461220)]">Membership and coverage of registered workers</h3>
             </div>
             <div className="grid min-w-0 gap-4 lg:grid-cols-2">
-              {pick(overview.charts, workerCharts).map((chart) => (
-                <ChartCard key={chart.id} className={chart.id === "membership" ? "lg:col-span-2" : ""} chart={chart} onSelect={(category, series) => setDrill({ type: "chart", chartId: chart.id, category, series })} />
+              {pick(base.charts, ["membership"]).map((chart) => (
+                <ChartCard key={chart.id} className="lg:col-span-2" chart={chart} onSelect={(category, series) => openOverview({ type: "chart", chartId: chart.id, category, series })} />
               ))}
             </div>
           </section>
@@ -165,58 +160,73 @@ export function WelfareDashboard() {
           <section className="space-y-3">
             <div>
               <p className="text-[12px] font-semibold tracking-[0.16em] text-[color:var(--c-text-8c2f39)] uppercase">Welfare schemes</p>
-              <h2 className="mt-1 text-xl font-semibold text-[color:var(--c-text-461220)]">Scheme performance</h2>
-              <p className="mt-1 max-w-4xl text-sm leading-6 text-slate-600">{overview.schemeNote}</p>
+              <h3 className="mt-1 text-xl font-semibold text-[color:var(--c-text-461220)]">Scheme performance</h3>
+              <p className="mt-1 max-w-4xl text-sm leading-6 text-slate-600">{base.schemeNote}</p>
             </div>
             <div className="grid min-w-0 gap-4 lg:grid-cols-2">
-              {pick(overview.charts, schemeCharts).map((chart) => (
-                <ChartCard key={chart.id} className={chart.id === "scheme-status" ? "lg:col-span-2" : ""} chart={chart} onSelect={(category, series) => setDrill({ type: "chart", chartId: chart.id, category, series })} />
+              {pick(base.charts, schemeCharts).map((chart) => (
+                <ChartCard key={chart.id} className={chart.id === "scheme-status" ? "lg:col-span-2" : ""} chart={chart} onSelect={(category, series) => openOverview({ type: "chart", chartId: chart.id, category, series })} />
               ))}
             </div>
           </section>
 
+          <MoreCharts id="welfare-more" count={moreCharts.length}>
+            {moreCharts.map((chart) => (
+              <ChartCard key={chart.id} chart={chart} onSelect={(category, series) => openOverview({ type: "chart", chartId: chart.id, category, series })} />
+            ))}
+          </MoreCharts>
+        </>
+      ) : !error ? (
+        <p className="text-sm text-slate-600">Loading the KBOCW Welfare Board dashboard.</p>
+      ) : null}
+
+      <ScopeBand id="welfare-filters" kicker="Filters" title="Filter the records" note="Choose a period, district, taluk, scheme or status. The figures, application stages, fund position, district map and registers below follow your choice." />
+      <section className="rounded-2xl border border-[color:var(--c-border-fed9c8)] bg-[color:var(--c-bg-ffffff)] px-5 py-4 shadow-[0_12px_40px_rgb(var(--c-shadow-rgb)/0.05)]">
+        {options ? <WelfareFiltersBar options={options} value={filters} updating={updating} onChange={applyFilters} onReset={() => setSearchParams(welfareQuery(DEFAULT_WELFARE_FILTERS), { replace: true })} /> : <p className="text-sm text-slate-500">Loading filters.</p>}
+      </section>
+
+      {overview ? (
+        <>
+          <FilterSummary scope={overview.scopeLabel} updating={updating} items={overview.kpis.map((item) => ({ label: item.label, value: item.displayValue }))} />
+
           <section className="space-y-3">
             <div>
               <p className="text-[12px] font-semibold tracking-[0.16em] text-[color:var(--c-text-8c2f39)] uppercase">Application processing</p>
-              <h2 className="mt-1 text-xl font-semibold text-[color:var(--c-text-461220)]">From receipt to disbursement</h2>
+              <h3 className="mt-1 text-xl font-semibold text-[color:var(--c-text-461220)]">From receipt to disbursement</h3>
               <p className="mt-1 max-w-4xl text-sm leading-6 text-slate-600">Each stage is the current status of an application. Applications are counted apart from unique workers.</p>
             </div>
-            <WelfarePipeline stages={overview.stages} activeId={filters.applicationStatus} onSelect={(stageId) => setDrill({ type: "stage", stageId })} />
-            {processing ? <ChartCard chart={processing} onSelect={(category, series) => setDrill({ type: "chart", chartId: processing.id, category, series })} /> : null}
+            <WelfarePipeline stages={overview.stages} activeId={filters.applicationStatus} onSelect={(stageId) => openFiltered({ type: "stage", stageId })} />
           </section>
 
           <section className="space-y-3">
             <div>
               <p className="text-[12px] font-semibold tracking-[0.16em] text-[color:var(--c-text-8c2f39)] uppercase">Financial assistance</p>
-              <h2 className="mt-1 text-xl font-semibold text-[color:var(--c-text-461220)]">Fund position and utilization</h2>
+              <h3 className="mt-1 text-xl font-semibold text-[color:var(--c-text-461220)]">Fund position</h3>
             </div>
             <WelfareFinance finance={overview.finance} />
-            {utilization ? <ChartCard chart={utilization} onSelect={(category, series) => setDrill({ type: "chart", chartId: utilization.id, category, series })} /> : null}
           </section>
 
           <section className="space-y-3">
             <div>
               <p className="text-[12px] font-semibold tracking-[0.16em] text-[color:var(--c-text-8c2f39)] uppercase">District welfare</p>
-              <h2 className="mt-1 text-xl font-semibold text-[color:var(--c-text-461220)]">Coverage and follow-up</h2>
+              <h3 className="mt-1 text-xl font-semibold text-[color:var(--c-text-461220)]">Coverage and follow-up</h3>
             </div>
             <WelfareMap districts={overview.districts} selectedId={filters.districtId} metric={metric} boundaryNote={overview.boundaryNote} onMetric={setMetric} onSelect={selectDistrict} />
-            <WelfareActions items={overview.actions} onSelect={(exceptionId) => setDrill({ type: "exception", exceptionId })} />
+            <WelfareActions items={overview.actions} onSelect={(exceptionId) => openFiltered({ type: "exception", exceptionId })} />
           </section>
 
           <section className="space-y-3">
             <div>
               <p className="text-[12px] font-semibold tracking-[0.16em] text-[color:var(--c-text-8c2f39)] uppercase">Registers</p>
-              <h2 className="mt-1 text-xl font-semibold text-[color:var(--c-text-461220)]">Workers, applications and disbursements</h2>
+              <h3 className="mt-1 text-xl font-semibold text-[color:var(--c-text-461220)]">Workers, applications and disbursements</h3>
             </div>
-            <WelfareRegisters registers={overview.registers} onOpen={(register, id) => setDrill({ type: "record", register, id })} />
+            <WelfareRegisters registers={overview.registers} onOpen={(register, id) => openFiltered({ type: "record", register, id })} />
           </section>
 
           <footer className="pb-4 text-sm leading-6 text-slate-500">
             Source: {overview.source}. Last refreshed: {overview.lastRefreshed}. Scope: {overview.scopeLabel}. {overview.stageNote}
           </footer>
         </>
-      ) : !error ? (
-        <p className="text-sm text-slate-600">Loading the KBOCW Welfare Board dashboard.</p>
       ) : null}
 
       {drill ? <DetailDrawer detail={detail} loading={detailLoading} onClose={() => setDrill(null)} /> : null}

@@ -11,7 +11,7 @@ import { userById } from "@/analytics/users"
 const ACTIONS = [
   { to: "/analytics/build-report", title: "Build a report", text: "Pick a dataset, fields and filters, then choose a chart." },
   { to: "/analytics/build-dashboard", title: "Build a dashboard", text: "Arrange saved reports on a grid with shared filters." },
-  { to: "/analytics/templates", title: "Start from a template", text: "Seven ready-made reports you can edit." },
+  { to: "/analytics/templates", title: "Start from a template", text: "Ten ready-made reports you can edit." },
   { to: "/analytics/datasets", title: "Explore datasets", text: "Fields, freshness, sources and who can use them." },
 ]
 
